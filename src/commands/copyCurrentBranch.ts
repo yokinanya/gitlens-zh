@@ -18,7 +18,7 @@ export class CopyCurrentBranchCommand extends ActiveEditorCommand {
 
 		const gitUri = uri != null ? await GitUri.fromUri(uri) : undefined;
 
-		const repository = await RepositoryPicker.getBestRepositoryOrShow(gitUri, editor, 'Copy Current Branch Name');
+		const repository = await RepositoryPicker.getBestRepositoryOrShow(gitUri, editor, '复制当前分支名称');
 		if (repository == null) return;
 
 		try {
@@ -28,7 +28,7 @@ export class CopyCurrentBranchCommand extends ActiveEditorCommand {
 			}
 		} catch (ex) {
 			Logger.error(ex, 'CopyCurrentBranchCommand');
-			void window.showErrorMessage('Unable to copy current branch name. See output channel for more details');
+			void window.showErrorMessage('无法复制当前分支名称。更多细节请查看输出频道');
 		}
 	}
 }

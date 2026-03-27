@@ -6,7 +6,6 @@ import { StatusFileFormatter } from '../../git/formatters/statusFormatter';
 import { GitUri } from '../../git/gitUri';
 import { GitCommit, GitFile } from '../../git/models';
 import { joinPaths, relativeDir } from '../../system/path';
-import { pluralize } from '../../system/string';
 import { ViewsWithCommits } from '../viewBase';
 import { FileRevisionAsCommitNode } from './fileRevisionAsCommitNode';
 import { FileNode } from './folderNode';
@@ -76,13 +75,13 @@ export class StatusFileNode extends ViewNode<ViewsWithCommits> implements FileNo
 			if (this._hasStagedChanges) {
 				item.contextValue += '+staged';
 				item.tooltip = StatusFileFormatter.fromTemplate(
-					`\${file}\n\${directory}/\n\n\${status}\${ (originalPath)} in Index (staged)`,
+					`\${file}\n\${directory}/\n\n\${status}\${ (originalPath)}，位于索引（已暂存）中`,
 					this.file,
 				);
 			} else {
 				item.contextValue += '+unstaged';
 				item.tooltip = StatusFileFormatter.fromTemplate(
-					`\${file}\n\${directory}/\n\n\${status}\${ (originalPath)} in Working Tree`,
+					`\${file}\n\${directory}/\n\n\${status}\${ (originalPath)} in 工作树`,
 					this.file,
 				);
 			}
@@ -118,7 +117,7 @@ export class StatusFileNode extends ViewNode<ViewsWithCommits> implements FileNo
 			}
 
 			item.tooltip = StatusFileFormatter.fromTemplate(
-				`\${file}\n\${directory}/\n\n\${status}\${ (originalPath)} in ${this.getChangedIn()}`,
+				`\${file}\n\${directory}/\n\n\${status}\${ (originalPath)}，位于 ${this.getChangedIn()}`,
 				this.file,
 			);
 
@@ -202,12 +201,12 @@ export class StatusFileNode extends ViewNode<ViewsWithCommits> implements FileNo
 
 		if (this._hasUnstagedChanges) {
 			commits++;
-			changedIn.push('Working Tree');
+			changedIn.push('工作树');
 		}
 
 		if (this._hasStagedChanges) {
 			commits++;
-			changedIn.push('Index (staged)');
+			changedIn.push('索引（已暂存）');
 		}
 
 		if (this.commits.length > commits) {
@@ -215,13 +214,12 @@ export class StatusFileNode extends ViewNode<ViewsWithCommits> implements FileNo
 		}
 
 		if (commits > 0) {
-			changedIn.push(pluralize('commit', commits));
+			changedIn.push(`${commits} 个提交`);
 		}
 
-		if (changedIn.length > 2) {
-			changedIn[changedIn.length - 1] = `and ${changedIn[changedIn.length - 1]}`;
-		}
-		return changedIn.join(changedIn.length > 2 ? ', ' : ' and ');
+		if (changedIn.length <= 1) return changedIn.join('');
+		if (changedIn.length === 2) return `${changedIn[0]} 和 ${changedIn[1]}`;
+		return `${changedIn.slice(0, -1).join('、')} 和 ${changedIn[changedIn.length - 1]}`;
 	}
 
 	override getCommand(): Command | undefined {
@@ -236,7 +234,7 @@ export class StatusFileNode extends ViewNode<ViewsWithCommits> implements FileNo
 				},
 			};
 			return {
-				title: 'Open Changes with Previous Revision',
+				title: '打开与上一修订版本的对比',
 				command: Commands.DiffWithPrevious,
 				arguments: [undefined, commandArgs],
 			};
@@ -261,7 +259,7 @@ export class StatusFileNode extends ViewNode<ViewsWithCommits> implements FileNo
 			},
 		};
 		return {
-			title: 'Open Changes',
+			title: '打开变更',
 			command: Commands.DiffWith,
 			arguments: [commandArgs],
 		};

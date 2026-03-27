@@ -74,7 +74,7 @@ export class OpenOnRemoteCommand extends Command {
 			}
 
 			const providers = GitRemote.getHighlanderProviders(remotes);
-			const provider = providers?.length ? providers[0].name : 'Remote';
+			const provider = providers?.length ? providers[0].name : '远程';
 
 			const options: Parameters<typeof RemoteProviderPicker.show>[4] = {
 				autoPick: 'default',
@@ -82,11 +82,11 @@ export class OpenOnRemoteCommand extends Command {
 				setDefault: true,
 			};
 			let title;
-			let placeHolder = `Choose which remote to ${args.clipboard ? 'copy the url for' : 'open on'}`;
+			let placeHolder = `选择要${args.clipboard ? '复制 URL' : '打开'}的远程`;
 
 			switch (args.resource.type) {
 				case RemoteResourceType.Branch:
-					title = `${args.clipboard ? `Copy ${provider} Branch Url` : `Open Branch on ${provider}`}${pad(
+					title = `${args.clipboard ? `复制 ${provider} 分支 URL` : `在 ${provider} 上打开分支`}${pad(
 						GlyphChars.Dot,
 						2,
 						2,
@@ -94,11 +94,11 @@ export class OpenOnRemoteCommand extends Command {
 					break;
 
 				case RemoteResourceType.Branches:
-					title = `${args.clipboard ? `Copy ${provider} Branches Url` : `Open Branches on ${provider}`}`;
+					title = `${args.clipboard ? `复制 ${provider} 分支 URL` : `在 ${provider} 上打开分支`}`;
 					break;
 
 				case RemoteResourceType.Commit:
-					title = `${args.clipboard ? `Copy ${provider} Commit Url` : `Open Commit on ${provider}`}${pad(
+					title = `${args.clipboard ? `复制 ${provider} 提交 URL` : `在 ${provider} 上打开提交`}${pad(
 						GlyphChars.Dot,
 						2,
 						2,
@@ -107,7 +107,7 @@ export class OpenOnRemoteCommand extends Command {
 
 				case RemoteResourceType.Comparison:
 					title = `${
-						args.clipboard ? `Copy ${provider} Comparison Url` : `Open Comparison on ${provider}`
+						args.clipboard ? `复制 ${provider} 比较 URL` : `在 ${provider} 上打开比较`
 					}${pad(GlyphChars.Dot, 2, 2)}${GitRevision.createRange(
 						args.resource.base,
 						args.resource.compare,
@@ -121,21 +121,19 @@ export class OpenOnRemoteCommand extends Command {
 
 					title = `${
 						args.clipboard
-							? `Copy ${provider} Create Pull Request Url`
-							: `Create Pull Request on ${provider}`
+							? `复制 ${provider} 创建拉取请求 URL`
+							: `在 ${provider} 上创建拉取请求`
 					}${pad(GlyphChars.Dot, 2, 2)}${
 						args.resource.base?.branch
 							? GitRevision.createRange(args.resource.base.branch, args.resource.compare.branch, '...')
 							: args.resource.compare.branch
 					}`;
 
-					placeHolder = `Choose which remote to ${
-						args.clipboard ? 'copy the create pull request url for' : 'create the pull request on'
-					}`;
+					placeHolder = `选择要${args.clipboard ? '复制创建拉取请求 URL' : '创建拉取请求'}的远程`;
 					break;
 
 				case RemoteResourceType.File:
-					title = `${args.clipboard ? `Copy ${provider} File Url` : `Open File on ${provider}`}${pad(
+					title = `${args.clipboard ? `复制 ${provider} 文件 URL` : `在 ${provider} 上打开文件`}${pad(
 						GlyphChars.Dot,
 						2,
 						2,
@@ -143,11 +141,11 @@ export class OpenOnRemoteCommand extends Command {
 					break;
 
 				case RemoteResourceType.Repo:
-					title = `${args.clipboard ? `Copy ${provider} Repository Url` : `Open Repository on ${provider}`}`;
+					title = `${args.clipboard ? `复制 ${provider} 仓库 URL` : `在 ${provider} 上打开仓库`}`;
 					break;
 
 				case RemoteResourceType.Revision: {
-					title = `${args.clipboard ? `Copy ${provider} File Url` : `Open File on ${provider}`}${pad(
+					title = `${args.clipboard ? `复制 ${provider} 文件 URL` : `在 ${provider} 上打开文件`}${pad(
 						GlyphChars.Dot,
 						2,
 						2,
@@ -160,7 +158,7 @@ export class OpenOnRemoteCommand extends Command {
 			void (await pick?.execute());
 		} catch (ex) {
 			Logger.error(ex, 'OpenOnRemoteCommand');
-			void Messages.showGenericErrorMessage('Unable to open in remote provider');
+			void Messages.showGenericErrorMessage('无法在远程提供方中打开');
 		}
 	}
 }

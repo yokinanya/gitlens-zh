@@ -44,7 +44,7 @@ export namespace RepositoryPicker {
 
 	export async function show(
 		title: string | undefined,
-		placeholder: string = 'Choose a repository',
+		placeholder: string = '选择仓库',
 		repositories?: Repository[],
 	): Promise<RepositoryQuickPickItem | undefined> {
 		const items: RepositoryQuickPickItem[] = await Promise.all([

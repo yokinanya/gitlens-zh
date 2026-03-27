@@ -24,12 +24,12 @@ export class OpenChangedFilesCommand extends Command {
 
 		try {
 			if (args.uris == null) {
-				const repository = await RepositoryPicker.getRepositoryOrShow('Open All Changed Files');
+				const repository = await RepositoryPicker.getRepositoryOrShow('打开所有已变更文件');
 				if (repository == null) return;
 
 				const status = await this.container.git.getStatusForRepo(repository.uri);
 				if (status == null) {
-					void window.showWarningMessage('Unable to open changed files');
+					void window.showWarningMessage('无法打开已变更文件');
 
 					return;
 				}
@@ -40,7 +40,7 @@ export class OpenChangedFilesCommand extends Command {
 			findOrOpenEditors(args.uris);
 		} catch (ex) {
 			Logger.error(ex, 'OpenChangedFilesCommand');
-			void Messages.showGenericErrorMessage('Unable to open all changed files');
+			void Messages.showGenericErrorMessage('无法打开所有已变更文件');
 		}
 	}
 }

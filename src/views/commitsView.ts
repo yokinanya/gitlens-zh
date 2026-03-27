@@ -41,7 +41,7 @@ export class CommitsRepositoryNode extends RepositoryFolderNode<CommitsView, Bra
 		if (this.child == null) {
 			const branch = await this.repo.getBranch();
 			if (branch == null) {
-				this.view.message = 'No commits could be found.';
+				this.view.message = '未找到提交。';
 
 				return [];
 			}
@@ -126,7 +126,7 @@ export class CommitsViewNode extends RepositoriesSubscribeableNode<CommitsView, 
 		if (this.children == null) {
 			const repositories = this.view.container.git.openRepositories;
 			if (repositories.length === 0) {
-				this.view.message = 'No commits could be found.';
+				this.view.message = '未找到提交。';
 
 				return [];
 			}
@@ -151,8 +151,8 @@ export class CommitsViewNode extends RepositoriesSubscribeableNode<CommitsView, 
 
 				const status = branch.getTrackingStatus();
 				this.view.description = `${status ? `${status} ${GlyphChars.Dot} ` : ''}${branch.name}${
-					branch.rebasing ? ' (Rebasing)' : ''
-				}${lastFetched ? ` ${GlyphChars.Dot} Last fetched ${Repository.formatLastFetched(lastFetched)}` : ''}`;
+					branch.rebasing ? '（变基中）' : ''
+				}${lastFetched ? ` ${GlyphChars.Dot} 上次抓取 ${Repository.formatLastFetched(lastFetched)}` : ''}`;
 			}
 
 			return child.getChildren();
@@ -162,7 +162,7 @@ export class CommitsViewNode extends RepositoriesSubscribeableNode<CommitsView, 
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Commits', TreeItemCollapsibleState.Expanded);
+		const item = new TreeItem('提交', TreeItemCollapsibleState.Expanded);
 		return item;
 	}
 }
@@ -175,7 +175,7 @@ export class CommitsView extends ViewBase<CommitsViewNode, CommitsViewConfig> {
 	protected readonly configKey = 'commits';
 
 	constructor(container: Container) {
-		super('gitlens.views.commits', 'Commits', container);
+		super('gitlens.views.commits', '提交', container);
 	}
 
 	override get canReveal(): boolean {
@@ -345,7 +345,7 @@ export class CommitsView extends ViewBase<CommitsViewNode, CommitsViewConfig> {
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(commit, { icon: false, quoted: true })} in the side bar...`,
+				title: `正在侧边栏中定位 ${GitReference.toString(commit, { icon: false, quoted: true })}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {

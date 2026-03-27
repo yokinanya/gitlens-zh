@@ -1710,11 +1710,11 @@ export class GitHubApi {
 						throw new AuthenticationError('github', AuthenticationErrorReason.Forbidden, ex);
 				}
 
-				void window.showErrorMessage(`GitHub request failed: ${ex.errors?.[0]?.message ?? ex.message}`, 'OK');
+				void window.showErrorMessage(`GitHub 请求失败：${ex.errors?.[0]?.message ?? ex.message}`, '确定');
 			} else if (ex instanceof RequestError) {
 				this.handleRequestError(ex);
 			} else {
-				void window.showErrorMessage(`GitHub request failed: ${ex.message}`, 'OK');
+				void window.showErrorMessage(`GitHub 请求失败：${ex.message}`, '确定');
 			}
 
 			throw ex;
@@ -1732,7 +1732,7 @@ export class GitHubApi {
 			if (ex instanceof RequestError) {
 				this.handleRequestError(ex);
 			} else {
-				void window.showErrorMessage(`GitHub request failed: ${ex.message}`, 'OK');
+				void window.showErrorMessage(`GitHub 请求失败：${ex.message}`, '确定');
 			}
 
 			throw ex;
@@ -1753,15 +1753,15 @@ export class GitHubApi {
 			case 500: // Internal Server Error
 				if (ex.response != null) {
 					void window.showErrorMessage(
-						'GitHub failed to respond and might be experiencing issues. Please visit the [GitHub status page](https://githubstatus.com) for more information.',
-						'OK',
+						'GitHub 未能响应，当前可能存在服务异常。更多信息请访问 [GitHub 状态页](https://githubstatus.com)。',
+						'确定',
 					);
 				}
 				break;
 			case 502: // Bad Gateway
 				// GitHub seems to return this status code for timeouts
 				if (ex.message.includes('timeout')) {
-					void window.showErrorMessage('GitHub request timed out', 'OK');
+					void window.showErrorMessage('GitHub 请求超时', '确定');
 					return;
 				}
 				break;
@@ -1771,8 +1771,8 @@ export class GitHubApi {
 		}
 
 		void window.showErrorMessage(
-			`GitHub request failed: ${(ex.response as any)?.errors?.[0]?.message ?? ex.message}`,
-			'OK',
+			`GitHub 请求失败：${(ex.response as any)?.errors?.[0]?.message ?? ex.message}`,
+			'确定',
 		);
 	}
 
@@ -1802,7 +1802,7 @@ export class GitHubApi {
 				this._onDidReauthenticate.fire();
 			}
 		} else {
-			void window.showErrorMessage(ex.message, 'OK');
+			void window.showErrorMessage(ex.message, '确定');
 		}
 	}
 }

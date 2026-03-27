@@ -66,43 +66,43 @@ export class ViewFileDecorationProvider implements FileDecorationProvider, Dispo
 				return {
 					badge: 'I',
 					color: new ThemeColor('gitlens.decorations.ignoredForegroundColor'),
-					tooltip: 'Ignored',
+					tooltip: '已忽略',
 				};
 			case '?':
 				return {
 					badge: 'U',
 					color: new ThemeColor('gitlens.decorations.untrackedForegroundColor'),
-					tooltip: 'Untracked',
+					tooltip: '未跟踪',
 				};
 			case 'A':
 				return {
 					badge: 'A',
 					color: new ThemeColor('gitlens.decorations.addedForegroundColor'),
-					tooltip: 'Added',
+					tooltip: '已添加',
 				};
 			case 'C':
 				return {
 					badge: 'C',
 					color: new ThemeColor('gitlens.decorations.copiedForegroundColor'),
-					tooltip: 'Copied',
+					tooltip: '已复制',
 				};
 			case 'D':
 				return {
 					badge: 'D',
 					color: new ThemeColor('gitlens.decorations.deletedForegroundColor'),
-					tooltip: 'Deleted',
+					tooltip: '已删除',
 				};
 			case 'M':
 				return {
 					badge: 'M',
 					// color: new ThemeColor('gitlens.decorations.modifiedForegroundColor'),
-					tooltip: 'Modified',
+					tooltip: '已修改',
 				};
 			case 'R':
 				return {
 					badge: 'R',
 					color: new ThemeColor('gitlens.decorations.renamedForegroundColor'),
-					tooltip: 'Renamed',
+					tooltip: '已重命名',
 				};
 			default:
 				return undefined;
@@ -117,37 +117,37 @@ export class ViewFileDecorationProvider implements FileDecorationProvider, Dispo
 				return {
 					badge: '▲',
 					color: new ThemeColor('gitlens.decorations.branchAheadForegroundColor'),
-					tooltip: 'Ahead',
+					tooltip: '领先',
 				};
 			case GitBranchStatus.Behind:
 				return {
 					badge: '▼',
 					color: new ThemeColor('gitlens.decorations.branchBehindForegroundColor'),
-					tooltip: 'Behind',
+					tooltip: '落后',
 				};
 			case GitBranchStatus.Diverged:
 				return {
 					badge: '▼▲',
 					color: new ThemeColor('gitlens.decorations.branchDivergedForegroundColor'),
-					tooltip: 'Diverged',
+					tooltip: '已分叉',
 				};
 			case GitBranchStatus.MissingUpstream:
 				return {
 					badge: '!',
 					color: new ThemeColor('gitlens.decorations.branchMissingUpstreamForegroundColor'),
-					tooltip: 'Missing Upstream',
+					tooltip: '缺少上游',
 				};
 			case GitBranchStatus.UpToDate:
 				return {
 					badge: '',
 					color: new ThemeColor('gitlens.decorations.branchUpToDateForegroundColor'),
-					tooltip: 'Up to Date',
+					tooltip: '已是最新',
 				};
 			case GitBranchStatus.Unpublished:
 				return {
 					badge: '▲+',
 					color: new ThemeColor('gitlens.decorations.branchUnpublishedForegroundColor'),
-					tooltip: 'Unpublished',
+					tooltip: '未发布',
 				};
 			default:
 				return undefined;
@@ -181,7 +181,7 @@ export class ViewFileDecorationProvider implements FileDecorationProvider, Dispo
 		return {
 			badge: GlyphChars.Check,
 			color: color,
-			tooltip: 'Current Branch',
+			tooltip: '当前分支',
 		};
 	}
 
@@ -192,7 +192,7 @@ export class ViewFileDecorationProvider implements FileDecorationProvider, Dispo
 
 		return {
 			badge: GlyphChars.Check,
-			tooltip: 'Default Remote',
+			tooltip: '默认远程',
 		};
 	}
 }

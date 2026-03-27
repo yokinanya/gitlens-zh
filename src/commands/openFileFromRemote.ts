@@ -20,8 +20,8 @@ export class OpenFileFromRemoteCommand extends Command {
 		}
 
 		const url = await window.showInputBox({
-			prompt: 'Enter a remote file url to open',
-			placeHolder: 'Remote file url',
+			prompt: '输入要打开的远程文件 URL',
+			placeHolder: '远程文件 URL',
 			value: clipboard,
 			ignoreFocusOut: true,
 		});
@@ -31,14 +31,14 @@ export class OpenFileFromRemoteCommand extends Command {
 		if (local == null) {
 			local = await this.container.git.getLocalInfoFromRemoteUri(Uri.parse(url), { validate: false });
 			if (local == null) {
-				void window.showWarningMessage('Unable to parse the provided remote url.');
+				void window.showWarningMessage('无法解析提供的远程 URL。');
 
 				return;
 			}
 
-			const confirm = 'Open File...';
+			const confirm = '打开文件...';
 			const pick = await window.showWarningMessage(
-				'Unable to find a workspace folder that matches the provided remote url.',
+				'找不到与提供的远程 URL 匹配的工作区文件夹。',
 				confirm,
 			);
 			if (pick !== confirm) return;
@@ -57,7 +57,7 @@ export class OpenFileFromRemoteCommand extends Command {
 			await openEditor(local.uri, { selection: selection, rethrow: true });
 		} catch {
 			const uris = await window.showOpenDialog({
-				title: 'Open local file',
+				title: '打开本地文件',
 				defaultUri: local.uri,
 				canSelectMany: false,
 				canSelectFolders: false,

@@ -60,7 +60,7 @@ export class ContributorsViewNode extends RepositoriesSubscribeableNode<Contribu
 		if (this.children == null) {
 			const repositories = this.view.container.git.openRepositories;
 			if (repositories.length === 0) {
-				this.view.message = 'No contributors could be found.';
+				this.view.message = '未找到贡献者。';
 
 				return [];
 			}
@@ -93,8 +93,8 @@ export class ContributorsViewNode extends RepositoriesSubscribeableNode<Contribu
 
 			// const contributors = await child.repo.getContributors({ all: all, ref: ref });
 			if (children.length === 0) {
-				this.view.message = 'No contributors could be found.';
-				this.view.title = 'Contributors';
+				this.view.message = '未找到贡献者。';
+				this.view.title = '贡献者';
 
 				void child.ensureSubscription();
 
@@ -102,7 +102,7 @@ export class ContributorsViewNode extends RepositoriesSubscribeableNode<Contribu
 			}
 
 			this.view.message = undefined;
-			this.view.title = `Contributors (${children.length})`;
+			this.view.title = `贡献者 (${children.length})`;
 
 			return children;
 		}
@@ -111,7 +111,7 @@ export class ContributorsViewNode extends RepositoriesSubscribeableNode<Contribu
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Contributors', TreeItemCollapsibleState.Expanded);
+		const item = new TreeItem('贡献者', TreeItemCollapsibleState.Expanded);
 		return item;
 	}
 }
@@ -120,7 +120,7 @@ export class ContributorsView extends ViewBase<ContributorsViewNode, Contributor
 	protected readonly configKey = 'contributors';
 
 	constructor(container: Container) {
-		super('gitlens.views.contributors', 'Contributors', container);
+		super('gitlens.views.contributors', '贡献者', container);
 	}
 
 	override get canReveal(): boolean {
@@ -268,7 +268,7 @@ export class ContributorsView extends ViewBase<ContributorsViewNode, Contributor
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing contributor '${contributor.name}' in the side bar...`,
+				title: `正在侧边栏中定位贡献者“${contributor.name}”...`,
 				cancellable: true,
 			},
 			async (progress, token) => {

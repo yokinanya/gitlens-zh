@@ -647,7 +647,7 @@ export class Git {
 					const msg: string = ex?.toString() ?? '';
 					if (GitErrors.noFastForward.test(msg)) {
 						void window.showErrorMessage(
-							`Unable to pull the '${options.branch}' branch, as it can't be fast-forwarded.`,
+							`无法拉取分支 '${options.branch}'，因为它无法执行快进合并。`,
 						);
 
 						return;
@@ -1374,7 +1374,7 @@ export class Git {
 				stashName,
 			);
 			if (stashRef?.trim() !== ref) {
-				throw new Error('Unable to delete stash; mismatch with stash number');
+				throw new Error('无法删除储藏：储藏编号不匹配');
 			}
 		}
 

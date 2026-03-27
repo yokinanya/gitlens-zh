@@ -26,12 +26,12 @@ export class CloseUnchangedFilesCommand extends Command {
 
 		try {
 			if (args.uris == null) {
-				const repository = await RepositoryPicker.getRepositoryOrShow('Close All Unchanged Files');
+				const repository = await RepositoryPicker.getRepositoryOrShow('关闭所有未变更文件');
 				if (repository == null) return;
 
 				const status = await this.container.git.getStatusForRepo(repository.uri);
 				if (status == null) {
-					void window.showWarningMessage('Unable to close unchanged files');
+					void window.showWarningMessage('无法关闭未变更文件');
 
 					return;
 				}
@@ -101,7 +101,7 @@ export class CloseUnchangedFilesCommand extends Command {
 			disposable.dispose();
 		} catch (ex) {
 			Logger.error(ex, 'CloseUnchangedFilesCommand');
-			void Messages.showGenericErrorMessage('Unable to close all unchanged files');
+			void Messages.showGenericErrorMessage('无法关闭所有未变更文件');
 		}
 	}
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<meta charset="utf-8" />
 		<style>
@@ -16,16 +16,16 @@
 				<h2 data-bind="description"></h2>
 				<div class="toolbox">
 					<div class="select-container">
-						<label for="periods">Timeframe</label>
+						<label for="periods">时间范围</label>
 						<vscode-dropdown id="periods" name="periods" position="below">
-							<vscode-option value="7|D">1 week</vscode-option>
-							<vscode-option value="1|M">1 month</vscode-option>
-							<vscode-option value="3|M" selected="true">3 months</vscode-option>
-							<vscode-option value="6|M">6 months</vscode-option>
-							<vscode-option value="9|M">9 months</vscode-option>
-							<vscode-option value="1|Y">1 year</vscode-option>
-							<vscode-option value="2|Y">2 years</vscode-option>
-							<vscode-option value="4|Y">4 years</vscode-option>
+							<vscode-option value="7|D">1 周</vscode-option>
+							<vscode-option value="1|M">1 个月</vscode-option>
+							<vscode-option value="3|M" selected="true">3 个月</vscode-option>
+							<vscode-option value="6|M">6 个月</vscode-option>
+							<vscode-option value="9|M">9 个月</vscode-option>
+							<vscode-option value="1|Y">1 年</vscode-option>
+							<vscode-option value="2|Y">2 年</vscode-option>
+							<vscode-option value="4|Y">4 年</vscode-option>
 						</vscode-dropdown>
 					</div>
 				</div>
@@ -40,10 +40,7 @@
 		</div>
 		<div id="overlay" class="hidden">
 			<div class="modal">
-				<p>
-					The Visual File History allows you to quickly see the evolution of a file, including when changes
-					were made, how large they were, and who made them.
-				</p>
+				<p>可视化文件历史能帮助你快速查看文件的演变过程，包括更改发生的时间、更改规模以及是谁进行了这些更改。</p>
 				<div id="overlay-slot"></div>
 			</div>
 		</div>

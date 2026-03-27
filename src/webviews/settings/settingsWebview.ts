@@ -14,7 +14,7 @@ export class SettingsWebview extends WebviewWithConfigBase<State> {
 			'gitlens.settings',
 			'settings.html',
 			'images/gitlens-icon.png',
-			'GitLens Settings',
+			'GitLens 设置',
 			Commands.ShowSettingsPage,
 		);
 
@@ -46,9 +46,9 @@ export class SettingsWebview extends WebviewWithConfigBase<State> {
 	}
 
 	protected override includeBootstrap(): State {
-		const scopes: ['user' | 'workspace', string][] = [['user', 'User']];
+		const scopes: ['user' | 'workspace', string][] = [['user', '用户']];
 		if (workspace.workspaceFolders?.length) {
-			scopes.push(['workspace', 'Workspace']);
+			scopes.push(['workspace', '工作区']);
 		}
 
 		return {

@@ -1,22 +1,22 @@
-## Introducing GitLens+
+## 认识 GitLens+
 
-GitLens+ adds all-new, completely optional, features that enhance your current GitLens experience when you sign in with a free account. A free GitLens+ account gives you access to these new GitLens+ features on public repos, while a paid account allows you to use them on private repos.
+GitLens+ 提供一组全新且完全可选的功能。登录免费账户后，你就可以在公共仓库中使用这些 GitLens+ 功能；付费账户则可让你在私有仓库中使用它们。
 
-🛈 All other GitLens features are always accessible, without an account, and will continue to evolve and be invested in.
+🛈 其他 GitLens 功能始终可用，无需账户，并且会继续持续演进。
 
-[Learn more about GitLens+](https://gitkraken.com/gitlens/plus-features 'Learn more')
+[了解更多 GitLens+ 信息](https://gitkraken.com/gitlens/plus-features '了解更多')
 
-The first new GitLens+ features are the Visual File History and Worktrees.
+首批 GitLens+ 新功能包括可视化文件历史和工作树。
 
 <p align="center">
-  <img src="../../images/docs/visual-file-history-hover.png" alt="Visual File History View"/>
-  <br/>New Visual File History GitLens+ Feature
+  <img src="../../images/docs/visual-file-history-hover.png" alt="可视化文件历史视图"/>
+  <br/>全新的可视化文件历史 GitLens+ 功能
 </p>
 
-## Does this affect existing features?
+## 这会影响现有功能吗？
 
-No, the introduction of GitLens+ has no impact on existing GitLens features, so you won't lose access to any of the GitLens features you know and love. In fact, we are heavily investing in enhancing and expanding the GitLens feature set. Creating an account simply gives you access to a subset of new features that will enable you to get even more out of Git in VS Code!
+不会。GitLens+ 的引入不会影响现有 GitLens 功能，你依然可以继续使用自己熟悉的能力。相反，我们仍在持续投入并扩展 GitLens 的整体功能集。创建账户只是为了让你访问一部分新的增强功能，从而在 VS Code 中进一步发挥 Git 的价值。
 
-## More GitLens+ features coming soon
+## 更多 GitLens+ 功能即将推出
 
-Additional features like a visual commit graph, and integrations for GitHub Enterprise and GitLab are coming soon.
+更多功能正在路上，包括可视化提交图，以及对 GitHub Enterprise 和 GitLab 的更多集成。

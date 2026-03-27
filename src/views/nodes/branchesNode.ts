@@ -45,7 +45,7 @@ export class BranchesNode extends ViewNode<BranchesView | RepositoriesView> {
 				filter: b => !b.remote,
 				sort: { current: false },
 			});
-			if (branches.values.length === 0) return [new MessageNode(this.view, this, 'No branches could be found.')];
+			if (branches.values.length === 0) return [new MessageNode(this.view, this, '未找到分支。')];
 
 			// TODO@eamodio handle paging
 			const branchNodes = branches.values.map(
@@ -87,7 +87,7 @@ export class BranchesNode extends ViewNode<BranchesView | RepositoriesView> {
 	}
 
 	async getTreeItem(): Promise<TreeItem> {
-		const item = new TreeItem('Branches', TreeItemCollapsibleState.Collapsed);
+		const item = new TreeItem('分支', TreeItemCollapsibleState.Collapsed);
 		item.id = this.id;
 		item.contextValue = ContextValues.Branches;
 		if (await this.repo.hasRemotes()) {

@@ -50,13 +50,13 @@ export class AzureDevOpsRemote extends RemoteProvider {
 				{
 					prefix: '#',
 					url: `${workUrl}/_workitems/edit/<num>`,
-					title: `Open Work Item #<num> on ${this.name}`,
+					title: `在 ${this.name} 上打开工作项 #<num>`,
 				},
 				{
 					// Default Pull request message when merging a PR in ADO. Will not catch commits & pushes following a different pattern.
 					prefix: 'Merged PR ',
 					url: `${this.baseUrl}/pullrequest/<num>`,
-					title: `Open Pull Request #<num> on ${this.name}`,
+					title: `在 ${this.name} 上打开拉取请求 #<num>`,
 				},
 			];
 		}

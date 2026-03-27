@@ -36,7 +36,7 @@ export class TagsNode extends ViewNode<TagsView | RepositoriesView> {
 	async getChildren(): Promise<ViewNode[]> {
 		if (this._children == null) {
 			const tags = await this.repo.getTags({ sort: true });
-			if (tags.values.length === 0) return [new MessageNode(this.view, this, 'No tags could be found.')];
+			if (tags.values.length === 0) return [new MessageNode(this.view, this, '未找到标签。')];
 
 			// TODO@eamodio handle paging
 			const tagNodes = tags.values.map(
@@ -68,7 +68,7 @@ export class TagsNode extends ViewNode<TagsView | RepositoriesView> {
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Tags', TreeItemCollapsibleState.Collapsed);
+		const item = new TreeItem('标签', TreeItemCollapsibleState.Collapsed);
 		item.id = this.id;
 		item.contextValue = ContextValues.Tags;
 		item.iconPath = new ThemeIcon('tag');

@@ -221,7 +221,7 @@ export class TimelineWebview extends WebviewBase<State> {
 		if (current.uri == null) {
 			return {
 				period: period,
-				title: 'There are no editors open that can provide file history information',
+				title: '当前没有可提供文件历史信息的已打开编辑器',
 				dateFormat: dateFormat,
 				access: access,
 			};
@@ -246,7 +246,7 @@ export class TimelineWebview extends WebviewBase<State> {
 			return {
 				dataset: [],
 				period: period,
-				title: 'No commits found for the specified time period',
+				title: '在指定时间范围内未找到提交',
 				uri: current.uri.toString(),
 				dateFormat: dateFormat,
 				access: access,
@@ -265,9 +265,7 @@ export class TimelineWebview extends WebviewBase<State> {
 
 			if (queryRequiredCommits.length > limit) {
 				void window.showWarningMessage(
-					`Unable able to show more than the first ${limit} commits for the specified time period because of ${
-						name ? `${name} ` : ''
-					}rate limits.`,
+					`由于${name ? `${name} ` : ''}速率限制，无法显示指定时间范围内前 ${limit} 次提交之后的更多结果。`,
 				);
 				queryRequiredCommits = queryRequiredCommits.slice(0, 20);
 			}

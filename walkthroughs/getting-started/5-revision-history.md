@@ -1,7 +1,7 @@
-## Navigate Revision History
+## 浏览修订历史
 
 <p align="center">
-  <img src="../../images/docs/revision-navigation.gif" alt="Revision Navigation" />
+  <img src="../../images/docs/revision-navigation.gif" alt="修订导航" />
 </p>
 
-With just a click of a button, you can navigate backwards and forwards through any file's history. Compare changes over time and see the revision history of the whole file or every individual line of code. Customizable and unobtrusive Git blame annotations are still shown on every line, telling you the author, date, and message for the last commit!
+只需点击按钮，你就可以在任意文件的历史中前后跳转。你可以比较不同时间点的更改，并查看整个文件或某一行代码的修订历史。与此同时，低干扰且可定制的 Git 归属注释仍会显示在每一行上，告诉你最近一次提交的作者、日期和消息。

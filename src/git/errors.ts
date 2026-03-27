@@ -16,14 +16,14 @@ export class StashApplyError extends Error {
 		let message;
 		let reason: StashApplyErrorReason | undefined;
 		if (messageOrReason == null) {
-			message = 'Unable to apply stash';
+			message = '无法应用储藏';
 		} else if (typeof messageOrReason === 'string') {
 			message = messageOrReason;
 			reason = undefined;
 		} else {
 			reason = messageOrReason;
 			message =
-				'Unable to apply stash. Your working tree changes would be overwritten. Please commit or stash your changes before trying again';
+				'无法应用储藏。你的工作树更改将被覆盖。请先提交或储藏当前更改后再重试';
 		}
 		super(message);
 
@@ -52,7 +52,7 @@ export class WorktreeCreateError extends Error {
 		let message;
 		let reason: WorktreeCreateErrorReason | undefined;
 		if (messageOrReason == null) {
-			message = 'Unable to create worktree';
+			message = '无法创建工作树';
 		} else if (typeof messageOrReason === 'string') {
 			message = messageOrReason;
 			reason = undefined;
@@ -60,10 +60,10 @@ export class WorktreeCreateError extends Error {
 			reason = messageOrReason;
 			switch (reason) {
 				case WorktreeCreateErrorReason.AlreadyCheckedOut:
-					message = 'Unable to create worktree because it is already checked out';
+					message = '无法创建工作树，因为它已被检出';
 					break;
 				case WorktreeCreateErrorReason.AlreadyExists:
-					message = 'Unable to create worktree because it already exists';
+					message = '无法创建工作树，因为它已存在';
 					break;
 			}
 		}
@@ -94,7 +94,7 @@ export class WorktreeDeleteError extends Error {
 		let message;
 		let reason: WorktreeDeleteErrorReason | undefined;
 		if (messageOrReason == null) {
-			message = 'Unable to delete worktree';
+			message = '无法删除工作树';
 		} else if (typeof messageOrReason === 'string') {
 			message = messageOrReason;
 			reason = undefined;
@@ -102,10 +102,10 @@ export class WorktreeDeleteError extends Error {
 			reason = messageOrReason;
 			switch (reason) {
 				case WorktreeDeleteErrorReason.HasChanges:
-					message = 'Unable to delete worktree because there are uncommitted changes';
+					message = '无法删除工作树，因为存在未提交的更改';
 					break;
 				case WorktreeDeleteErrorReason.MainWorkingTree:
-					message = 'Unable to delete worktree because it is a main working tree';
+					message = '无法删除工作树，因为它是主工作树';
 					break;
 			}
 		}

@@ -115,7 +115,7 @@ export class UncommittedFileNode extends ViewNode<ViewsWithCommits> implements F
 			},
 		};
 		return {
-			title: 'Open Changes with Previous Revision',
+			title: '打开与上一修订版本的对比',
 			command: Commands.DiffWithPrevious,
 			arguments: [undefined, commandArgs],
 		};

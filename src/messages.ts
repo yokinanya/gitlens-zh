@@ -22,46 +22,38 @@ export const enum SuppressedMessages {
 export class Messages {
 	static showCommitHasNoPreviousCommitWarningMessage(commit?: GitCommit): Promise<MessageItem | undefined> {
 		if (commit == null) {
-			return Messages.showMessage(
-				'info',
-				'There is no previous commit.',
-				SuppressedMessages.CommitHasNoPreviousCommitWarning,
-			);
+			return Messages.showMessage('info', '没有上一个提交。', SuppressedMessages.CommitHasNoPreviousCommitWarning);
 		}
 		return Messages.showMessage(
 			'info',
-			`Commit ${commit.shortSha} (${commit.author.name}, ${commit.formattedDate}) has no previous commit.`,
+			`提交 ${commit.shortSha}（${commit.author.name}，${commit.formattedDate}）没有上一个提交。`,
 			SuppressedMessages.CommitHasNoPreviousCommitWarning,
 		);
 	}
 
 	static showCommitNotFoundWarningMessage(message: string): Promise<MessageItem | undefined> {
-		return Messages.showMessage(
-			'warn',
-			`${message}. The commit could not be found.`,
-			SuppressedMessages.CommitNotFoundWarning,
-		);
+		return Messages.showMessage('warn', `${message}。未找到该提交。`, SuppressedMessages.CommitNotFoundWarning);
 	}
 
 	static async showCreatePullRequestPrompt(branch: string): Promise<boolean> {
-		const create = { title: 'Create Pull Request...' };
+		const create = { title: '创建拉取请求...' };
 		const result = await Messages.showMessage(
 			'info',
-			`Would you like to create a Pull Request for branch '${branch}'?`,
+			`是否要为分支“${branch}”创建拉取请求？`,
 			SuppressedMessages.CreatePullRequestPrompt,
-			{ title: "Don't Show Again" },
+			{ title: '不再显示' },
 			create,
 		);
 		return result === create;
 	}
 
 	static async showDebugLoggingWarningMessage(): Promise<boolean> {
-		const disable = { title: 'Disable Debug Logging' };
+		const disable = { title: '禁用调试日志' };
 		const result = await Messages.showMessage(
 			'warn',
-			'GitLens debug logging is currently enabled. Unless you are reporting an issue, it is recommended to be disabled. Would you like to disable it?',
+			'GitLens 调试日志当前已启用。除非你正在上报问题，否则建议将其关闭。是否要禁用？',
 			SuppressedMessages.SuppressDebugLoggingWarning,
-			{ title: "Don't Show Again" },
+			{ title: '不再显示' },
 			disable,
 		);
 
@@ -69,10 +61,10 @@ export class Messages {
 	}
 
 	static async showGenericErrorMessage(message: string): Promise<MessageItem | undefined> {
-		const actions: MessageItem[] = [{ title: 'Open Output Channel' }];
+		const actions: MessageItem[] = [{ title: '打开输出通道' }];
 		const result = await Messages.showMessage(
 			'error',
-			`${message}. See output channel for more details`,
+			`${message}。更多详情请查看输出通道。`,
 			undefined,
 			null,
 			...actions,
@@ -87,7 +79,7 @@ export class Messages {
 	static showFileNotUnderSourceControlWarningMessage(message: string): Promise<MessageItem | undefined> {
 		return Messages.showMessage(
 			'warn',
-			`${message}. The file is probably not under source control.`,
+			`${message}。该文件可能未受版本控制。`,
 			SuppressedMessages.FileNotUnderSourceControlWarning,
 		);
 	}
@@ -95,7 +87,7 @@ export class Messages {
 	static showGitDisabledErrorMessage() {
 		return Messages.showMessage(
 			'error',
-			'GitLens requires Git to be enabled. Please re-enable Git \u2014 set `git.enabled` to true and reload.',
+			'GitLens 需要启用 Git。请重新启用 Git，将 `git.enabled` 设为 true 后重新加载。',
 			SuppressedMessages.GitDisabledWarning,
 		);
 	}
@@ -103,14 +95,14 @@ export class Messages {
 	static showGitInvalidConfigErrorMessage() {
 		return Messages.showMessage(
 			'error',
-			'GitLens is unable to use Git. Your Git configuration seems to be invalid. Please resolve any issues with your Git configuration and reload.',
+			'GitLens 无法使用 Git。你的 Git 配置似乎无效。请修复配置问题后重新加载。',
 		);
 	}
 
 	static showGitMissingErrorMessage() {
 		return Messages.showMessage(
 			'error',
-			"GitLens was unable to find Git. Please make sure Git is installed. Also ensure that Git is either in the PATH, or that 'git.path' is pointed to its installed location.",
+			"GitLens 未能找到 Git。请确认已安装 Git，并确保 Git 已加入 PATH，或将 'git.path' 指向其安装位置。",
 			SuppressedMessages.GitMissingWarning,
 		);
 	}
@@ -118,7 +110,7 @@ export class Messages {
 	static showGitVersionUnsupportedErrorMessage(version: string, required: string): Promise<MessageItem | undefined> {
 		return Messages.showMessage(
 			'error',
-			`GitLens requires a newer version of Git (>= ${required}) than is currently installed (${version}). Please install a more recent version of Git.`,
+			`GitLens 需要比当前已安装版本（${version}）更新的 Git（>= ${required}）。请安装更新版本的 Git。`,
 			SuppressedMessages.GitVersionWarning,
 		);
 	}
@@ -126,7 +118,7 @@ export class Messages {
 	static showInsidersErrorMessage() {
 		return Messages.showMessage(
 			'error',
-			'GitLens (Insiders) cannot be used while GitLens is also enabled. Please ensure that only one version is enabled.',
+			'启用 GitLens 的同时无法使用 GitLens（Insiders）。请确保只启用其中一个版本。',
 			SuppressedMessages.GitDisabledWarning,
 		);
 	}
@@ -134,32 +126,28 @@ export class Messages {
 	static showLineUncommittedWarningMessage(message: string): Promise<MessageItem | undefined> {
 		return Messages.showMessage(
 			'warn',
-			`${message}. The line has uncommitted changes.`,
+			`${message}。该行存在未提交的更改。`,
 			SuppressedMessages.LineUncommittedWarning,
 		);
 	}
 
 	static showNoRepositoryWarningMessage(message: string): Promise<MessageItem | undefined> {
-		return Messages.showMessage(
-			'warn',
-			`${message}. No repository could be found.`,
-			SuppressedMessages.NoRepositoryWarning,
-		);
+		return Messages.showMessage('warn', `${message}。未找到仓库。`, SuppressedMessages.NoRepositoryWarning);
 	}
 
 	static showRebaseSwitchToTextWarningMessage(): Promise<MessageItem | undefined> {
 		return Messages.showMessage(
 			'warn',
-			'Closing either the git-rebase-todo file or the Rebase Editor will start the rebase.',
+			'关闭 git-rebase-todo 文件或 Rebase 编辑器中的任意一个都会启动 rebase。',
 			SuppressedMessages.RebaseSwitchToTextWarning,
 		);
 	}
 
 	static async showWhatsNewMessage(version: string) {
-		const whatsnew = { title: "See What's New" };
+		const whatsnew = { title: '查看新功能' };
 		const result = await Messages.showMessage(
 			'info',
-			`GitLens ${version} is here — check out what's new!`,
+			`GitLens ${version} 已上线，来看看有哪些新功能！`,
 			undefined,
 			null,
 			whatsnew,
@@ -174,7 +162,7 @@ export class Messages {
 		type: 'info' | 'warn' | 'error',
 		message: string,
 		suppressionKey?: SuppressedMessages,
-		dontShowAgain: MessageItem | null = { title: "Don't Show Again" },
+		dontShowAgain: MessageItem | null = { title: '不再显示' },
 		...actions: MessageItem[]
 	): Promise<MessageItem | undefined> {
 		Logger.log(`ShowMessage(${type}, '${message}', ${suppressionKey}, ${JSON.stringify(dontShowAgain)})`);

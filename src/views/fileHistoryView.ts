@@ -8,7 +8,7 @@ import { executeCommand } from '../system/command';
 import { FileHistoryTrackerNode, LineHistoryTrackerNode } from './nodes';
 import { ViewBase } from './viewBase';
 
-const pinnedSuffix = ' (pinned)';
+const pinnedSuffix = '（已固定）';
 
 export class FileHistoryView extends ViewBase<FileHistoryTrackerNode | LineHistoryTrackerNode, FileHistoryViewConfig> {
 	protected readonly configKey = 'fileHistory';
@@ -17,7 +17,7 @@ export class FileHistoryView extends ViewBase<FileHistoryTrackerNode | LineHisto
 	private _followEditor: boolean = true;
 
 	constructor(container: Container) {
-		super('gitlens.views.fileHistory', 'File History', container);
+		super('gitlens.views.fileHistory', '文件历史', container);
 
 		void setContext(ContextKeys.ViewsFileHistoryCursorFollowing, this._followCursor);
 		void setContext(ContextKeys.ViewsFileHistoryEditorFollowing, this._followEditor);
@@ -139,7 +139,7 @@ export class FileHistoryView extends ViewBase<FileHistoryTrackerNode | LineHisto
 		this._followCursor = enabled;
 		void setContext(ContextKeys.ViewsFileHistoryCursorFollowing, enabled);
 
-		this.title = this._followCursor ? 'Line History' : 'File History';
+		this.title = this._followCursor ? '行历史' : '文件历史';
 
 		const root = this.ensureRoot(true);
 		if (uri != null) {

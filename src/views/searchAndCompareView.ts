@@ -70,7 +70,7 @@ export class SearchAndCompareViewNode extends ViewNode<SearchAndCompareView> {
 	getTreeItem(): TreeItem {
 		this.splatted = false;
 
-		const item = new TreeItem('SearchAndCompare', TreeItemCollapsibleState.Expanded);
+		const item = new TreeItem('搜索与比较', TreeItemCollapsibleState.Expanded);
 		item.contextValue = ContextValues.SearchAndCompare;
 		return item;
 	}
@@ -150,8 +150,8 @@ export class SearchAndCompareViewNode extends ViewNode<SearchAndCompareView> {
 		if (ref == null) {
 			const pick = await ReferencePicker.show(
 				repoPath,
-				`Compare ${this.getRefName(selectedRef.ref)} with`,
-				'Choose a reference to compare with',
+				`比较 ${this.getRefName(selectedRef.ref)} 与`,
+				'选择要比较的引用',
 				{
 					allowEnteringRefs: true,
 					picked: typeof selectedRef.ref === 'string' ? selectedRef.ref : selectedRef.ref.ref,
@@ -181,7 +181,7 @@ export class SearchAndCompareViewNode extends ViewNode<SearchAndCompareView> {
 
 	async selectForCompare(repoPath?: string, ref?: string | NamedRef, options?: { prompt?: boolean }) {
 		if (repoPath == null) {
-			repoPath = (await RepositoryPicker.getRepositoryOrShow('Compare'))?.path;
+			repoPath = (await RepositoryPicker.getRepositoryOrShow('比较'))?.path;
 		}
 		if (repoPath == null) return;
 
@@ -190,7 +190,7 @@ export class SearchAndCompareViewNode extends ViewNode<SearchAndCompareView> {
 		let prompt = options?.prompt ?? false;
 		let ref2;
 		if (ref == null) {
-			const pick = await ReferencePicker.show(repoPath, 'Compare', 'Choose a reference to compare', {
+			const pick = await ReferencePicker.show(repoPath, '比较', '选择要比较的引用', {
 				allowEnteringRefs: { ranges: true },
 				// checkmarks: false,
 				include:
@@ -237,7 +237,7 @@ export class SearchAndCompareViewNode extends ViewNode<SearchAndCompareView> {
 
 	private getRefName(ref: string | NamedRef) {
 		return typeof ref === 'string'
-			? GitRevision.shorten(ref, { strings: { working: 'Working Tree' } })!
+			? GitRevision.shorten(ref, { strings: { working: '工作树' } })!
 			: ref.label ?? GitRevision.shorten(ref.ref)!;
 	}
 
@@ -260,7 +260,7 @@ export class SearchAndCompareView extends ViewBase<SearchAndCompareViewNode, Sea
 	protected readonly configKey = 'searchAndCompare';
 
 	constructor(container: Container) {
-		super('gitlens.views.searchAndCompare', 'Search & Compare', container);
+		super('gitlens.views.searchAndCompare', '搜索与比较', container);
 
 		void setContext(ContextKeys.ViewsSearchAndCompareKeepResults, this.keepResults);
 	}
@@ -429,7 +429,7 @@ export class SearchAndCompareView extends ViewBase<SearchAndCompareViewNode, Sea
 			await this.show();
 		}
 
-		const labels = { label: `Results ${typeof label === 'string' ? label : label.label}`, queryLabel: label };
+		const labels = { label: `结果 ${typeof label === 'string' ? label : label.label}`, queryLabel: label };
 		if (updateNode != null) {
 			await updateNode.edit({ pattern: search, labels: labels, log: results });
 

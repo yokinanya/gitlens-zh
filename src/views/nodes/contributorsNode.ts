@@ -52,7 +52,7 @@ export class ContributorsNode extends ViewNode<ContributorsView | RepositoriesVi
 			const stats = this.view.container.config.views.contributors.showStatistics;
 
 			const contributors = await this.repo.getContributors({ all: all, ref: ref, stats: stats });
-			if (contributors.length === 0) return [new MessageNode(this.view, this, 'No contributors could be found.')];
+			if (contributors.length === 0) return [new MessageNode(this.view, this, '未找到贡献者。')];
 
 			GitContributor.sort(contributors);
 			const presenceMap = await this.maybeGetPresenceMap(contributors);
@@ -68,7 +68,7 @@ export class ContributorsNode extends ViewNode<ContributorsView | RepositoriesVi
 	getTreeItem(): TreeItem {
 		this.splatted = false;
 
-		const item = new TreeItem('Contributors', TreeItemCollapsibleState.Collapsed);
+		const item = new TreeItem('贡献者', TreeItemCollapsibleState.Collapsed);
 		item.id = this.id;
 		item.contextValue = ContextValues.Contributors;
 		item.iconPath = new ThemeIcon('organization');

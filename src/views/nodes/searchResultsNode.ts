@@ -240,15 +240,15 @@ export class SearchResultsNode extends ViewNode<SearchAndCompareView> implements
 		if (typeof label === 'string') return label;
 
 		const count = log?.count ?? 0;
+		if (count === 0) return `未找到${label.label}`;
 
 		const resultsType =
-			label.resultsType === undefined ? { singular: 'result', plural: 'results' } : label.resultsType;
+			label.resultsType === undefined ? { singular: '条结果', plural: '条结果' } : label.resultsType;
 
 		return `${pluralize(resultsType.singular, count, {
 			format: c => (log?.hasMore ? `${c}+` : undefined),
 			plural: resultsType.plural,
-			zero: 'No',
-		})} ${label.label}`;
+		})}：${label.label}`;
 	}
 
 	private getSearchQuery(

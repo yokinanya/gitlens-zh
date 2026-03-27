@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<meta charset="utf-8" />
 	</head>
@@ -15,63 +15,59 @@
 
 		<div class="container">
 			<header>
-				<a class="header__link" title="Learn more about GitLens" href="https://gitlens.amod.io">
+				<a class="header__link" title="了解更多 GitLens 信息" href="https://gitlens.amod.io">
 					<div class="header__logo">
 						<img class="image__logo" src="#{root}/images/gitlens-icon.png" />
 						<div>
 							<h1 class="header__title">Git<span class="header__title--highlight">Lens</span></h1>
-							<p class="header__subtitle">Git supercharged</p>
+							<p class="header__subtitle">Git 增强版</p>
 						</div>
 					</div>
 				</a>
 				<p class="header__blurb">
-					GitLens <b>supercharges</b> Git inside VS Code and unlocks the <b>untapped knowledge</b> within each
-					repository. It helps you to <b>visualize code authorship</b> at a glance via Git blame annotations
-					and CodeLens, <b>seamlessly navigate and explore</b> Git repositories,
-					<b>gain valuable insights</b> via rich visualizations and powerful comparison commands, and so much
-					more.
+					GitLens 可在 VS Code 中显著增强 Git 体验，帮助你挖掘每个仓库中的历史信息。它能通过 Git 归属注释和
+					CodeLens 让你快速看清代码作者信息，顺畅浏览和探索 Git 仓库，并借助丰富的可视化与强大的比较命令获得更多洞察。
 				</p>
 			</header>
 
 			<div class="content__area">
 				<section id="welcome" class="section--full">
 					<h2 class="section__title section__title--primary">
-						Welcome to <span class="highlight">GitLens 12</span>
+						欢迎使用 <span class="highlight">GitLens 12</span>
 					</h2>
 					<div class="section__whatsnew">
-						<a title="See What's New" href="https://gitkraken.com/blog/gitlens-12"
+						<a title="查看新功能" href="https://gitkraken.com/blog/gitlens-12"
 							><img src="#{webroot}/media/gitlens-12-card.webp"
 						/></a>
 						<a
 							class="button button--flat"
-							title="See What's New"
+							title="查看新功能"
 							href="https://gitkraken.com/blog/gitlens-12"
-							>See What's New in GitLens 12</a
+							>查看 GitLens 12 新功能</a
 						>
 						<span class="button__subaction"
-							>or read the <a href="https://gitlens.amod.io/#whats-new">release notes</a></span
+							>或阅读<a href="https://gitlens.amod.io/#whats-new">发行说明</a></span
 						>
 						<a
 							class="button button--flat"
-							title="Open the Get Started with GitLens walkthrough"
+							title="打开 GitLens 入门引导"
 							href="command:gitlens.getStarted"
-							>Get Started Walkthrough</a
+							>打开入门引导</a
 						>
 						<span class="button__subaction"
-							>or <a href="command:gitlens.plus.learn">learn about GitLens+ features</a></span
+							>或<a href="command:gitlens.plus.learn">了解 GitLens+ 功能</a></span
 						>
 					</div>
 
-					<h2 id="quick-setup" class="section__title section__title--break">Quick Setup</h2>
+					<h2 id="quick-setup" class="section__title section__title--break">快速设置</h2>
 					<p class="blurb ml-2 mr-2">
-						GitLens is <b>powerful</b>, <b>feature rich</b>, and highly <b>customizable</b> to meet your
-						needs. Do you find CodeLens intrusive or the current line blame annotation distracting &mdash;
-						no problem, quickly turn them off or change how they behave using the options below.
+						GitLens 功能强大、特性丰富，并且高度可定制。若你觉得 CodeLens 过于显眼，或当前行归属注释
+						注解会分散注意力，也没关系，可以直接通过下面的选项关闭它们，或快速调整它们的行为方式。
 					</p>
 					<p class="blurb mt-0 mb-0 center">
-						<i class="icon icon__info"></i> For more options, use the interactive
-						<a class="command" title="Open GitLens Settings" href="command:gitlens.showSettingsPage"
-							>GitLens settings editor</a
+						<i class="icon icon__info"></i> 如需更多选项，请使用交互式
+						<a class="command" title="打开 GitLens 设置" href="command:gitlens.showSettingsPage"
+							>GitLens 设置编辑器</a
 						>
 					</p>
 				</section>
@@ -87,17 +83,17 @@
 									data-setting
 									data-add-settings-off="hovers.currentLine.over=line"
 								/>
-								<label for="currentLine.enabled">Current Line Blame</label>
+								<label for="currentLine.enabled">当前行归属</label>
 								<a
 									class="link__configure"
-									title="Jump to more Current Line Blame settings"
+									title="跳转到更多当前行归属设置"
 									href="command:gitlens.showSettingsPage?%22current-line%22"
 								>
 									<i class="icon icon__gear"></i>
 								</a>
 							</div>
 							<p class="section__header-hint">
-								Adds an unobtrusive blame annotation at the end of the current line
+								在当前行末尾添加低干扰的归属注释
 							</p>
 						</div>
 					</div>
@@ -132,14 +128,14 @@
 								<label for="codeLens.enabled">Git CodeLens</label>
 								<a
 									class="link__configure"
-									title="Jump to more Git CodeLens settings"
+									title="跳转到更多 Git CodeLens 设置"
 									href="command:gitlens.showSettingsPage?%22code-lens%22"
 								>
 									<i class="icon icon__gear"></i>
 								</a>
 							</div>
 							<p class="section__header-hint">
-								Adds authorship CodeLens to the top of files and on code blocks
+								在文件顶部和代码块上显示作者信息 CodeLens
 							</p>
 						</div>
 					</div>
@@ -209,17 +205,17 @@
 						<div class="section__header">
 							<div class="setting__input setting__input--big">
 								<input id="statusBar.enabled" name="statusBar.enabled" type="checkbox" data-setting />
-								<label for="statusBar.enabled">Status Bar Blame</label>
+								<label for="statusBar.enabled">状态栏归属</label>
 								<a
 									class="link__configure"
-									title="Jump to more Status Bar Blame settings"
+									title="跳转到更多状态栏归属设置"
 									href="command:gitlens.showSettingsPage?%22status-bar%22"
 								>
 									<i class="icon icon__gear"></i>
 								</a>
 							</div>
 							<p class="section__header-hint">
-								Adds a Git blame annotation about the current line to the status bar
+								在状态栏中显示当前行的 Git 归属信息
 							</p>
 						</div>
 					</div>
@@ -244,10 +240,10 @@
 					<div class="section__content">
 						<div class="section__header">
 							<h2>
-								Views
+								视图
 								<a
 									class="link__configure"
-									title="Jump to more View settings"
+									title="跳转到更多视图设置"
 									href="command:gitlens.showSettingsPage?%22views%22"
 								>
 									<i class="icon icon__gear"></i>
@@ -256,34 +252,32 @@
 						</div>
 
 						<p class="blurb mt-0">
-							GitLens views can be configured to be shown in different side bar layouts to best match your
-							workflow
+							GitLens 视图可配置为不同的侧边栏布局，以更好地匹配你的工作方式。
 						</p>
 
 						<div class="presets mb-1">
 							<div class="preset">
 								<a
 									class="button button--flat"
-									title="Shows all the views together on the Source Control side bar"
+									title="在源代码管理侧边栏中一起显示所有视图"
 									href="command:gitlens.setViewsLayout?%7B%22layout%22%3A%22scm%22%7D"
-									>Source Control Layout (default)</a
+									>源代码管理布局（默认）</a
 								>
-								<p>Shows all the views together on the Source Control side bar</p>
+								<p>在源代码管理侧边栏中集中显示所有视图</p>
 							</div>
 							<div class="preset">
 								<a
 									class="button button--flat"
-									title="Shows all the views together on the GitLens side bar"
+									title="在 GitLens 侧边栏中一起显示所有视图"
 									href="command:gitlens.setViewsLayout?%7B%22layout%22%3A%22gitlens%22%7D"
-									>GitLens Layout</a
+									>GitLens 布局</a
 								>
-								<p>Shows all the views together on the GitLens side bar</p>
+								<p>在 GitLens 侧边栏中集中显示所有视图</p>
 							</div>
 						</div>
 
 						<p class="section__hint">
-							<i class="icon icon__info"></i> You can also simply drag &amp; drop individual views to
-							create custom layouts
+							<i class="icon icon__info"></i> 你也可以直接拖放单个视图，创建自定义布局
 						</p>
 					</div>
 				</section>
@@ -292,10 +286,10 @@
 					<div class="section__content">
 						<div class="section__header">
 							<h2>
-								Dates & Times
+								日期与时间
 								<a
 									class="link__configure"
-									title="Jump to more View settings"
+									title="跳转到更多日期与时间设置"
 									href="command:gitlens.showSettingsPage?%22dates%22"
 								>
 									<i class="icon icon__gear"></i>
@@ -313,13 +307,13 @@
 									data-value-off="absolute"
 									data-setting
 								/>
-								<label for="defaultDateStyle">Allow relative date formatting</label>
+								<label for="defaultDateStyle">允许使用相对日期格式</label>
 							</div>
 							<span class="setting__hint hidden" data-visibility="defaultDateStyle =relative"
-								>Shows some dates relatively, e.g. 1 day ago</span
+								>以相对方式显示部分日期，例如 1 天前</span
 							>
 							<span class="setting__hint hidden" data-visibility="defaultDateStyle =absolute"
-								>Shows dates absolutely, e.g.
+								>以绝对方式显示日期，例如
 								<span
 									data-setting-preview="defaultDateFormat"
 									data-setting-preview-type="date"
@@ -331,18 +325,18 @@
 						<div class="settings">
 							<div class="setting">
 								<div class="setting__input">
-									<label for="defaultDateLocale">Date&nbsp;locale</label>
+									<label for="defaultDateLocale">日期区域设置</label>
 									<input
 										id="defaultDateLocale"
 										name="defaultDateLocale"
 										type="text"
-										placeholder="defaults to VS Code locale"
+										placeholder="默认使用 VS Code 区域设置"
 										data-setting
 										data-setting-preview
 									/>
 									<a
 										class="link__learn-more"
-										title="See possible BCP 47 language tag for supported locale values"
+										title="查看支持的 BCP 47 语言标签"
 										href="https://en.wikipedia.org/wiki/IETF_language_tag#List_of_major_primary_language_subtags"
 									>
 										<i class="icon icon__info"></i>
@@ -350,11 +344,11 @@
 								</div>
 								<span class="setting__hint">
 									<span style="line-height: 2rem">
-										<i class="icon icon--sm icon__info"></i> Use <code>system</code> for the system
-										locale, or a locale language tag, e.g. en-US
+										<i class="icon icon--sm icon__info"></i> 可使用 <code>system</code>
+										跟随系统区域设置，或输入区域语言标签，例如 en-US
 									</span>
 									<br />
-									Example date:
+									示例日期：
 									<span
 										data-setting-preview="defaultDateLocale"
 										data-setting-preview-type="date-locale"
@@ -365,25 +359,25 @@
 
 							<div class="setting">
 								<div class="setting__input">
-									<label for="defaultDateFormat">Date&nbsp;format</label>
+									<label for="defaultDateFormat">日期格式</label>
 									<input
 										id="defaultDateFormat"
 										name="defaultDateFormat"
 										type="text"
-										placeholder="defaults to MMMM Do, YYYY h:mma"
+										placeholder="默认值为 MMMM Do, YYYY h:mma"
 										data-setting
 										data-setting-preview
 									/>
 									<a
 										class="link__learn-more"
-										title="See Moment.js docs for supported date formats"
+										title="查看 Moment.js 支持的日期格式"
 										href="https://momentjs.com/docs/#/displaying/format/"
 									>
 										<i class="icon icon__info"></i>
 									</a>
 								</div>
 								<span class="setting__hint"
-									>Example date:
+									>示例日期：
 									<span
 										data-setting-preview="defaultDateFormat"
 										data-setting-preview-type="date"
@@ -394,25 +388,25 @@
 
 							<div class="setting">
 								<div class="setting__input">
-									<label for="defaultDateShortFormat">Short&nbsp;date&nbsp;format</label>
+									<label for="defaultDateShortFormat">短日期格式</label>
 									<input
 										id="defaultDateShortFormat"
 										name="defaultDateShortFormat"
 										type="text"
-										placeholder="defaults to MMM D, YYYY"
+										placeholder="默认值为 MMM D, YYYY"
 										data-setting
 										data-setting-preview
 									/>
 									<a
 										class="link__learn-more"
-										title="See Moment.js docs for supported date formats"
+										title="查看 Moment.js 支持的日期格式"
 										href="https://momentjs.com/docs/#/displaying/format/"
 									>
 										<i class="icon icon__info"></i>
 									</a>
 								</div>
 								<span class="setting__hint"
-									>Example short date:
+									>短日期示例：
 									<span
 										data-setting-preview="defaultDateShortFormat"
 										data-setting-preview-type="date"
@@ -423,25 +417,25 @@
 
 							<div class="setting">
 								<div class="setting__input">
-									<label for="defaultTimeFormat">Time&nbsp;format</label>
+									<label for="defaultTimeFormat">时间格式</label>
 									<input
 										id="defaultTimeFormat"
 										name="defaultTimeFormat"
 										type="text"
-										placeholder="defaults to h:mma"
+										placeholder="默认值为 h:mma"
 										data-setting
 										data-setting-preview
 									/>
 									<a
 										class="link__learn-more"
-										title="See Moment.js docs for supported date formats"
+										title="查看 Moment.js 支持的日期格式"
 										href="https://momentjs.com/docs/#/displaying/format/"
 									>
 										<i class="icon icon__info"></i>
 									</a>
 								</div>
 								<span class="setting__hint"
-									>Example date:
+									>示例时间：
 									<span
 										data-setting-preview="defaultTimeFormat"
 										data-setting-preview-type="date"

@@ -1,11 +1,11 @@
-## Visual File History
+## 可视化文件历史
 
 <p align="center">
-  <img src="../../images/docs/visual-file-history-hover.png" alt="Visual File History View"/>
+  <img src="../../images/docs/visual-file-history-hover.png" alt="可视化文件历史视图"/>
 </p>
 
-The Visual File History allows you to quickly see the evolution of a file, including when changes were made, how large they were, and who made them.
+可视化文件历史能帮助你快速查看文件的演变过程，包括更改发生的时间、更改规模以及是谁进行了这些更改。
 
-Authors who have contributed changes to the file are on the left y-axis to create a swim-lane of their commits over time (the x-axis). Commit are plotted as color-coded (per-author) bubbles, whose size represents the relative magnitude of the changes.
+左侧 y 轴会按作者展示对该文件做出过贡献的人员，形成随时间推进的提交泳道图；x 轴表示时间。每次提交都会以按作者着色的气泡显示，气泡大小代表这次更改的相对规模。
 
-Additionally, each commit's additions and deletions are visualized as color-coded, stacked, vertical bars, whose height represents the number of affected lines (right y-axis). Added lines are shown in green, while deleted lines are red.
+此外，每次提交的新增与删除还会以彩色堆叠竖条的方式显示，其高度代表受影响的行数。新增行显示为绿色，删除行显示为红色。

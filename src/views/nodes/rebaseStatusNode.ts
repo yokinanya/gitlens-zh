@@ -8,7 +8,7 @@ import { GitBranch, GitCommit, GitRebaseStatus, GitReference, GitRevisionReferen
 import { makeHierarchical } from '../../system/array';
 import { executeCoreCommand } from '../../system/command';
 import { joinPaths, normalizePath } from '../../system/path';
-import { pluralize, sortCompare } from '../../system/string';
+import { sortCompare } from '../../system/string';
 import { ViewsWithCommits } from '../viewBase';
 import { BranchNode } from './branchNode';
 import { CommitFileNode } from './commitFileNode';
@@ -73,7 +73,7 @@ export class RebaseStatusNode extends ViewNode<ViewsWithCommits> {
 
 	getTreeItem(): TreeItem {
 		const item = new TreeItem(
-			`${this.status?.hasConflicts ? 'Resolve conflicts to continue rebasing' : 'Rebasing'} ${
+			`${this.status?.hasConflicts ? '解决冲突以继续变基' : '正在变基'} ${
 				this.rebaseStatus.incoming != null
 					? `${GitReference.toString(this.rebaseStatus.incoming, { expand: false, icon: false })}`
 					: ''
@@ -82,20 +82,20 @@ export class RebaseStatusNode extends ViewNode<ViewsWithCommits> {
 		);
 		item.id = this.id;
 		item.contextValue = ContextValues.Rebase;
-		item.description = this.status?.hasConflicts ? pluralize('conflict', this.status.conflicts.length) : undefined;
+		item.description = this.status?.hasConflicts ? `${this.status.conflicts.length} 个冲突` : undefined;
 		item.iconPath = this.status?.hasConflicts
 			? new ThemeIcon('warning', new ThemeColor('list.warningForeground'))
 			: new ThemeIcon('debug-pause', new ThemeColor('list.foreground'));
 
 		const markdown = new MarkdownString(
-			`${`Rebasing ${
+			`${`正在将 ${
 				this.rebaseStatus.incoming != null ? GitReference.toString(this.rebaseStatus.incoming) : ''
-			}onto ${GitReference.toString(this.rebaseStatus.current)}`}\n\nStep ${
+			} 变基到 ${GitReference.toString(this.rebaseStatus.current)}`}\n\n第 ${
 				this.rebaseStatus.steps.current.number
-			} of ${this.rebaseStatus.steps.total}\\\nPaused at ${GitReference.toString(
+			} / ${this.rebaseStatus.steps.total} 步\\\n暂停于 ${GitReference.toString(
 				this.rebaseStatus.steps.current.commit,
 				{ icon: true },
-			)}${this.status?.hasConflicts ? `\n\n${pluralize('conflicted file', this.status.conflicts.length)}` : ''}`,
+			)}${this.status?.hasConflicts ? `\n\n${this.status.conflicts.length} 个冲突文件` : ''}`,
 			true,
 		);
 		markdown.supportHtml = true;
@@ -151,7 +151,7 @@ export class RebaseCommitNode extends ViewRefNode<ViewsWithCommits, GitRevisionR
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem(`Paused at commit ${this.commit.shortSha}`, TreeItemCollapsibleState.Collapsed);
+		const item = new TreeItem(`暂停于提交 ${this.commit.shortSha}`, TreeItemCollapsibleState.Collapsed);
 
 		// item.contextValue = ContextValues.RebaseCommit;
 
@@ -174,7 +174,7 @@ export class RebaseCommitNode extends ViewRefNode<ViewsWithCommits, GitRevisionR
 			},
 		};
 		return {
-			title: 'Open Changes with Previous Revision',
+			title: '打开与上一修订版本的对比',
 			command: Commands.DiffWithPrevious,
 			arguments: [undefined, commandArgs],
 		};
@@ -209,7 +209,7 @@ export class RebaseCommitNode extends ViewRefNode<ViewsWithCommits, GitRevisionR
 		}
 
 		const tooltip = await CommitFormatter.fromTemplateAsync(
-			`Rebase paused at \${link}\${' via 'pullRequest}\${'&nbsp;&nbsp;\u2022&nbsp;&nbsp;'changesDetail}\${'&nbsp;&nbsp;&nbsp;&nbsp;'tips}\n\n\${avatar} &nbsp;__\${author}__, \${ago} &nbsp; _(\${date})_ \n\n\${message}\${\n\n---\n\nfootnotes}`,
+			`变基暂停于 \${link}\${' 通过 'pullRequest}\${'&nbsp;&nbsp;\u2022&nbsp;&nbsp;'changesDetail}\${'&nbsp;&nbsp;&nbsp;&nbsp;'tips}\n\n\${avatar} &nbsp;__\${author}__，\${ago} &nbsp; _(\${date})_ \n\n\${message}\${\n\n---\n\nfootnotes}`,
 			this.commit,
 			{
 				autolinkedIssuesOrPullRequests: autolinkedIssuesOrPullRequests,

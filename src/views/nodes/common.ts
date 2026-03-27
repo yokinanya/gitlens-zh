@@ -187,7 +187,7 @@ export abstract class PagerNode extends ViewNode {
 
 	override getCommand(): Command | undefined {
 		return {
-			title: 'Load more',
+			title: '加载更多',
 			command: 'gitlens.views.loadMoreChildren',
 			arguments: [this],
 		};
@@ -211,8 +211,8 @@ export class LoadMoreNode extends PagerNode {
 			parent,
 			options?.message ??
 				(options?.pageSize === 0
-					? `Load all ${GlyphChars.Space}${GlyphChars.Dash}${GlyphChars.Space} this may take a while`
-					: 'Load more'),
+					? `加载全部 ${GlyphChars.Space}${GlyphChars.Dash}${GlyphChars.Space} 这可能需要一些时间`
+					: '加载更多'),
 			previousNode,
 			options,
 		);

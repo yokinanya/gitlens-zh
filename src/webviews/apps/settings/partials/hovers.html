@@ -2,13 +2,13 @@
 	<div class="section__header">
 		<div class="setting__input setting__input--big">
 			<input id="hovers.enabled" name="hovers.enabled" type="checkbox" data-setting />
-			<label for="hovers.enabled">Hovers</label>
-			<a class="link__learn-more" title="Learn more" href="https://github.com/gitkraken/vscode-gitlens/#hovers-">
+			<label for="hovers.enabled">悬停提示</label>
+			<a class="link__learn-more" title="了解更多" href="https://github.com/gitkraken/vscode-gitlens/#hovers-">
 				<i class="icon icon__info"></i>
 			</a>
 		</div>
 
-		<p class="section__header-hint">Adds detailed blame information accessible via hovers</p>
+		<p class="section__header-hint">通过悬停提示显示详细的归属信息</p>
 	</div>
 
 	<div class="section__collapsible">
@@ -18,7 +18,7 @@
 					<div class="setting" data-enablement="hovers.enabled">
 						<div class="setting__input">
 							<input id="hovers.avatars" name="hovers.avatars" type="checkbox" data-setting disabled />
-							<label for="hovers.avatars">Use author avatars</label>
+							<label for="hovers.avatars">使用作者头像</label>
 						</div>
 					</div>
 
@@ -32,13 +32,12 @@
 								disabled
 							/>
 							<label for="hovers.pullRequests.enabled"
-								>Show the Pull Request (if any) that introduced the commit</label
+								>显示引入该提交的拉取请求（如果有）</label
 							>
 						</div>
 
 						<p class="setting__hint hidden" data-visibility="hovers.pullRequests.enabled">
-							<i class="icon icon__info"></i>Requires a connection to a supported remote service (e.g.
-							GitHub)
+							<i class="icon icon__info"></i>需要连接到受支持的远程服务（例如 GitHub）
 						</p>
 					</div>
 				</div>
@@ -57,7 +56,7 @@
 								data-setting
 								disabled
 							/>
-							<label for="hovers.currentLine.enabled">Show hovers for the current line</label>
+							<label for="hovers.currentLine.enabled">显示当前行的悬停提示</label>
 						</div>
 					</div>
 
@@ -75,7 +74,7 @@
 								data-add-settings-on="hovers.currentLine.over=line"
 								disabled
 							/>
-							<label for="hovers.currentLine.enabled-1">Show hovers for the current line</label>
+							<label for="hovers.currentLine.enabled-1">显示当前行的悬停提示</label>
 						</div>
 					</div>
 
@@ -86,7 +85,7 @@
 							data-enablement="hovers.enabled &amp; hovers.currentLine.enabled"
 						>
 							<div class="setting__input">
-								<label for="hovers.currentLine.over">Shown when over the</label>
+								<label for="hovers.currentLine.over">在以下位置悬停时显示</label>
 								<div class="select-container">
 									<select
 										id="hovers.currentLine.over"
@@ -94,8 +93,8 @@
 										data-setting
 										disabled
 									>
-										<option value="annotation">annotation only</option>
-										<option value="line">line &amp; annotation</option>
+										<option value="annotation">仅注解</option>
+										<option value="line">行与注解</option>
 									</select>
 								</div>
 							</div>
@@ -107,7 +106,7 @@
 							data-enablement="hovers.enabled &amp; hovers.currentLine.enabled &amp; currentLine.enabled"
 						>
 							<div class="setting__input">
-								<label for="hovers.currentLine.over">Shown when over the</label>
+								<label for="hovers.currentLine.over">在以下位置悬停时显示</label>
 								<div class="select-container">
 									<select
 										id="hovers.currentLine.over"
@@ -115,8 +114,8 @@
 										data-setting
 										disabled
 									>
-										<option value="annotation">annotation only</option>
-										<option value="line">line</option>
+										<option value="annotation">仅注解</option>
+										<option value="line">行</option>
 									</select>
 								</div>
 							</div>
@@ -131,7 +130,7 @@
 									data-setting
 									disabled
 								/>
-								<label for="hovers.currentLine.details">Add blame details</label>
+								<label for="hovers.currentLine.details">显示归属详情</label>
 							</div>
 						</div>
 
@@ -144,7 +143,7 @@
 									data-setting
 									disabled
 								/>
-								<label for="hovers.currentLine.changes">Add changes (diff)</label>
+								<label for="hovers.currentLine.changes">显示更改（diff）</label>
 							</div>
 						</div>
 					</div>
@@ -210,7 +209,7 @@
 								data-setting
 								disabled
 							/>
-							<label for="hovers.annotations.enabled">Show hovers while annotating</label>
+							<label for="hovers.annotations.enabled">在显示注解时显示悬停提示</label>
 						</div>
 					</div>
 
@@ -218,7 +217,7 @@
 						<div class="setting" data-enablement="hovers.enabled &amp; hovers.annotations.enabled">
 							<div class="setting__input">
 								<div class="setting__input">
-									<label for="hovers.annotations.over">Shown when over the</label>
+									<label for="hovers.annotations.over">在以下位置悬停时显示</label>
 									<div class="select-container">
 										<select
 											id="hovers.annotations.over"
@@ -226,8 +225,8 @@
 											data-setting
 											disabled
 										>
-											<option value="annotation">annotation only</option>
-											<option value="line">line &amp; annotation</option>
+											<option value="annotation">仅注解</option>
+											<option value="line">行与注解</option>
 										</select>
 									</div>
 								</div>
@@ -243,7 +242,7 @@
 									data-setting
 									disabled
 								/>
-								<label for="hovers.annotations.details">Add blame details</label>
+								<label for="hovers.annotations.details">显示归属详情</label>
 							</div>
 						</div>
 
@@ -256,7 +255,7 @@
 									data-setting
 									disabled
 								/>
-								<label for="hovers.annotations.changes">Add changes (diff)</label>
+								<label for="hovers.annotations.changes">显示更改（diff）</label>
 							</div>
 						</div>
 					</div>
@@ -317,14 +316,14 @@
 
 		<div class="section__group">
 			<p class="section__hint">
-				<i class="icon icon__info"></i> For more options, open
+				<i class="icon icon__info"></i> 如需更多选项，打开
 				<a
 					class="command"
-					title="Open Settings"
+					title="打开设置"
 					href="command:workbench.action.openSettings?%22gitlens.hovers%22"
-					>Settings</a
+					>设置</a
 				>
-				and search for <b><i>gitlens.hovers</i></b>
+				并搜索 <b><i>gitlens.hovers</i></b>
 			</p>
 		</div>
 	</div>

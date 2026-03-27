@@ -71,7 +71,7 @@ import { isSubscriptionPaidPlan, isSubscriptionPreviewTrialExpired } from '../su
 import { filterMap, intersection, isStringArray } from '../system/array';
 import { formatPath } from '../system/formatPath';
 import { map } from '../system/iterable';
-import { pad, pluralize, truncate } from '../system/string';
+import { pad, truncate } from '../system/string';
 import { OpenWorkspaceLocation } from '../system/utils';
 import type { ViewsWithRepositoryFolders } from '../views/viewBase';
 import { GitActions } from './gitCommands.actions';
@@ -105,7 +105,7 @@ export function appendReposToTitle<
 			(state as { repos: Repository[] }).repos[0].formattedName
 		}`;
 	} else {
-		repoContext = `${pad(GlyphChars.Dot, 2, 2)}${(state as { repos: Repository[] }).repos.length} repositories`;
+		repoContext = `${pad(GlyphChars.Dot, 2, 2)}${(state as { repos: Repository[] }).repos.length} 个仓库`;
 	}
 
 	return `${title}${truncate(repoContext, quickPickTitleMaxChars - title.length)}`;
@@ -266,7 +266,7 @@ export async function getBranchesAndOrTags(
 
 	if (branches != null && branches.length !== 0 && (tags == null || tags.length === 0)) {
 		return [
-			QuickPickSeparator.create('Branches'),
+			QuickPickSeparator.create('分支'),
 			...(await Promise.all(
 				branches
 					.filter(b => !b.remote)
@@ -284,7 +284,7 @@ export async function getBranchesAndOrTags(
 						),
 					),
 			)),
-			QuickPickSeparator.create('Remote Branches'),
+			QuickPickSeparator.create('远程分支'),
 			...(await Promise.all(
 				branches
 					.filter(b => b.remote)
@@ -320,7 +320,7 @@ export async function getBranchesAndOrTags(
 	}
 
 	return [
-		QuickPickSeparator.create('Branches'),
+		QuickPickSeparator.create('分支'),
 		...(await Promise.all(
 			branches!
 				.filter(b => !b.remote)
@@ -337,7 +337,7 @@ export async function getBranchesAndOrTags(
 					),
 				),
 		)),
-		QuickPickSeparator.create('Tags'),
+		QuickPickSeparator.create('标签'),
 		...tags!.map(t =>
 			TagQuickPickItem.create(
 				t,
@@ -350,7 +350,7 @@ export async function getBranchesAndOrTags(
 				},
 			),
 		),
-		QuickPickSeparator.create('Remote Branches'),
+		QuickPickSeparator.create('远程分支'),
 		...(await Promise.all(
 			branches!
 				.filter(b => b.remote)
@@ -405,7 +405,7 @@ export function getValidateGitReferenceFn(
 			if (inRefMode) {
 				quickpick.items = [
 					DirectiveQuickPickItem.create(Directive.Back, true, {
-						label: 'Enter a reference or commit SHA',
+						label: '输入引用或提交 SHA',
 					}),
 				];
 				return true;
@@ -449,16 +449,16 @@ export async function* inputBranchNameStep<
 		title: appendReposToTitle(`${context.title}${options.titleContext ?? ''}`, state, context),
 		placeholder: options.placeholder,
 		value: options.value,
-		prompt: 'Enter branch name',
+		prompt: '输入分支名称',
 		validate: async (value: string | undefined): Promise<[boolean, string | undefined]> => {
 			if (value == null) return [false, undefined];
 
 			value = value.trim();
-			if (value.length === 0) return [false, 'Please enter a valid branch name'];
+			if (value.length === 0) return [false, '请输入有效的分支名称'];
 
 			if ('repo' in state) {
 				const valid = await Container.instance.git.validateBranchOrTagName(state.repo.path, value);
-				return [valid, valid ? undefined : `'${value}' isn't a valid branch name`];
+				return [valid, valid ? undefined : `'${value}' 不是有效的分支名称`];
 			}
 
 			let valid = true;
@@ -466,7 +466,7 @@ export async function* inputBranchNameStep<
 			for (const repo of state.repos) {
 				valid = await Container.instance.git.validateBranchOrTagName(repo.path, value);
 				if (!valid) {
-					return [false, `'${value}' isn't a valid branch name`];
+					return [false, `'${value}' 不是有效的分支名称`];
 				}
 			}
 
@@ -497,16 +497,16 @@ export async function* inputTagNameStep<
 		title: appendReposToTitle(`${context.title}${options.titleContext ?? ''}`, state, context),
 		placeholder: options.placeholder,
 		value: options.value,
-		prompt: 'Enter tag name',
+		prompt: '输入标签名称',
 		validate: async (value: string | undefined): Promise<[boolean, string | undefined]> => {
 			if (value == null) return [false, undefined];
 
 			value = value.trim();
-			if (value.length === 0) return [false, 'Please enter a valid tag name'];
+			if (value.length === 0) return [false, '请输入有效的标签名称'];
 
 			if ('repo' in state) {
 				const valid = await Container.instance.git.validateBranchOrTagName(state.repo.path, value);
-				return [valid, valid ? undefined : `'${value}' isn't a valid tag name`];
+				return [valid, valid ? undefined : `'${value}' 不是有效的标签名称`];
 			}
 
 			let valid = true;
@@ -514,7 +514,7 @@ export async function* inputTagNameStep<
 			for (const repo of state.repos) {
 				valid = await Container.instance.git.validateBranchOrTagName(repo.path, value);
 				if (!valid) {
-					return [false, `'${value}' isn't a valid branch name`];
+					return [false, `'${value}' 不是有效的标签名称`];
 				}
 			}
 
@@ -559,7 +559,7 @@ export async function* pickBranchStep<
 
 	const step = QuickCommand.createPickStep<BranchQuickPickItem>({
 		title: appendReposToTitle(`${context.title}${titleContext ?? ''}`, state, context),
-		placeholder: branches.length === 0 ? `No branches found in ${state.repo.formattedName}` : placeholder,
+		placeholder: branches.length === 0 ? `未在 ${state.repo.formattedName} 中找到分支` : placeholder,
 		matchOnDetail: true,
 		items:
 			branches.length === 0
@@ -615,7 +615,7 @@ export async function* pickBranchesStep<
 	const step = QuickCommand.createPickStep<BranchQuickPickItem>({
 		multiselect: branches.length !== 0,
 		title: appendReposToTitle(`${context.title}${titleContext ?? ''}`, state, context),
-		placeholder: branches.length === 0 ? `No branches found in ${state.repo.formattedName}` : placeholder,
+		placeholder: branches.length === 0 ? `未在 ${state.repo.formattedName} 中找到分支` : placeholder,
 		matchOnDetail: true,
 		items:
 			branches.length === 0
@@ -686,10 +686,10 @@ export async function* pickBranchOrTagStep<
 		title: appendReposToTitle(`${context.title}${titleContext ?? ''}`, state, context),
 		placeholder:
 			branchesAndOrTags.length === 0
-				? `No branches${context.showTags ? ' or tags' : ''} found in ${state.repo.formattedName}`
+				? `未在 ${state.repo.formattedName} 中找到分支${context.showTags ? '或标签' : ''}`
 				: `${typeof placeholder === 'string' ? placeholder : placeholder(context)}${GlyphChars.Space.repeat(
 						3,
-				  )}(or enter a reference using #)`,
+				  )}（或使用 # 输入引用）`,
 		matchOnDescription: true,
 		matchOnDetail: true,
 		value: value,
@@ -727,10 +727,10 @@ export async function* pickBranchOrTagStep<
 					const branchesAndOrTags = await getBranchesAndOrTagsFn();
 					quickpick.placeholder =
 						branchesAndOrTags.length === 0
-							? `${state.repo.formattedName} has no branches${context.showTags ? ' or tags' : ''}`
+							? `${state.repo.formattedName} 没有分支${context.showTags ? '或标签' : ''}`
 							: `${
 									typeof placeholder === 'string' ? placeholder : placeholder(context)
-							  }${GlyphChars.Space.repeat(3)}(or enter a reference using #)`;
+							  }${GlyphChars.Space.repeat(3)}（或使用 # 输入引用）`;
 					quickpick.items = branchesAndOrTags;
 				} finally {
 					quickpick.busy = false;
@@ -796,14 +796,12 @@ export async function* pickBranchOrTagStepMultiRepo<
 		title: appendReposToTitle(`${context.title}${titleContext ?? ''}`, state, context),
 		placeholder:
 			branchesAndOrTags.length === 0
-				? `No ${state.repos.length === 1 ? '' : 'common '}branches${
-						context.showTags ? ' or tags' : ''
-				  } found in ${
-						state.repos.length === 1 ? state.repos[0].formattedName : `${state.repos.length} repositories`
-				  }`
+				? `未在 ${
+						state.repos.length === 1 ? state.repos[0].formattedName : `${state.repos.length} 个仓库`
+				  } 中找到${state.repos.length === 1 ? '' : '共同的'}分支${context.showTags ? '或标签' : ''}`
 				: `${typeof placeholder === 'string' ? placeholder : placeholder(context)}${GlyphChars.Space.repeat(
 						3,
-				  )}(or enter a reference using #)`,
+				  )}（或使用 # 输入引用）`,
 		matchOnDescription: true,
 		matchOnDetail: true,
 		value: value ?? (GitReference.isRevision(state.reference) ? state.reference.ref : undefined),
@@ -835,16 +833,16 @@ export async function* pickBranchOrTagStepMultiRepo<
 					const branchesAndOrTags = await getBranchesAndOrTagsFn();
 					quickpick.placeholder =
 						branchesAndOrTags.length === 0
-							? `No ${state.repos.length === 1 ? '' : 'common '}branches${
-									context.showTags ? ' or tags' : ''
-							  } found in ${
+							? `未在 ${
 									state.repos.length === 1
 										? state.repos[0].formattedName
-										: `${state.repos.length} repositories`
+										: `${state.repos.length} 个仓库`
+							  } 中找到${state.repos.length === 1 ? '' : '共同的'}分支${
+									context.showTags ? '或标签' : ''
 							  }`
 							: `${
 									typeof placeholder === 'string' ? placeholder : placeholder(context)
-							  }${GlyphChars.Space.repeat(3)}(or enter a reference using #)`;
+							  }${GlyphChars.Space.repeat(3)}（或使用 # 输入引用）`;
 					quickpick.items = branchesAndOrTags;
 				} finally {
 					quickpick.busy = false;
@@ -960,7 +958,7 @@ export async function* pickCommitStep<
 						{ pattern: SearchPattern.fromCommit(item.item.ref) },
 						{
 							label: {
-								label: `for ${GitReference.toString(item.item, { icon: false })}`,
+								label: `关于 ${GitReference.toString(item.item, { icon: false })}`,
 							},
 							reveal: {
 								select: true,
@@ -1003,7 +1001,7 @@ export async function* pickCommitStep<
 					commit.repoPath,
 					{ pattern: SearchPattern.fromCommit(commit) },
 					{
-						label: { label: `for ${GitReference.toString(commit, { icon: false })}` },
+						label: { label: `关于 ${GitReference.toString(commit, { icon: false })}` },
 						reveal: {
 							select: true,
 							focus: false,
@@ -1104,7 +1102,7 @@ export function* pickCommitsStep<
 						{ pattern: SearchPattern.fromCommit(item.ref) },
 						{
 							label: {
-								label: `for ${GitReference.toString(item, { icon: false })}`,
+								label: `关于 ${GitReference.toString(item, { icon: false })}`,
 							},
 							reveal: {
 								select: true,
@@ -1132,7 +1130,7 @@ export function* pickCommitsStep<
 					commit.repoPath,
 					{ pattern: SearchPattern.fromCommit(commit) },
 					{
-						label: { label: `for ${GitReference.toString(commit, { icon: false })}` },
+						label: { label: `关于 ${GitReference.toString(commit, { icon: false })}` },
 						reveal: {
 							select: true,
 							focus: false,
@@ -1153,7 +1151,7 @@ export async function* pickContributorsStep<
 >(
 	state: State,
 	context: Context,
-	placeholder: string = 'Choose contributors',
+	placeholder: string = '选择贡献者',
 ): AsyncStepResultGenerator<GitContributor[]> {
 	const message = (await Container.instance.git.getOrOpenScmRepository(state.repo.path))?.inputBox.value;
 
@@ -1191,7 +1189,7 @@ export async function* pickContributorsStep<
 export async function* pickRepositoryStep<
 	State extends PartialStepState & { repo?: string | Repository },
 	Context extends { repos: Repository[]; title: string; associatedView: ViewsWithRepositoryFolders },
->(state: State, context: Context, placeholder: string = 'Choose a repository'): AsyncStepResultGenerator<Repository> {
+>(state: State, context: Context, placeholder: string = '选择仓库'): AsyncStepResultGenerator<Repository> {
 	if (typeof state.repo === 'string') {
 		state.repo = Container.instance.git.getRepository(state.repo);
 		if (state.repo != null) return state.repo;
@@ -1246,7 +1244,7 @@ export async function* pickRepositoriesStep<
 	context: Context,
 	options?: { placeholder?: string; skipIfPossible?: boolean },
 ): AsyncStepResultGenerator<Repository[]> {
-	options = { placeholder: 'Choose repositories', skipIfPossible: false, ...options };
+	options = { placeholder: '选择仓库', skipIfPossible: false, ...options };
 
 	let actives: Repository[];
 	if (state.repos != null) {
@@ -1402,7 +1400,7 @@ export async function* pickTagsStep<
 	const step = QuickCommand.createPickStep<TagQuickPickItem>({
 		multiselect: tags.length !== 0,
 		title: appendReposToTitle(`${context.title}${titleContext ?? ''}`, state, context),
-		placeholder: tags.length === 0 ? `No tags found in ${state.repo.formattedName}` : placeholder,
+		placeholder: tags.length === 0 ? `未在 ${state.repo.formattedName} 中找到标签` : placeholder,
 		matchOnDetail: true,
 		items:
 			tags.length === 0
@@ -1461,7 +1459,7 @@ export async function* pickWorktreeStep<
 
 	const step = QuickCommand.createPickStep<WorktreeQuickPickItem>({
 		title: appendReposToTitle(`${context.title}${titleContext ?? ''}`, state, context),
-		placeholder: worktrees.length === 0 ? `No worktrees found in ${state.repo.formattedName}` : placeholder,
+		placeholder: worktrees.length === 0 ? `未在 ${state.repo.formattedName} 中找到工作树` : placeholder,
 		matchOnDetail: true,
 		items:
 			worktrees.length === 0
@@ -1522,7 +1520,7 @@ export async function* pickWorktreesStep<
 	const step = QuickCommand.createPickStep<WorktreeQuickPickItem>({
 		multiselect: worktrees.length !== 0,
 		title: appendReposToTitle(`${context.title}${titleContext ?? ''}`, state, context),
-		placeholder: worktrees.length === 0 ? `No worktrees found in ${state.repo.formattedName}` : placeholder,
+		placeholder: worktrees.length === 0 ? `未在 ${state.repo.formattedName} 中找到工作树` : placeholder,
 		matchOnDetail: true,
 		items:
 			worktrees.length === 0
@@ -1582,7 +1580,7 @@ export async function* showCommitOrStashStep<
 						state.repo.path,
 						{ pattern: SearchPattern.fromCommit(state.reference.ref) },
 						{
-							label: { label: `for ${GitReference.toString(state.reference, { icon: false })}` },
+							label: { label: `关于 ${GitReference.toString(state.reference, { icon: false })}` },
 							reveal: {
 								select: true,
 								focus: false,
@@ -1630,8 +1628,8 @@ async function getShowCommitOrStashStepItems<
 
 	if (GitCommit.isStash(state.reference)) {
 		items.push(
-			QuickPickSeparator.create('Actions'),
-			new GitCommandQuickPickItem('Apply Stash...', {
+			QuickPickSeparator.create('操作'),
+			new GitCommandQuickPickItem('应用储藏...', {
 				command: 'stash',
 				state: {
 					subcommand: 'apply',
@@ -1639,7 +1637,7 @@ async function getShowCommitOrStashStepItems<
 					reference: state.reference,
 				},
 			}),
-			new GitCommandQuickPickItem('Delete Stash...', {
+			new GitCommandQuickPickItem('删除储藏...', {
 				command: 'stash',
 				state: {
 					subcommand: 'drop',
@@ -1655,7 +1653,7 @@ async function getShowCommitOrStashStepItems<
 		const remotes = await Container.instance.git.getRemotesWithProviders(state.repo.path, { sort: true });
 		if (remotes?.length) {
 			items.push(
-				QuickPickSeparator.create(GitRemote.getHighlanderProviderName(remotes) ?? 'Remote'),
+				QuickPickSeparator.create(GitRemote.getHighlanderProviderName(remotes) ?? '远程'),
 				new OpenRemoteResourceCommandQuickPickItem(remotes, {
 					type: RemoteResourceType.Commit,
 					sha: state.reference.sha,
@@ -1667,7 +1665,7 @@ async function getShowCommitOrStashStepItems<
 			);
 		}
 
-		items.push(QuickPickSeparator.create('Actions'));
+		items.push(QuickPickSeparator.create('操作'));
 
 		const branch = await Container.instance.git.getBranch(state.repo.path);
 		const [branches, published] = await Promise.all([
@@ -1687,7 +1685,7 @@ async function getShowCommitOrStashStepItems<
 				// TODO@eamodio Add Undo commit, if HEAD & unpushed
 
 				items.push(
-					new GitCommandQuickPickItem('Push to Commit...', {
+					new GitCommandQuickPickItem('推送到此提交...', {
 						command: 'push',
 						state: {
 							repos: state.repo,
@@ -1698,21 +1696,21 @@ async function getShowCommitOrStashStepItems<
 			}
 
 			items.push(
-				new GitCommandQuickPickItem('Revert Commit...', {
+				new GitCommandQuickPickItem('还原此提交...', {
 					command: 'revert',
 					state: {
 						repo: state.repo,
 						references: [state.reference],
 					},
 				}),
-				new GitCommandQuickPickItem(`Reset ${branch?.name ?? 'Current Branch'} to Commit...`, {
+				new GitCommandQuickPickItem(`将 ${branch?.name ?? '当前分支'} 重置到此提交...`, {
 					command: 'reset',
 					state: {
 						repo: state.repo,
 						reference: state.reference,
 					},
 				}),
-				new GitCommandQuickPickItem(`Reset ${branch?.name ?? 'Current Branch'} to Previous Commit...`, {
+				new GitCommandQuickPickItem(`将 ${branch?.name ?? '当前分支'} 重置到上一个提交...`, {
 					command: 'reset',
 					state: {
 						repo: state.repo,
@@ -1726,7 +1724,7 @@ async function getShowCommitOrStashStepItems<
 			);
 		} else {
 			items.push(
-				new GitCommandQuickPickItem('Cherry Pick Commit...', {
+				new GitCommandQuickPickItem('挑拣提交...', {
 					command: 'cherry-pick',
 					state: {
 						repo: state.repo,
@@ -1737,14 +1735,14 @@ async function getShowCommitOrStashStepItems<
 		}
 
 		items.push(
-			new GitCommandQuickPickItem(`Rebase ${branch?.name ?? 'Current Branch'} onto Commit...`, {
+			new GitCommandQuickPickItem(`将 ${branch?.name ?? '当前分支'} 变基到此提交...`, {
 				command: 'rebase',
 				state: {
 					repo: state.repo,
 					reference: state.reference,
 				},
 			}),
-			new GitCommandQuickPickItem('Switch to Commit...', {
+			new GitCommandQuickPickItem('切换到此提交...', {
 				command: 'switch',
 				state: {
 					repos: [state.repo],
@@ -1753,7 +1751,7 @@ async function getShowCommitOrStashStepItems<
 			}),
 
 			QuickPickSeparator.create(),
-			new GitCommandQuickPickItem('Create Branch at Commit...', {
+			new GitCommandQuickPickItem('在此提交处创建分支...', {
 				command: 'branch',
 				state: {
 					subcommand: 'create',
@@ -1761,7 +1759,7 @@ async function getShowCommitOrStashStepItems<
 					reference: state.reference,
 				},
 			}),
-			new GitCommandQuickPickItem('Create Tag at Commit...', {
+			new GitCommandQuickPickItem('在此提交处创建标签...', {
 				command: 'tag',
 				state: {
 					subcommand: 'create',
@@ -1770,14 +1768,14 @@ async function getShowCommitOrStashStepItems<
 				},
 			}),
 
-			QuickPickSeparator.create('Copy'),
+			QuickPickSeparator.create('复制'),
 			new CommitCopyIdQuickPickItem(state.reference),
 			new CommitCopyMessageQuickPickItem(state.reference),
 		);
 	}
 
 	items.push(
-		QuickPickSeparator.create('Open'),
+		QuickPickSeparator.create('打开'),
 		new CommitOpenAllChangesCommandQuickPickItem(state.reference),
 		new CommitOpenAllChangesWithWorkingCommandQuickPickItem(state.reference),
 		new CommitOpenAllChangesWithDiffToolCommandQuickPickItem(state.reference),
@@ -1787,7 +1785,7 @@ async function getShowCommitOrStashStepItems<
 	);
 
 	items.push(
-		QuickPickSeparator.create('Compare'),
+		QuickPickSeparator.create('比较'),
 		new CommitCompareWithHEADCommandQuickPickItem(state.reference),
 		new CommitCompareWithWorkingCommandQuickPickItem(state.reference),
 	);
@@ -1799,7 +1797,7 @@ async function getShowCommitOrStashStepItems<
 	);
 
 	items.push(
-		QuickPickSeparator.create('Browse'),
+		QuickPickSeparator.create('浏览'),
 		new CommitBrowseRepositoryFromHereCommandQuickPickItem(state.reference, { openInNewWindow: false }),
 		new CommitBrowseRepositoryFromHereCommandQuickPickItem(state.reference, {
 			before: true,
@@ -1817,7 +1815,7 @@ async function getShowCommitOrStashStepItems<
 		0,
 		new CommitFilesQuickPickItem(state.reference, {
 			unpublished: unpublished,
-			hint: 'Click to see all changed files',
+			hint: '点击查看所有已变更文件',
 		}),
 	);
 	return items as CommandQuickPickItem[];
@@ -1853,9 +1851,9 @@ export function* showCommitOrStashFilesStep<
 		items: [
 			new CommitFilesQuickPickItem(state.reference, {
 				picked: state.fileName == null,
-				hint: `Click to see ${GitCommit.isStash(state.reference) ? 'stash' : 'commit'} actions`,
+				hint: `点击查看${GitCommit.isStash(state.reference) ? '储藏' : '提交'}操作`,
 			}),
-			QuickPickSeparator.create('Files'),
+			QuickPickSeparator.create('文件'),
 			...(state.reference.files?.map(
 				fs => new CommitFileQuickPickItem(state.reference, fs, options?.picked === fs.path),
 			) ?? []),
@@ -1868,7 +1866,7 @@ export function* showCommitOrStashFilesStep<
 					state.repo.path,
 					{ pattern: SearchPattern.fromCommit(state.reference.ref) },
 					{
-						label: { label: `for ${GitReference.toString(state.reference, { icon: false })}` },
+						label: { label: `关于 ${GitReference.toString(state.reference, { icon: false })}` },
 						reveal: {
 							select: true,
 							focus: false,
@@ -1927,7 +1925,7 @@ export async function* showCommitOrStashFileStep<
 		),
 		placeholder: `${formatPath(state.fileName, {
 			relativeTo: state.repo.path,
-		})} in ${GitReference.toString(state.reference, {
+		})}，位于 ${GitReference.toString(state.reference, {
 			icon: false,
 		})}`,
 		ignoreFocusOut: true,
@@ -1940,7 +1938,7 @@ export async function* showCommitOrStashFileStep<
 					state.repo.path,
 					{ pattern: SearchPattern.fromCommit(state.reference.ref) },
 					{
-						label: { label: `for ${GitReference.toString(state.reference, { icon: false })}` },
+						label: { label: `关于 ${GitReference.toString(state.reference, { icon: false })}` },
 						reveal: {
 							select: true,
 							focus: false,
@@ -1995,7 +1993,7 @@ async function getShowCommitOrStashFileStepItems<
 		items.push(
 			QuickPickSeparator.create(),
 			new CommitCopyMessageQuickPickItem(state.reference),
-			QuickPickSeparator.create('Actions'),
+			QuickPickSeparator.create('操作'),
 			new CommitApplyFileChangesCommandQuickPickItem(state.reference, file),
 			new CommitRestoreFileChangesCommandQuickPickItem(state.reference, file),
 			QuickPickSeparator.create(),
@@ -2005,7 +2003,7 @@ async function getShowCommitOrStashFileStepItems<
 		const remotes = await Container.instance.git.getRemotesWithProviders(state.repo.path, { sort: true });
 		if (remotes?.length) {
 			items.push(
-				QuickPickSeparator.create(GitRemote.getHighlanderProviderName(remotes) ?? 'Remote'),
+				QuickPickSeparator.create(GitRemote.getHighlanderProviderName(remotes) ?? '远程'),
 				new OpenRemoteResourceCommandQuickPickItem(remotes, {
 					type: RemoteResourceType.Revision,
 					fileName: state.fileName,
@@ -2029,17 +2027,17 @@ async function getShowCommitOrStashFileStepItems<
 		}
 
 		items.push(
-			QuickPickSeparator.create('Actions'),
+			QuickPickSeparator.create('操作'),
 			new CommitApplyFileChangesCommandQuickPickItem(state.reference, file),
 			new CommitRestoreFileChangesCommandQuickPickItem(state.reference, file),
-			QuickPickSeparator.create('Copy'),
+			QuickPickSeparator.create('复制'),
 			new CommitCopyIdQuickPickItem(state.reference),
 			new CommitCopyMessageQuickPickItem(state.reference),
 		);
 	}
 
 	items.push(
-		QuickPickSeparator.create('Open'),
+		QuickPickSeparator.create('打开'),
 		new CommitOpenChangesCommandQuickPickItem(state.reference, state.fileName),
 		new CommitOpenChangesWithWorkingCommandQuickPickItem(state.reference, state.fileName),
 		new CommitOpenChangesWithDiffToolCommandQuickPickItem(state.reference, state.fileName),
@@ -2052,13 +2050,13 @@ async function getShowCommitOrStashFileStepItems<
 	items.push(new CommitOpenRevisionCommandQuickPickItem(state.reference, file));
 
 	items.push(
-		QuickPickSeparator.create('Compare'),
+		QuickPickSeparator.create('比较'),
 		new CommitCompareWithHEADCommandQuickPickItem(state.reference),
 		new CommitCompareWithWorkingCommandQuickPickItem(state.reference),
 	);
 
 	items.push(
-		QuickPickSeparator.create('Browse'),
+		QuickPickSeparator.create('浏览'),
 		new CommitBrowseRepositoryFromHereCommandQuickPickItem(state.reference, { openInNewWindow: false }),
 		new CommitBrowseRepositoryFromHereCommandQuickPickItem(state.reference, {
 			before: true,
@@ -2074,7 +2072,7 @@ async function getShowCommitOrStashFileStepItems<
 	items.splice(
 		0,
 		0,
-		new CommitFilesQuickPickItem(state.reference, { file: file, hint: 'Click to see all changed files' }),
+		new CommitFilesQuickPickItem(state.reference, { file: file, hint: '点击查看所有已变更文件' }),
 	);
 	return items as CommandQuickPickItem[];
 }
@@ -2111,15 +2109,13 @@ function getShowRepositoryStatusStepItems<
 
 	let workingTreeStatus;
 	if (computed.staged === 0 && computed.unstaged === 0) {
-		workingTreeStatus = 'No working tree changes';
+		workingTreeStatus = '工作树没有变更';
 	} else {
 		workingTreeStatus = `$(files) ${
-			computed.staged ? `${pluralize('staged file', computed.staged)} (${computed.stagedStatus})` : ''
+			computed.staged ? `${computed.staged} 个已暂存文件 (${computed.stagedStatus})` : ''
 		}${
 			computed.unstaged
-				? `${computed.staged ? ', ' : ''}${pluralize('unstaged file', computed.unstaged)} (${
-						computed.unstagedStatus
-				  })`
+				? `${computed.staged ? ', ' : ''}${computed.unstaged} 个未暂存文件 (${computed.unstagedStatus})`
 				: ''
 		}`;
 	}
@@ -2128,28 +2124,28 @@ function getShowRepositoryStatusStepItems<
 		if (context.status.state.ahead === 0 && context.status.state.behind === 0) {
 			items.push(
 				DirectiveQuickPickItem.create(Directive.Noop, true, {
-					label: `$(git-branch) ${context.status.branch} is up to date with $(git-branch) ${context.status.upstream}`,
+					label: `$(git-branch) ${context.status.branch} 与 $(git-branch) ${context.status.upstream} 保持同步`,
 					detail: workingTreeStatus,
 				}),
 			);
 		} else if (context.status.state.ahead !== 0 && context.status.state.behind !== 0) {
 			items.push(
 				DirectiveQuickPickItem.create(Directive.Noop, true, {
-					label: `$(git-branch) ${context.status.branch} has diverged from $(git-branch) ${context.status.upstream}`,
+					label: `$(git-branch) ${context.status.branch} 与 $(git-branch) ${context.status.upstream} 已分叉`,
 					detail: workingTreeStatus,
 				}),
 			);
 		} else if (context.status.state.ahead !== 0) {
 			items.push(
 				DirectiveQuickPickItem.create(Directive.Noop, true, {
-					label: `$(git-branch) ${context.status.branch} is ahead of $(git-branch) ${context.status.upstream}`,
+					label: `$(git-branch) ${context.status.branch} 领先于 $(git-branch) ${context.status.upstream}`,
 					detail: workingTreeStatus,
 				}),
 			);
 		} else if (context.status.state.behind !== 0) {
 			items.push(
 				DirectiveQuickPickItem.create(Directive.Noop, true, {
-					label: `$(git-branch) ${context.status.branch} is behind $(git-branch) ${context.status.upstream}`,
+					label: `$(git-branch) ${context.status.branch} 落后于 $(git-branch) ${context.status.upstream}`,
 					detail: workingTreeStatus,
 				}),
 			);
@@ -2158,7 +2154,7 @@ function getShowRepositoryStatusStepItems<
 		if (context.status.state.behind !== 0) {
 			items.push(
 				new GitCommandQuickPickItem(
-					`$(cloud-download) ${pluralize('commit', context.status.state.behind)} behind`,
+					`$(cloud-download) 落后 ${context.status.state.behind} 次提交`,
 					{
 						command: 'log',
 						state: {
@@ -2176,7 +2172,7 @@ function getShowRepositoryStatusStepItems<
 		if (context.status.state.ahead !== 0) {
 			items.push(
 				new GitCommandQuickPickItem(
-					`$(cloud-upload) ${pluralize('commit', context.status.state.ahead)} ahead`,
+					`$(cloud-upload) 领先 ${context.status.state.ahead} 次提交`,
 					{
 						command: 'log',
 						state: {
@@ -2193,7 +2189,7 @@ function getShowRepositoryStatusStepItems<
 	} else {
 		items.push(
 			DirectiveQuickPickItem.create(Directive.Noop, true, {
-				label: `$(git-branch) ${context.status.branch} has no upstream`,
+				label: `$(git-branch) ${context.status.branch} 没有上游分支`,
 				detail: workingTreeStatus,
 			}),
 		);
@@ -2210,7 +2206,7 @@ function getShowRepositoryStatusStepItems<
 	if (computed.staged > 0) {
 		items.push(
 			new OpenChangedFilesCommandQuickPickItem(computed.stagedAddsAndChanges, {
-				label: '$(files) Open Staged Files',
+				label: '$(files) 打开已暂存文件',
 			}),
 		);
 	}
@@ -2218,13 +2214,13 @@ function getShowRepositoryStatusStepItems<
 	if (computed.unstaged > 0) {
 		items.push(
 			new OpenChangedFilesCommandQuickPickItem(computed.unstagedAddsAndChanges, {
-				label: '$(files) Open Unstaged Files',
+				label: '$(files) 打开未暂存文件',
 			}),
 		);
 	}
 
 	if (context.status.files.length) {
-		items.push(new CommandQuickPickItem('$(x) Close Unchanged Files', Commands.CloseUnchangedFiles));
+		items.push(new CommandQuickPickItem('$(x) 关闭未变更文件', Commands.CloseUnchangedFiles));
 	}
 
 	return items;

@@ -4,7 +4,7 @@ import { GitUri } from '../../git/gitUri';
 import { GitBranch, GitMergeStatus, GitReference, GitStatus } from '../../git/models';
 import { makeHierarchical } from '../../system/array';
 import { joinPaths, normalizePath } from '../../system/path';
-import { pluralize, sortCompare } from '../../system/string';
+import { sortCompare } from '../../system/string';
 import { ViewsWithCommits } from '../viewBase';
 import { BranchNode } from './branchNode';
 import { FileNode, FolderNode } from './folderNode';
@@ -63,25 +63,25 @@ export class MergeStatusNode extends ViewNode<ViewsWithCommits> {
 
 	getTreeItem(): TreeItem {
 		const item = new TreeItem(
-			`${this.status?.hasConflicts ? 'Resolve conflicts before merging' : 'Merging'} ${
+			`${this.status?.hasConflicts ? '解决冲突后继续合并' : '正在合并'} ${
 				this.mergeStatus.incoming != null
 					? `${GitReference.toString(this.mergeStatus.incoming, { expand: false, icon: false })} `
 					: ''
-			}into ${GitReference.toString(this.mergeStatus.current, { expand: false, icon: false })}`,
+			}到 ${GitReference.toString(this.mergeStatus.current, { expand: false, icon: false })}`,
 			TreeItemCollapsibleState.Expanded,
 		);
 		item.id = this.id;
 		item.contextValue = ContextValues.Merge;
-		item.description = this.status?.hasConflicts ? pluralize('conflict', this.status.conflicts.length) : undefined;
+		item.description = this.status?.hasConflicts ? `${this.status.conflicts.length} 个冲突` : undefined;
 		item.iconPath = this.status?.hasConflicts
 			? new ThemeIcon('warning', new ThemeColor('list.warningForeground'))
 			: new ThemeIcon('debug-pause', new ThemeColor('list.foreground'));
 
 		const markdown = new MarkdownString(
-			`${`Merging ${
+			`${`正在将 ${
 				this.mergeStatus.incoming != null ? GitReference.toString(this.mergeStatus.incoming) : ''
-			}into ${GitReference.toString(this.mergeStatus.current)}`}${
-				this.status?.hasConflicts ? `\n\n${pluralize('conflicted file', this.status.conflicts.length)}` : ''
+			} 合并到 ${GitReference.toString(this.mergeStatus.current)}`}${
+				this.status?.hasConflicts ? `\n\n${this.status.conflicts.length} 个冲突文件` : ''
 			}`,
 			true,
 		);

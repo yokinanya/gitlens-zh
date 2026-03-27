@@ -53,7 +53,7 @@ export class FileHistoryNode extends SubscribeableViewNode<FileHistoryView> impl
 
 	async getChildren(): Promise<ViewNode[]> {
 		this.view.description = `${this.label}${
-			this.parent instanceof FileHistoryTrackerNode && !this.parent.followingEditor ? ' (pinned)' : ''
+			this.parent instanceof FileHistoryTrackerNode && !this.parent.followingEditor ? '（已固定）' : ''
 		}`;
 
 		const children: ViewNode[] = [];
@@ -132,7 +132,7 @@ export class FileHistoryNode extends SubscribeableViewNode<FileHistoryView> impl
 			}
 		}
 
-		if (children.length === 0) return [new MessageNode(this.view, this, 'No file history could be found.')];
+		if (children.length === 0) return [new MessageNode(this.view, this, '未找到文件历史。')];
 		return children;
 	}
 
@@ -143,12 +143,12 @@ export class FileHistoryNode extends SubscribeableViewNode<FileHistoryView> impl
 		const item = new TreeItem(label, TreeItemCollapsibleState.Expanded);
 		item.contextValue = ContextValues.FileHistory;
 		item.description = this.uri.directory;
-		item.tooltip = `History of ${this.uri.fileName}\n${this.uri.directory}/${
+		item.tooltip = `历史记录：${this.uri.fileName}\n${this.uri.directory}/${
 			this.uri.sha == null ? '' : `\n\n${this.uri.sha}`
 		}`;
 
 		this.view.description = `${label}${
-			this.parent instanceof FileHistoryTrackerNode && !this.parent.followingEditor ? ' (pinned)' : ''
+			this.parent instanceof FileHistoryTrackerNode && !this.parent.followingEditor ? '（已固定）' : ''
 		}`;
 
 		return item;

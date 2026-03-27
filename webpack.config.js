@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
-const { spawnSync } = require('child_process');
+const fs = require('fs');
 const path = require('path');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const { CleanWebpackPlugin: CleanPlugin } = require('clean-webpack-plugin');
@@ -583,15 +583,28 @@ class InlineChunkHtmlPlugin {
  * @returns { string }
  */
 function resolveTSConfig(configFile) {
-	const result = spawnSync('yarn', ['tsc', `-p ${configFile}`, '--showConfig'], {
-		cwd: __dirname,
-		encoding: 'utf8',
-		shell: true,
-	});
+	const data = JSON5.parse(fs.readFileSync(configFile, 'utf8'));
 
-	const data = result.stdout;
-	const start = data.indexOf('{');
-	const end = data.lastIndexOf('}') + 1;
-	const json = JSON5.parse(data.substring(start, end));
-	return json;
+	if (data.extends == null) {
+		return data;
+	}
+
+	const baseConfigFile = path.resolve(path.dirname(configFile), data.extends);
+	const resolvedBaseConfigFile = path.extname(baseConfigFile) ? baseConfigFile : `${baseConfigFile}.json`;
+	const base = resolveTSConfig(resolvedBaseConfigFile);
+
+	const { extends: _extends, compilerOptions, ...rest } = data;
+
+	return {
+		...base,
+		...rest,
+		compilerOptions: {
+			...(base.compilerOptions ?? {}),
+			...(compilerOptions ?? {}),
+			paths: {
+				...(base.compilerOptions?.paths ?? {}),
+				...(compilerOptions?.paths ?? {}),
+			},
+		},
+	};
 }

@@ -86,7 +86,7 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 					  })
 					: undefined,
 			]);
-			if (log == null) return [new MessageNode(this.view, this, 'No commits could be found.')];
+			if (log == null) return [new MessageNode(this.view, this, '未找到提交。')];
 
 			const children = [];
 
@@ -170,9 +170,9 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 			this.worktree.main || this.worktree.opened
 				? `${pad(GlyphChars.Dash, 2, 2)} ${
 						this.worktree.main
-							? `_Main${this.worktree.opened ? ', Active_' : '_'}`
+							? `_主工作树${this.worktree.opened ? '，当前活动_' : '_'}`
 							: this.worktree.opened
-							? '_Active_'
+							? '_当前活动_'
 							: ''
 				  } `
 				: '';
@@ -181,7 +181,7 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 			case 'bare':
 				icon = new ThemeIcon('folder');
 				tooltip.appendMarkdown(
-					`${this.worktree.main ? '$(pass) ' : ''}Bare Worktree${indicators}\\\n\`${
+					`${this.worktree.main ? '$(pass) ' : ''}裸工作树${indicators}\\\n\`${
 						this.worktree.friendlyPath
 					}\``,
 				);
@@ -191,7 +191,7 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 				this._branch = branch;
 
 				tooltip.appendMarkdown(
-					`${this.worktree.main ? '$(pass) ' : ''}Worktree for Branch $(git-branch) ${
+					`${this.worktree.main ? '$(pass) ' : ''}分支工作树 $(git-branch) ${
 						branch?.getNameWithoutRemote() ?? this.worktree.branch
 					}${indicators}\\\n\`${this.worktree.friendlyPath}\``,
 				);
@@ -201,15 +201,15 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 					hasChanges = status.hasChanges;
 					tooltip.appendMarkdown(
 						`\n\n${status.getFormattedDiffStatus({
-							prefix: 'Has Uncommitted Changes\\\n',
-							empty: 'No Uncommitted Changes',
+							prefix: '存在未提交的更改\\\n',
+							empty: '没有未提交的更改',
 							expand: true,
 						})}`,
 					);
 				}
 
 				if (branch != null) {
-					tooltip.appendMarkdown(`\n\nBranch $(git-branch) ${branch.getNameWithoutRemote()}`);
+					tooltip.appendMarkdown(`\n\n分支 $(git-branch) ${branch.getNameWithoutRemote()}`);
 
 					if (!branch.remote) {
 						if (branch.upstream != null) {
@@ -250,17 +250,17 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 							})}${branch.upstream.name}`;
 
 							tooltip.appendMarkdown(
-								` is ${branch.getTrackingStatus({
+								`：${branch.getTrackingStatus({
 									empty: branch.upstream.missing
-										? `missing upstream $(git-branch) ${branch.upstream.name}`
-										: `up to date with $(git-branch)  ${branch.upstream.name}${
-												remote?.provider?.name ? ` on ${remote.provider.name}` : ''
-										  }`,
+										? `上游分支缺失 $(git-branch) ${branch.upstream.name}`
+										: `与 $(git-branch)  ${branch.upstream.name}${
+												remote?.provider?.name ? `（${remote.provider.name}）` : ''
+										  } 保持同步`,
 									expand: true,
 									icons: true,
 									separator: ', ',
 									suffix: ` $(git-branch) ${branch.upstream.name}${
-										remote?.provider?.name ? ` on ${remote.provider.name}` : ''
+										remote?.provider?.name ? `（${remote.provider.name}）` : ''
 									}`,
 								})}`,
 							);
@@ -269,7 +269,7 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 								await this.view.container.git.getRemotesWithProviders(branch.repoPath),
 							);
 
-							tooltip.appendMarkdown(` hasn't been published to ${providerName ?? 'a remote'}`);
+							tooltip.appendMarkdown(` 尚未发布到 ${providerName ?? '远程仓库'}`);
 						}
 					}
 				}
@@ -279,7 +279,7 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 			case 'detached': {
 				icon = new ThemeIcon('git-commit');
 				tooltip.appendMarkdown(
-					`${this.worktree.main ? '$(pass) ' : ''}Detached Worktree at $(git-commit) ${GitRevision.shorten(
+					`${this.worktree.main ? '$(pass) ' : ''}游离工作树，位于 $(git-commit) ${GitRevision.shorten(
 						this.worktree.sha,
 					)}${indicators}\\\n\`${this.worktree.friendlyPath}\``,
 				);
@@ -289,8 +289,8 @@ export class WorktreeNode extends ViewNode<WorktreesView | RepositoriesView> {
 					hasChanges = status.hasChanges;
 					tooltip.appendMarkdown(
 						`\n\n${status.getFormattedDiffStatus({
-							prefix: 'Has Uncommitted Changes',
-							empty: 'No Uncommitted Changes',
+							prefix: '存在未提交的更改',
+							empty: '没有未提交的更改',
 							expand: true,
 						})}`,
 					);

@@ -400,7 +400,7 @@ export abstract class RepositoryFolderNode<
 			const status = branch.getTrackingStatus();
 			item.description = `${status ? `${status}${pad(GlyphChars.Dot, 1, 1)}` : ''}${branch.name}${
 				lastFetched
-					? `${pad(GlyphChars.Dot, 1, 1)}Last fetched ${Repository.formatLastFetched(lastFetched)}`
+					? `${pad(GlyphChars.Dot, 1, 1)}上次抓取 ${Repository.formatLastFetched(lastFetched)}`
 					: ''
 			}`;
 
@@ -418,29 +418,29 @@ export abstract class RepositoryFolderNode<
 			item.tooltip = new MarkdownString(
 				`${this.repo.formattedName ?? this.uri.repoPath ?? ''}${
 					lastFetched
-						? `${pad(GlyphChars.Dash, 2, 2)}Last fetched ${Repository.formatLastFetched(
+						? `${pad(GlyphChars.Dash, 2, 2)}上次抓取 ${Repository.formatLastFetched(
 								lastFetched,
 								false,
 						  )}`
 						: ''
-				}${this.repo.formattedName ? `\n${this.uri.repoPath}` : ''}\n\nCurrent branch $(git-branch) ${
+				}${this.repo.formattedName ? `\n${this.uri.repoPath}` : ''}\n\n当前分支 $(git-branch) ${
 					branch.name
 				}${
 					branch.upstream != null
-						? ` is ${branch.getTrackingStatus({
+						? `：${branch.getTrackingStatus({
 								empty: branch.upstream.missing
-									? `missing upstream $(git-branch) ${branch.upstream.name}`
-									: `up to date with $(git-branch) ${branch.upstream.name}${
-											providerName ? ` on ${providerName}` : ''
-									  }`,
+									? `上游分支缺失 $(git-branch) ${branch.upstream.name}`
+									: `与 $(git-branch) ${branch.upstream.name}${
+											providerName ? `（${providerName}）` : ''
+									  } 保持同步`,
 								expand: true,
 								icons: true,
 								separator: ', ',
 								suffix: ` $(git-branch) ${branch.upstream.name}${
-									providerName ? ` on ${providerName}` : ''
+									providerName ? `（${providerName}）` : ''
 								}`,
 						  })}`
-						: `hasn't been published to ${providerName ?? 'a remote'}`
+						: `尚未发布到 ${providerName ?? '远程仓库'}`
 				}`,
 				true,
 			);

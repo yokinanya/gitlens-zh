@@ -4,7 +4,7 @@ import { GitRevision } from '../../git/models';
 import { NamedRef } from '../../storage';
 import { gate } from '../../system/decorators/gate';
 import { debug, log } from '../../system/decorators/log';
-import { md5, pluralize } from '../../system/string';
+import { md5 } from '../../system/string';
 import { SearchAndCompareView } from '../searchAndCompareView';
 import { RepositoryNode } from './repositoryNode';
 import { CommitsQueryResults, ResultsCommitsNode } from './resultsCommitsNode';
@@ -87,7 +87,7 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 					this.view,
 					this,
 					this.uri.repoPath!,
-					'Behind',
+					'落后',
 					{
 						query: this.getCommitsQuery(GitRevision.createRange(behind.ref1, behind.ref2, '..')),
 						comparison: behind,
@@ -100,7 +100,7 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 					},
 					{
 						id: 'behind',
-						description: pluralize('commit', aheadBehindCounts?.behind ?? 0),
+						description: `${aheadBehindCounts?.behind ?? 0} 个提交`,
 						expand: false,
 					},
 				),
@@ -108,7 +108,7 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 					this.view,
 					this,
 					this.uri.repoPath!,
-					'Ahead',
+					'领先',
 					{
 						query: this.getCommitsQuery(GitRevision.createRange(ahead.ref1, ahead.ref2, '..')),
 						comparison: ahead,
@@ -121,7 +121,7 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 					},
 					{
 						id: 'ahead',
-						description: pluralize('commit', aheadBehindCounts?.ahead ?? 0),
+						description: `${aheadBehindCounts?.ahead ?? 0} 个提交`,
 						expand: false,
 					},
 				),
@@ -150,11 +150,11 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 		}
 
 		const item = new TreeItem(
-			`Comparing ${
-				this._ref.label ?? GitRevision.shorten(this._ref.ref, { strings: { working: 'Working Tree' } })
-			} with ${
+			`比较 ${
+				this._ref.label ?? GitRevision.shorten(this._ref.ref, { strings: { working: '工作树' } })
+			} 与 ${
 				this._compareWith.label ??
-				GitRevision.shorten(this._compareWith.ref, { strings: { working: 'Working Tree' } })
+				GitRevision.shorten(this._compareWith.ref, { strings: { working: '工作树' } })
 			}`,
 			TreeItemCollapsibleState.Collapsed,
 		);
@@ -251,7 +251,7 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 		}
 
 		return {
-			label: `${pluralize('file', files?.length ?? 0, { zero: 'No' })} changed`,
+			label: `${files?.length ?? 0} 个文件已更改`,
 			files: files,
 		};
 	}
@@ -281,7 +281,7 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 		}
 
 		return {
-			label: `${pluralize('file', files?.length ?? 0, { zero: 'No' })} changed`,
+			label: `${files?.length ?? 0} 个文件已更改`,
 			files: files,
 		};
 	}
@@ -322,7 +322,7 @@ export class CompareResultsNode extends ViewNode<SearchAndCompareView> {
 		const files = await this.view.container.git.getDiffStatus(this.uri.repoPath!, comparison);
 
 		return {
-			label: `${pluralize('file', files?.length ?? 0, { zero: 'No' })} changed`,
+			label: `${files?.length ?? 0} 个文件已更改`,
 			files: files,
 		};
 	}

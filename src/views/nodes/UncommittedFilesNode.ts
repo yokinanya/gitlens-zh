@@ -103,7 +103,7 @@ export class UncommittedFilesNode extends ViewNode<RepositoriesView | WorktreesV
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Uncommitted changes', TreeItemCollapsibleState.Collapsed);
+		const item = new TreeItem('未提交的更改', TreeItemCollapsibleState.Collapsed);
 		item.id = this.id;
 		item.contextValue = ContextValues.UncommittedFiles;
 		item.iconPath = new ThemeIcon('folder');
@@ -129,11 +129,11 @@ export class UncommittedFilesNode extends ViewNode<RepositoriesView | WorktreesV
 				this.view.container,
 				file.repoPath,
 				ref,
-				new GitCommitIdentity('You', undefined, date),
-				new GitCommitIdentity('You', undefined, date),
-				'Uncommitted changes',
+				new GitCommitIdentity('你', undefined, date),
+				new GitCommitIdentity('你', undefined, date),
+				'未提交的更改',
 				[previousRef],
-				'Uncommitted changes',
+				'未提交的更改',
 				new GitFileChange(file.repoPath, file.path, file.status, file.originalPath, previousRef),
 				undefined,
 				[],

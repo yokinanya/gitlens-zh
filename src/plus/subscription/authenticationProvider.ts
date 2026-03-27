@@ -87,7 +87,7 @@ export class SubscriptionAuthenticationProvider implements AuthenticationProvide
 			if (ex === 'Cancelled') throw ex;
 
 			Logger.error(ex, cc);
-			void window.showErrorMessage(`Unable to sign in to GitLens+: ${ex}`);
+			void window.showErrorMessage(`无法登录 GitLens+：${ex}`);
 			throw ex;
 		}
 	}
@@ -129,7 +129,7 @@ export class SubscriptionAuthenticationProvider implements AuthenticationProvide
 			this._onDidChangeSessions.fire({ added: [], removed: [session], changed: [] });
 		} catch (ex) {
 			Logger.error(ex, cc);
-			void window.showErrorMessage(`Unable to sign out of GitLens+: ${ex}`);
+			void window.showErrorMessage(`无法退出 GitLens+：${ex}`);
 			throw ex;
 		}
 	}

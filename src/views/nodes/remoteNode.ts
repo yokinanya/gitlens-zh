@@ -43,7 +43,7 @@ export class RemoteNode extends ViewNode<RemotesView | RepositoriesView> {
 			filter: b => b.remote && b.name.startsWith(this.remote.name),
 			sort: true,
 		});
-		if (branches.values.length === 0) return [new MessageNode(this.view, this, 'No branches could be found.')];
+		if (branches.values.length === 0) return [new MessageNode(this.view, this, '未找到分支。')];
 
 		// TODO@eamodio handle paging
 		const branchNodes = branches.values.map(

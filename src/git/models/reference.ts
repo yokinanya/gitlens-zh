@@ -67,7 +67,7 @@ export namespace GitRevision {
 		if (isUncommitted(ref)) {
 			return isUncommittedStaged(ref)
 				? strings.uncommittedStaged ?? 'Index'
-				: strings.uncommitted ?? 'Working Tree';
+				: strings.uncommitted ?? '工作树';
 		}
 
 		if (GitRevision.isRange(ref)) return ref;
@@ -194,7 +194,7 @@ export namespace GitReference {
 			default:
 				return {
 					name:
-						options.name ?? GitRevision.shorten(ref, { force: true, strings: { working: 'Working Tree' } }),
+						options.name ?? GitRevision.shorten(ref, { force: true, strings: { working: '工作树' } }),
 					ref: ref,
 					refType: 'revision',
 					repoPath: repoPath,

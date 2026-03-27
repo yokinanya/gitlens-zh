@@ -41,8 +41,8 @@ type RevertStepState<T extends State = State> = ExcludeSome<StepState<T>, 'repo'
 
 export class RevertGitCommand extends QuickCommand<State> {
 	constructor(container: Container, args?: RevertGitCommandArgs) {
-		super(container, 'revert', 'revert', 'Revert', {
-			description: 'undoes the changes of specified commits, by creating new commits with inverted changes',
+		super(container, 'revert', 'revert', '还原', {
+			description: '通过创建包含反向更改的新提交来撤销指定提交的更改',
 		});
 
 		let counter = 0;
@@ -135,7 +135,7 @@ export class RevertGitCommand extends QuickCommand<State> {
 						log: await log,
 						onDidLoadMore: log => context.cache.set(ref, Promise.resolve(log)),
 						placeholder: (context, log) =>
-							log == null ? `${context.destination.name} has no commits` : 'Choose commits to revert',
+							log == null ? `${context.destination.name} 没有可还原的提交` : '选择要还原的提交',
 						picked: state.references?.map(r => r.ref),
 					},
 				);
@@ -165,17 +165,17 @@ export class RevertGitCommand extends QuickCommand<State> {
 
 	private *confirmStep(state: RevertStepState, context: Context): StepResultGenerator<Flags[]> {
 		const step: QuickPickStep<FlagsQuickPickItem<Flags>> = this.createConfirmStep(
-			appendReposToTitle(`Confirm ${context.title}`, state, context),
+			appendReposToTitle(`确认${context.title}`, state, context),
 			[
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--no-edit'], {
 					label: this.title,
 					description: '--no-edit',
-					detail: `Will revert ${GitReference.toString(state.references)}`,
+					detail: `将还原 ${GitReference.toString(state.references)}`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--edit'], {
-					label: `${this.title} & Edit`,
+					label: `${this.title}并编辑`,
 					description: '--edit',
-					detail: `Will revert and edit ${GitReference.toString(state.references)}`,
+					detail: `将还原并编辑 ${GitReference.toString(state.references)}`,
 				}),
 			],
 		);

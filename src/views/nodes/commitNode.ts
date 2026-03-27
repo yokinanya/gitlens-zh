@@ -116,7 +116,7 @@ export class CommitNode extends ViewRefNode<ViewsWithCommits | FileHistoryView, 
 			},
 		};
 		return {
-			title: 'Open Changes with Previous Revision',
+			title: '打开与上一修订版本的对比',
 			command: Commands.DiffWithPrevious,
 			arguments: [undefined, commandArgs],
 		};

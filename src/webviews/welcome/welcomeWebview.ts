@@ -10,7 +10,7 @@ export class WelcomeWebview extends WebviewWithConfigBase<State> {
 			'gitlens.welcome',
 			'welcome.html',
 			'images/gitlens-icon.png',
-			'Welcome to GitLens',
+			'欢迎使用 GitLens',
 			Commands.ShowWelcomePage,
 		);
 	}

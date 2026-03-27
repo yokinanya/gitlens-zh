@@ -5,7 +5,7 @@ import { Directive, DirectiveQuickPickItem } from '../../quickpicks/items/direct
 import { FlagsQuickPickItem } from '../../quickpicks/items/flags';
 import { isStringArray } from '../../system/array';
 import { fromNow } from '../../system/date';
-import { pad, pluralize } from '../../system/string';
+import { pad } from '../../system/string';
 import { ViewsWithRepositoryFolders } from '../../views/viewBase';
 import {
 	appendReposToTitle,
@@ -45,8 +45,8 @@ type PullStepState<T extends State = State> = ExcludeSome<StepState<T>, 'repos',
 
 export class PullGitCommand extends QuickCommand<State> {
 	constructor(container: Container, args?: PullGitCommandArgs) {
-		super(container, 'pull', 'pull', 'Pull', {
-			description: 'fetches and integrates changes from a remote into the current branch',
+		super(container, 'pull', 'pull', '拉取', {
+			description: '从远程抓取并将更改整合到当前分支',
 		});
 
 		let counter = 0;
@@ -140,25 +140,25 @@ export class PullGitCommand extends QuickCommand<State> {
 		let step: QuickPickStep<FlagsQuickPickItem<Flags>>;
 
 		if (state.repos.length > 1) {
-			step = this.createConfirmStep(appendReposToTitle(`Confirm ${context.title}`, state, context), [
+			step = this.createConfirmStep(appendReposToTitle(`确认${context.title}`, state, context), [
 				FlagsQuickPickItem.create<Flags>(state.flags, [], {
 					label: this.title,
-					detail: `Will pull ${state.repos.length} repositories`,
+					detail: `将拉取 ${state.repos.length} 个仓库`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--rebase'], {
-					label: `${this.title} with Rebase`,
+					label: `${this.title}并变基`,
 					description: '--rebase',
-					detail: `Will pull ${state.repos.length} repositories by rebasing`,
+					detail: `将通过变基方式拉取 ${state.repos.length} 个仓库`,
 				}),
 			]);
 		} else if (GitReference.isBranch(state.reference)) {
 			if (state.reference.remote) {
 				step = this.createConfirmStep(
-					appendReposToTitle(`Confirm ${context.title}`, state, context),
+					appendReposToTitle(`确认${context.title}`, state, context),
 					[],
 					DirectiveQuickPickItem.create(Directive.Cancel, true, {
-						label: `Cancel ${this.title}`,
-						detail: 'Cannot pull a remote branch',
+						label: `取消${this.title}`,
+						detail: '无法拉取远程分支',
 					}),
 				);
 			} else {
@@ -167,23 +167,23 @@ export class PullGitCommand extends QuickCommand<State> {
 
 				if (branch?.upstream == null) {
 					step = this.createConfirmStep(
-						appendReposToTitle(`Confirm ${context.title}`, state, context),
+						appendReposToTitle(`确认${context.title}`, state, context),
 						[],
 						DirectiveQuickPickItem.create(Directive.Cancel, true, {
-							label: `Cancel ${this.title}`,
-							detail: 'Cannot pull a branch until it has been published',
+							label: `取消${this.title}`,
+							detail: '分支发布之前无法拉取',
 						}),
 					);
 				} else {
-					step = this.createConfirmStep(appendReposToTitle(`Confirm ${context.title}`, state, context), [
+					step = this.createConfirmStep(appendReposToTitle(`确认${context.title}`, state, context), [
 						FlagsQuickPickItem.create<Flags>(state.flags, [], {
 							label: this.title,
-							detail: `Will pull${
+							detail: `将拉取${
 								branch.state.behind
-									? ` ${pluralize('commit', branch.state.behind)} into ${GitReference.toString(
+									? ` ${branch.state.behind} 次提交到 ${GitReference.toString(
 											branch,
 									  )}`
-									: ` into ${GitReference.toString(branch)}`
+									: ` 到 ${GitReference.toString(branch)}`
 							}`,
 						}),
 					]);
@@ -195,25 +195,25 @@ export class PullGitCommand extends QuickCommand<State> {
 
 			let lastFetchedOn = '';
 			if (lastFetched !== 0) {
-				lastFetchedOn = `${pad(GlyphChars.Dot, 2, 2)}Last fetched ${fromNow(new Date(lastFetched))}`;
+				lastFetchedOn = `${pad(GlyphChars.Dot, 2, 2)}上次抓取 ${fromNow(new Date(lastFetched))}`;
 			}
 
 			const pullDetails =
 				status?.state.behind != null
-					? ` ${pluralize('commit', status.state.behind)} into $(repo) ${repo.formattedName}`
-					: ` into $(repo) ${repo.formattedName}`;
+					? ` ${status.state.behind} 次提交到 $(repo) ${repo.formattedName}`
+					: ` 到 $(repo) ${repo.formattedName}`;
 
 			step = this.createConfirmStep(
-				appendReposToTitle(`Confirm ${context.title}`, state, context, lastFetchedOn),
+				appendReposToTitle(`确认${context.title}`, state, context, lastFetchedOn),
 				[
 					FlagsQuickPickItem.create<Flags>(state.flags, [], {
 						label: this.title,
-						detail: `Will pull${pullDetails}`,
+						detail: `将拉取${pullDetails}`,
 					}),
 					FlagsQuickPickItem.create<Flags>(state.flags, ['--rebase'], {
-						label: `${this.title} with Rebase`,
+						label: `${this.title}并变基`,
 						description: '--rebase',
-						detail: `Will pull and rebase${pullDetails}`,
+						detail: `将拉取并变基${pullDetails}`,
 					}),
 				],
 				undefined,
@@ -222,7 +222,7 @@ export class PullGitCommand extends QuickCommand<State> {
 					onDidClickButton: async (quickpick, button) => {
 						if (button !== QuickCommandButtons.Fetch || quickpick.busy) return false;
 
-						quickpick.title = `Confirm ${context.title}${pad(GlyphChars.Dot, 2, 2)}Fetching${
+						quickpick.title = `确认${context.title}${pad(GlyphChars.Dot, 2, 2)}正在抓取${
 							GlyphChars.Ellipsis
 						}`;
 

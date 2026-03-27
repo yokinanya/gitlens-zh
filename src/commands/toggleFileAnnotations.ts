@@ -32,7 +32,7 @@ export class ClearFileAnnotationsCommand extends EditorCommand {
 			void (await this.container.fileAnnotations.clear(editor));
 		} catch (ex) {
 			Logger.error(ex, 'ClearFileAnnotationsCommand');
-			void Messages.showGenericErrorMessage('Unable to clear file annotations');
+			void Messages.showGenericErrorMessage('无法清除文件注释');
 		}
 	}
 }
@@ -136,8 +136,14 @@ async function toggleFileAnnotations<TArgs extends ToggleFileAnnotationCommandAr
 		));
 	} catch (ex) {
 		Logger.error(ex, 'ToggleFileAnnotationsCommand');
+		const annotationType =
+			args.type === FileAnnotationType.Blame
+				? '归属'
+				: args.type === FileAnnotationType.Changes
+					? '变更'
+					: '热图';
 		void window.showErrorMessage(
-			`Unable to toggle file ${args.type} annotations. See output channel for more details`,
+			`无法切换文件${annotationType}注释。更多细节请查看输出频道`,
 		);
 	}
 }

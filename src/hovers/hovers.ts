@@ -87,36 +87,36 @@ export namespace Hovers {
 				},
 				repoPath: commit.repoPath,
 				line: editorLine,
-			})} "Open Changes")`;
+			})} "打开变更")`;
 
 			previous =
 				compareUris.previous.sha == null || compareUris.previous.isUncommitted
 					? `  &nbsp;_${GitRevision.shorten(compareUris.previous.sha, {
-							strings: { working: 'Working Tree' },
+							strings: { working: '工作树' },
 					  })}_ &nbsp;${GlyphChars.ArrowLeftRightLong}&nbsp; `
 					: `  &nbsp;[$(git-commit) ${GitRevision.shorten(
 							compareUris.previous.sha || '',
 					  )}](${ShowQuickCommitCommand.getMarkdownCommandArgs(
 							compareUris.previous.sha || '',
-					  )} "Show Commit") &nbsp;${GlyphChars.ArrowLeftRightLong}&nbsp; `;
+					  )} "显示提交") &nbsp;${GlyphChars.ArrowLeftRightLong}&nbsp; `;
 
 			current =
 				compareUris.current.sha == null || compareUris.current.isUncommitted
 					? `_${GitRevision.shorten(compareUris.current.sha, {
 							strings: {
-								working: 'Working Tree',
+								working: '工作树',
 							},
 					  })}_`
 					: `[$(git-commit) ${GitRevision.shorten(
 							compareUris.current.sha || '',
 					  )}](${ShowQuickCommitCommand.getMarkdownCommandArgs(
 							compareUris.current.sha || '',
-					  )} "Show Commit")`;
+					  )} "显示提交")`;
 		} else {
 			message = `[$(compare-changes)](${DiffWithCommand.getMarkdownCommandArgs(
 				commit,
 				editorLine,
-			)} "Open Changes")`;
+			)} "打开变更")`;
 
 			if (previousSha === null) {
 				previousSha = await commit.getPreviousSha();
@@ -124,17 +124,17 @@ export namespace Hovers {
 			if (previousSha) {
 				previous = `  &nbsp;[$(git-commit) ${GitRevision.shorten(
 					previousSha,
-				)}](${ShowQuickCommitCommand.getMarkdownCommandArgs(previousSha)} "Show Commit") &nbsp;${
+				)}](${ShowQuickCommitCommand.getMarkdownCommandArgs(previousSha)} "显示提交") &nbsp;${
 					GlyphChars.ArrowLeftRightLong
 				}&nbsp;`;
 			}
 
 			current = `[$(git-commit) ${commit.shortSha}](${ShowQuickCommitCommand.getMarkdownCommandArgs(
 				commit.sha,
-			)} "Show Commit")`;
+			)} "显示提交")`;
 		}
 
-		message = `${diff}\n---\n\nChanges${previous ?? ' added in '}${current} &nbsp;&nbsp;|&nbsp;&nbsp; ${message}`;
+		message = `${diff}\n---\n\n变更${previous ?? ' 添加于 '}${current} &nbsp;&nbsp;|&nbsp;&nbsp; ${message}`;
 
 		const markdown = new MarkdownString(message, true);
 		markdown.supportHtml = true;
@@ -154,8 +154,8 @@ export namespace Hovers {
 		let previous;
 		let current;
 		if (fromCommit == null) {
-			previous = '_Working Tree_';
-			current = '_Unsaved_';
+			previous = '_工作树_';
+			current = '_未保存_';
 		} else {
 			const file = await fromCommit.findFile(uri);
 			if (file == null) return undefined;
@@ -171,15 +171,15 @@ export namespace Hovers {
 				},
 				repoPath: uri.repoPath!,
 				line: editorLine,
-			})} "Open Changes")`;
+			})} "打开变更")`;
 
 			previous = `[$(git-commit) ${fromCommit.shortSha}](${ShowQuickCommitCommand.getMarkdownCommandArgs(
 				fromCommit.sha,
-			)} "Show Commit")`;
+			)} "显示提交")`;
 
-			current = '_Working Tree_';
+			current = '_工作树_';
 		}
-		message = `${diff}\n---\n\nLocal Changes  &nbsp;${previous} &nbsp;${
+		message = `${diff}\n---\n\n本地变更  &nbsp;${previous} &nbsp;${
 			GlyphChars.ArrowLeftRightLong
 		}&nbsp; ${current}${message == null ? '' : ` &nbsp;&nbsp;|&nbsp;&nbsp; ${message}`}`;
 

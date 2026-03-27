@@ -42,26 +42,26 @@ export class ComparePickerNode extends ViewNode<SearchAndCompareView> {
 		let item;
 		if (selectedRef == null) {
 			item = new TreeItem(
-				'Compare <branch, tag, or ref> with <branch, tag, or ref>',
+				'比较 <分支、标签或引用> 与 <分支、标签或引用>',
 				TreeItemCollapsibleState.None,
 			);
 			item.contextValue = ContextValues.ComparePicker;
 			item.description = description;
-			item.tooltip = `Click to select or enter a reference for compare${GlyphChars.Ellipsis}`;
+			item.tooltip = `点击以选择或输入用于比较的引用${GlyphChars.Ellipsis}`;
 			item.command = {
-				title: `Compare${GlyphChars.Ellipsis}`,
+				title: `比较${GlyphChars.Ellipsis}`,
 				command: this.view.getQualifiedCommand('selectForCompare'),
 			};
 		} else {
 			item = new TreeItem(
-				`Compare ${selectedRef.label} with <branch, tag, or ref>`,
+				`比较 ${selectedRef.label} 与 <分支、标签或引用>`,
 				TreeItemCollapsibleState.None,
 			);
 			item.contextValue = ContextValues.ComparePickerWithRef;
 			item.description = description;
-			item.tooltip = `Click to compare ${selectedRef.label} with${GlyphChars.Ellipsis}`;
+			item.tooltip = `点击以将 ${selectedRef.label} 与其他引用比较${GlyphChars.Ellipsis}`;
 			item.command = {
-				title: `Compare ${selectedRef.label} with${GlyphChars.Ellipsis}`,
+				title: `比较 ${selectedRef.label} 与${GlyphChars.Ellipsis}`,
 				command: this.view.getQualifiedCommand('compareWithSelected'),
 			};
 		}

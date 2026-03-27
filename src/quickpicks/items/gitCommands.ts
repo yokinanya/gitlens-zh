@@ -140,7 +140,7 @@ export namespace BranchQuickPickItem {
 }
 
 export class CommitLoadMoreQuickPickItem implements QuickPickItem {
-	readonly label = 'Load more';
+	readonly label = '加载更多';
 	readonly alwaysShow = true;
 }
 
@@ -255,12 +255,12 @@ export namespace RefQuickPickItem {
 	): RefQuickPickItem {
 		if (ref === '') {
 			return {
-				label: `${options?.icon ? `$(file-directory)${GlyphChars.Space}` : ''}Working Tree`,
+				label: `${options?.icon ? `$(file-directory)${GlyphChars.Space}` : ''}工作树`,
 				description: '',
 				alwaysShow: options?.alwaysShow,
 				buttons: options?.buttons,
 				picked: picked,
-				item: GitReference.create(ref, repoPath, { refType: 'revision', name: 'Working Tree' }),
+				item: GitReference.create(ref, repoPath, { refType: 'revision', name: '工作树' }),
 				current: false,
 				ref: ref,
 				remote: false,
@@ -291,7 +291,7 @@ export namespace RefQuickPickItem {
 
 		if (GitRevision.isRange(ref)) {
 			return {
-				label: `Range ${gitRef.name}`,
+				label: `范围 ${gitRef.name}`,
 				description: '',
 				alwaysShow: options?.alwaysShow,
 				buttons: options?.buttons,
@@ -304,7 +304,7 @@ export namespace RefQuickPickItem {
 		}
 
 		const item: RefQuickPickItem = {
-			label: `Commit ${gitRef.name}`,
+			label: `提交 ${gitRef.name}`,
 			description: options?.ref ? `$(git-commit)${GlyphChars.Space}${ref}` : '',
 			alwaysShow: options?.alwaysShow,
 			buttons: options?.buttons,
@@ -460,20 +460,20 @@ export namespace WorktreeQuickPickItem {
 	) {
 		let description = '';
 		if (options?.type) {
-			description = 'worktree';
+			description = '工作树';
 		}
 
 		if (options?.status != null) {
 			description += options.status.hasChanges
-				? pad(`Uncommited changes (${options.status.getFormattedDiffStatus()})`, description ? 2 : 0, 0)
-				: pad('No changes', description ? 2 : 0, 0);
+				? pad(`未提交的更改（${options.status.getFormattedDiffStatus()}）`, description ? 2 : 0, 0)
+				: pad('无更改', description ? 2 : 0, 0);
 		}
 
 		let icon;
 		let label;
 		switch (worktree.type) {
 			case 'bare':
-				label = '(bare)';
+				label = '（裸仓库）';
 				icon = '$(folder)';
 				break;
 			case 'branch':
@@ -489,7 +489,7 @@ export namespace WorktreeQuickPickItem {
 		const item: WorktreeQuickPickItem = {
 			label: `${icon}${GlyphChars.Space}${label}${options?.checked ? pad('$(check)', 2) : ''}`,
 			description: description,
-			detail: options?.path ? `In $(folder) ${worktree.friendlyPath}` : undefined,
+			detail: options?.path ? `位于 $(folder) ${worktree.friendlyPath}` : undefined,
 			alwaysShow: options?.alwaysShow,
 			buttons: options?.buttons,
 			picked: picked,

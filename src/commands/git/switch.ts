@@ -42,8 +42,8 @@ export interface SwitchGitCommandArgs {
 
 export class SwitchGitCommand extends QuickCommand<State> {
 	constructor(container: Container, args?: SwitchGitCommandArgs) {
-		super(container, 'switch', 'switch', 'Switch', {
-			description: 'aka checkout, switches the current branch to a specified branch',
+		super(container, 'switch', 'switch', '切换', {
+			description: '即 checkout，将当前分支切换到指定分支',
 		});
 
 		let counter = 0;
@@ -66,9 +66,9 @@ export class SwitchGitCommand extends QuickCommand<State> {
 		return void (await window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Switching ${
-					state.repos.length === 1 ? state.repos[0].formattedName : `${state.repos.length} repositories`
-				} to ${state.reference.name}`,
+				title: `正在将 ${
+					state.repos.length === 1 ? state.repos[0].formattedName : `${state.repos.length} 个仓库`
+				} 切换到 ${state.reference.name}`,
 			},
 			() =>
 				Promise.all(
@@ -126,7 +126,7 @@ export class SwitchGitCommand extends QuickCommand<State> {
 
 			if (state.counter < 2 || state.reference == null) {
 				const result = yield* pickBranchOrTagStepMultiRepo(state as SwitchStepState, context, {
-					placeholder: context => `Choose a branch${context.showTags ? ' or tag' : ''} to switch to`,
+					placeholder: context => `选择要切换到的分支${context.showTags ? '或标签' : ''}`,
 				});
 				if (result === StepResult.Break) {
 					// If we skipped the previous step, make sure we back up past it
@@ -141,7 +141,7 @@ export class SwitchGitCommand extends QuickCommand<State> {
 			}
 
 			if (GitReference.isBranch(state.reference) && state.reference.remote) {
-				context.title = `Create Branch and ${this.title}`;
+				context.title = `创建分支并${this.title}`;
 
 				const { values: branches } = await this.container.git.getBranches(state.reference.repoPath, {
 					filter: b => b.upstream?.name === state.reference!.name,
@@ -150,8 +150,8 @@ export class SwitchGitCommand extends QuickCommand<State> {
 
 				if (branches.length === 0) {
 					const result = yield* inputBranchNameStep(state as SwitchStepState, context, {
-						placeholder: 'Please provide a name for the new branch',
-						titleContext: ` based on ${GitReference.toString(state.reference, {
+						placeholder: '请输入新分支名称',
+						titleContext: `，基于 ${GitReference.toString(state.reference, {
 							icon: false,
 						})}`,
 						value: state.createBranch ?? GitReference.getNameWithoutRemote(state.reference),
@@ -180,26 +180,24 @@ export class SwitchGitCommand extends QuickCommand<State> {
 
 	private *confirmStep(state: SwitchStepState, context: Context): StepResultGenerator<void> {
 		const step: QuickPickStep<QuickPickItem> = this.createConfirmStep(
-			appendReposToTitle(`Confirm ${context.title}`, state, context),
+			appendReposToTitle(`确认${context.title}`, state, context),
 			[
 				{
 					label: context.title,
 					description: state.createBranch ? '-b' : '',
-					detail: `Will ${
+					detail: `${
 						state.createBranch
-							? `create and switch to a new branch named ${
-									state.createBranch
-							  } from ${GitReference.toString(state.reference)}`
-							: `switch to ${GitReference.toString(state.reference)}`
-					} in ${
+							? `从 ${GitReference.toString(state.reference)} 创建名为 ${state.createBranch} 的新分支并切换到它`
+							: `切换到 ${GitReference.toString(state.reference)}`
+					}，作用于 ${
 						state.repos.length === 1
 							? `$(repo) ${state.repos[0].formattedName}`
-							: `${state.repos.length} repositories`
+							: `${state.repos.length} 个仓库`
 					}`,
 				},
 			],
 			undefined,
-			{ placeholder: `Confirm ${context.title}` },
+			{ placeholder: `确认${context.title}` },
 		);
 		const selection: StepSelection<typeof step> = yield step;
 		return QuickCommand.canPickStepContinue(step, state, selection) ? undefined : StepResult.Break;

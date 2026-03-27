@@ -7,13 +7,13 @@ import { executeCommand } from '../system/command';
 import { LineHistoryTrackerNode } from './nodes';
 import { ViewBase } from './viewBase';
 
-const pinnedSuffix = ' (pinned)';
+const pinnedSuffix = '（已固定）';
 
 export class LineHistoryView extends ViewBase<LineHistoryTrackerNode, LineHistoryViewConfig> {
 	protected readonly configKey = 'lineHistory';
 
 	constructor(container: Container) {
-		super('gitlens.views.lineHistory', 'Line History', container);
+		super('gitlens.views.lineHistory', '行历史', container);
 
 		void setContext(ContextKeys.ViewsLineHistoryEditorFollowing, true);
 	}

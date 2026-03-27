@@ -68,7 +68,7 @@ export class BranchesViewNode extends RepositoriesSubscribeableNode<BranchesView
 		if (this.children == null) {
 			const repositories = this.view.container.git.openRepositories;
 			if (repositories.length === 0) {
-				this.view.message = 'No branches could be found.';
+				this.view.message = '未找到分支。';
 
 				return [];
 			}
@@ -86,8 +86,8 @@ export class BranchesViewNode extends RepositoriesSubscribeableNode<BranchesView
 
 			const branches = await child.repo.getBranches({ filter: b => !b.remote });
 			if (branches.values.length === 0) {
-				this.view.message = 'No branches could be found.';
-				this.view.title = 'Branches';
+				this.view.message = '未找到分支。';
+				this.view.title = '分支';
 
 				void child.ensureSubscription();
 
@@ -95,7 +95,7 @@ export class BranchesViewNode extends RepositoriesSubscribeableNode<BranchesView
 			}
 
 			this.view.message = undefined;
-			this.view.title = `Branches (${branches.values.length})`;
+			this.view.title = `分支 (${branches.values.length})`;
 
 			return child.getChildren();
 		}
@@ -104,7 +104,7 @@ export class BranchesViewNode extends RepositoriesSubscribeableNode<BranchesView
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Branches', TreeItemCollapsibleState.Expanded);
+		const item = new TreeItem('分支', TreeItemCollapsibleState.Expanded);
 		return item;
 	}
 }
@@ -113,7 +113,7 @@ export class BranchesView extends ViewBase<BranchesViewNode, BranchesViewConfig>
 	protected readonly configKey = 'branches';
 
 	constructor(container: Container) {
-		super('gitlens.views.branches', 'Branches', container);
+		super('gitlens.views.branches', '分支', container);
 	}
 
 	override get canReveal(): boolean {
@@ -283,7 +283,7 @@ export class BranchesView extends ViewBase<BranchesViewNode, BranchesViewConfig>
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(branch, { icon: false, quoted: true })} in the side bar...`,
+				title: `正在侧边栏中定位 ${GitReference.toString(branch, { icon: false, quoted: true })}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {
@@ -309,7 +309,7 @@ export class BranchesView extends ViewBase<BranchesViewNode, BranchesViewConfig>
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(commit, { icon: false, quoted: true })} in the side bar...`,
+				title: `正在侧边栏中定位 ${GitReference.toString(commit, { icon: false, quoted: true })}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {

@@ -1,34 +1,34 @@
 <section id="modes" class="section--settings section--collapsible">
 	<div class="section__header">
 		<h2>
-			Modes
-			<a class="link__learn-more" title="Learn more" href="https://github.com/gitkraken/vscode-gitlens/#modes-">
+			模式
+			<a class="link__learn-more" title="了解更多" href="https://github.com/gitkraken/vscode-gitlens/#modes-">
 				<i class="icon icon__info"></i>
 			</a>
 		</h2>
 
-		<p class="section__header-hint">Supports user-defined modes for quickly toggling between sets of settings</p>
+		<p class="section__header-hint">支持用户自定义模式，以便在多组设置之间快速切换</p>
 		<div class="section__header-info">
 			<i class="icon icon--md icon__bulb"></i>
 			<div>
 				<p>
-					Use the
-					<a class="command" title="Run command" href="command:gitlens.switchMode">GitLens: Switch Mode</a>
-					command to quickly switch the active mode
+					使用
+					<a class="command" title="运行命令" href="command:gitlens.switchMode">GitLens: 切换模式</a>
+					命令可快速切换当前激活的模式
 				</p>
 				<p>
-					Use the
-					<a class="command" title="Run command" href="command:gitlens.toggleReviewMode"
-						>GitLens: Toggle Review Mode</a
+					使用
+					<a class="command" title="运行命令" href="command:gitlens.toggleReviewMode"
+						>GitLens: 切换审查模式</a
 					>
-					command to toggle Review mode
+					命令可切换审查模式
 				</p>
 				<p>
-					Use the
-					<a class="command" title="Run command" href="command:gitlens.toggleZenMode"
-						>GitLens: Toggle Zen Mode</a
+					使用
+					<a class="command" title="运行命令" href="command:gitlens.toggleZenMode"
+						>GitLens: 切换禅模式</a
 					>
-					command to toggle Zen mode
+					命令可切换禅模式
 				</p>
 			</div>
 		</div>
@@ -40,14 +40,14 @@
 				<div class="setting">
 					<div class="setting__input">
 						<input id="mode.statusBar.enabled" name="mode.statusBar.enabled" type="checkbox" data-setting />
-						<label for="mode.statusBar.enabled">Show the active mode in the status bar</label>
+						<label for="mode.statusBar.enabled">在状态栏中显示当前模式</label>
 					</div>
 				</div>
 
 				<div class="settings ml-2">
 					<div class="setting" data-enablement="mode.statusBar.enabled">
 						<div class="setting__input">
-							<label for="mode.statusBar.alignment">Position the annotation on the</label>
+							<label for="mode.statusBar.alignment">将注解放置在</label>
 							<div class="select-container">
 								<select
 									id="mode.statusBar.alignment"
@@ -55,8 +55,8 @@
 									data-setting
 									disabled
 								>
-									<option value="left">left</option>
-									<option value="right">right</option>
+									<option value="left">左侧</option>
+									<option value="right">右侧</option>
 								</select>
 							</div>
 						</div>
@@ -83,14 +83,14 @@
 
 		<div class="section__group">
 			<p class="section__hint">
-				<i class="icon icon__info"></i> For more options or to add your own custom modes, open
+				<i class="icon icon__info"></i> 如需更多选项或添加你自己的自定义模式，打开
 				<a
 					class="command"
-					title="Open Settings"
+					title="打开设置"
 					href="command:workbench.action.openSettings?%22gitlens.modes%22"
-					>Settings</a
+					>设置</a
 				>
-				and search for <b><i>gitlens.modes</i></b>
+				并搜索 <b><i>gitlens.modes</i></b>
 			</p>
 		</div>
 	</div>

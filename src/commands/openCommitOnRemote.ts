@@ -73,7 +73,7 @@ export class OpenCommitOnRemoteCommand extends ActiveEditorCommand {
 				const blame = await this.container.git.getBlameForLine(gitUri, blameline, editor?.document);
 				if (blame == null) {
 					void Messages.showFileNotUnderSourceControlWarningMessage(
-						'Unable to open commit on remote provider',
+						'无法在远程提供方中打开提交',
 					);
 
 					return;
@@ -96,7 +96,7 @@ export class OpenCommitOnRemoteCommand extends ActiveEditorCommand {
 		} catch (ex) {
 			Logger.error(ex, 'OpenCommitOnRemoteCommand');
 			void window.showErrorMessage(
-				'Unable to open commit on remote provider. See output channel for more details',
+				'无法在远程提供方中打开提交。更多细节请查看输出频道',
 			);
 		}
 	}

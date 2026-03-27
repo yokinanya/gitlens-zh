@@ -41,7 +41,7 @@ export class FileHistoryTrackerNode extends SubscribeableViewNode<FileHistoryVie
 			if (!this.hasUri) {
 				this.view.description = undefined;
 
-				this.view.message = 'There are no editors open that can provide file history information.';
+				this.view.message = '当前没有可提供文件历史信息的已打开编辑器。';
 				return [];
 			}
 
@@ -62,7 +62,7 @@ export class FileHistoryTrackerNode extends SubscribeableViewNode<FileHistoryVie
 				}
 			} catch {}
 
-			this.view.title = folder ? 'Folder History' : 'File History';
+			this.view.title = folder ? '文件夹历史' : '文件历史';
 
 			let branch;
 			if (!commitish.sha || commitish.sha === 'HEAD') {
@@ -83,7 +83,7 @@ export class FileHistoryTrackerNode extends SubscribeableViewNode<FileHistoryVie
 	getTreeItem(): TreeItem {
 		this.splatted = false;
 
-		const item = new TreeItem('File History', TreeItemCollapsibleState.Expanded);
+		const item = new TreeItem('文件历史', TreeItemCollapsibleState.Expanded);
 		item.contextValue = ContextValues.ActiveFileHistory;
 
 		return item;
@@ -102,8 +102,8 @@ export class FileHistoryTrackerNode extends SubscribeableViewNode<FileHistoryVie
 	async changeBase() {
 		const pick = await ReferencePicker.show(
 			this.uri.repoPath!,
-			'Change File History Base',
-			'Choose a reference to set as the new base',
+			'更改文件历史基准',
+			'选择要设为新基准的引用',
 			{
 				allowEnteringRefs: true,
 				picked: this._base,

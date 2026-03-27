@@ -1,35 +1,35 @@
 <section id="blame" class="section--settings section--collapsible">
 	<div class="section__header">
 		<h2>
-			Gutter Blame
+			装订线归属
 			<a
 				class="link__learn-more"
-				title="Learn more"
+				title="了解更多"
 				href="https://github.com/gitkraken/vscode-gitlens/#gutter-blame-"
 			>
 				<i class="icon icon__info"></i>
 			</a>
 		</h2>
 
-		<p class="section__header-hint">Adds on-demand gutter blame annotations for the whole file</p>
+		<p class="section__header-hint">按需为整个文件添加装订线归属注释</p>
 		<div class="section__header-info">
 			<i class="icon icon--md icon__bulb"></i>
 			<div>
 				<p>
-					Use the
+					使用
 					<span class="command hidden" data-visibility="blame.toggleMode =file">
-						GitLens: Toggle File Blame Annotations
+						GitLens: 切换文件归属注释
 					</span>
 					<a
 						class="command hidden"
-						title="Run command"
+						title="运行命令"
 						href="command:gitlens.toggleFileBlame"
 						data-visibility="blame.toggleMode =window"
-						>GitLens: Toggle File Blame Annotations</a
+						>GitLens: 切换文件归属注释</a
 					>
-					command to turn the annotations on or off
+					命令来开启或关闭这些注解
 				</p>
-				<p>Press <kbd>Esc</kbd> to turn off the annotations</p>
+				<p>按 <kbd>Esc</kbd> 可关闭这些注解</p>
 			</div>
 		</div>
 	</div>
@@ -39,11 +39,11 @@
 			<div class="section__content">
 				<div class="setting">
 					<div class="setting__input">
-						<label for="blame.toggleMode">Toggle annotations </label>
+						<label for="blame.toggleMode">切换注解 </label>
 						<div class="select-container">
 							<select id="blame.toggleMode" name="blame.toggleMode" data-setting>
-								<option value="file">individually for each file</option>
-								<option value="window">for all files</option>
+								<option value="file">分别针对每个文件</option>
+								<option value="window">针对所有文件</option>
 							</select>
 						</div>
 					</div>
@@ -51,7 +51,7 @@
 
 				<div class="setting">
 					<div class="setting__input setting__input--format">
-						<label for="blame.format">Annotation&nbsp;format</label>
+						<label for="blame.format">注解格式</label>
 						<input
 							id="blame.format"
 							name="blame.format"
@@ -62,13 +62,13 @@
 							data-default-value="${message|50?} ${agoOrDate|14-}"
 							data-popup-trigger
 						/>
-						<label for="blame.format" title="See available tokens">
+						<label for="blame.format" title="查看可用标记">
 							<i class="icon icon__chevron-down"></i>
 						</label>
 					</div>
 					<div id="blame.format.popup" class="popup hidden"></div>
 					<span class="setting__hint"
-						>Example:
+						>示例：
 						<span
 							data-setting-preview="blame.format"
 							data-setting-preview-type="commit"
@@ -81,23 +81,22 @@
 					<div class="setting__input">
 						<input id="blame.heatmap.enabled" name="blame.heatmap.enabled" type="checkbox" data-setting />
 						<label for="blame.heatmap.enabled">
-							Add a heatmap (age) indicator to show how recently lines were changed
+							添加热力图（年龄）指示器，以显示各行最近一次被修改的时间
 						</label>
 					</div>
 					<p class="setting__hint">
-						Indicator color reflects the age of the most recent change (hot or cold), while indicator
-						brightness ranges from bright (newer) to dim (older) based on the relative age
+						指示器颜色反映最近一次更改的时间（较新为暖色，较旧为冷色），亮度则根据相对时间从亮到暗变化
 					</p>
 				</div>
 
 				<div class="settings settings--fixed ml-2">
 					<div class="setting" data-enablement="blame.heatmap.enabled" disabled>
 						<div class="setting__input">
-							<label for="blame.heatmap.location">Position the heatmap on the</label>
+							<label for="blame.heatmap.location">将热力图放置在</label>
 							<div class="select-container">
 								<select id="blame.heatmap.location" name="blame.heatmap.location" data-setting disabled>
-									<option value="left">left</option>
-									<option value="right">right</option>
+									<option value="left">左侧</option>
+									<option value="right">右侧</option>
 								</select>
 							</div>
 						</div>
@@ -107,16 +106,16 @@
 				<div class="setting">
 					<div class="setting__input">
 						<input id="blame.avatars" name="blame.avatars" type="checkbox" data-setting />
-						<label for="blame.avatars">Add author avatars</label>
+						<label for="blame.avatars">添加作者头像</label>
 					</div>
 				</div>
 
 				<div class="setting">
 					<div class="setting__input">
 						<input id="blame.compact" name="blame.compact" type="checkbox" data-setting />
-						<label for="blame.compact">Use compact view</label>
+						<label for="blame.compact">使用紧凑视图</label>
 					</div>
-					<p class="setting__hint">Compacts (deduplicates) matching adjacent blame annotations</p>
+					<p class="setting__hint">将相邻且相同的归属注释压缩为更紧凑的显示形式</p>
 				</div>
 
 				<div class="setting">
@@ -128,7 +127,7 @@
 							data-setting
 						/>
 						<label for="blame.highlight.enabled">
-							Highlight other lines changed by the same commit as the current line
+							高亮显示与当前行同属一次提交的其他更改行
 						</label>
 					</div>
 				</div>
@@ -145,7 +144,7 @@
 								data-setting-type="array"
 								disabled
 							/>
-							<label for="blame.highlight.locations">Add gutter indicator</label>
+							<label for="blame.highlight.locations">添加装订线指示器</label>
 						</div>
 					</div>
 
@@ -160,7 +159,7 @@
 								data-setting-type="array"
 								disabled
 							/>
-							<label for="blame.highlight.locations-1">Add line highlight</label>
+							<label for="blame.highlight.locations-1">添加行高亮</label>
 						</div>
 					</div>
 
@@ -175,7 +174,7 @@
 								data-setting-type="array"
 								disabled
 							/>
-							<label for="blame.highlight.locations-2">Add scroll bar indicator</label>
+							<label for="blame.highlight.locations-2">添加滚动条指示器</label>
 						</div>
 					</div>
 				</div>
@@ -235,14 +234,14 @@
 
 		<div class="section__group">
 			<p class="section__hint">
-				<i class="icon icon__info"></i> For more options, open
+				<i class="icon icon__info"></i> 如需更多选项，打开
 				<a
 					class="command"
-					title="Open Settings"
+					title="打开设置"
 					href="command:workbench.action.openSettings?%22gitlens.blame%22"
-					>Settings</a
+					>设置</a
 				>
-				and search for <b><i>gitlens.blame</i></b>
+				并搜索 <b><i>gitlens.blame</i></b>
 			</p>
 		</div>
 	</div>

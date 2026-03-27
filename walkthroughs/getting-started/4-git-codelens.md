@@ -4,10 +4,10 @@
   <img src="../../images/docs/code-lens.png" alt="Git CodeLens" />
 </p>
 
-GitLens adds Git authorship CodeLens to the top of the file and on code blocks. The **recent change** CodeLens shows the author and date of the most recent commit for the code block or file, while the **authors** CodeLens shows the number of authors of the code block or file and the most prominent author (if there is more than one).
+GitLens 会在文件顶部和代码块上方添加 Git 作者信息 CodeLens。`最近更改` CodeLens 会显示对应代码块或文件最近一次提交的作者和日期；`作者` CodeLens 会显示对应代码块或文件的作者数量，以及最主要的作者（如果不止一位）。
 
-Clicking on the CodeLens performs a [customizable](command:gitlens.showSettingsPage?%22code-lens%22 'Jump to the Git CodeLens settings') action. For example, the **recent change** CodeLens will open a quick pick menu with the commit's file details and actions, where as the **authors** will toggle the whole file Git blame annotations.
+点击 CodeLens 会执行一个[可自定义](command:gitlens.showSettingsPage?%22code-lens%22 '跳转到 Git CodeLens 设置')的操作。例如，`最近更改` CodeLens 会打开一个快速选择菜单，展示该提交对应文件的详情和操作；而 `作者` CodeLens 则会切换整文件的 Git 归属注释。
 
-💡 Use the [Toggle Git CodeLens](command:workbench.action.quickOpen?%22>GitLens%3A%20Toggle%20Git%20CodeLens%22) command to turn the CodeLens on and off.
+💡 可使用 [GitLens: 切换 Git CodeLens](command:gitlens.toggleCodeLens) 命令来开启或关闭 CodeLens。
 
-⚙️ Use the settings editor to customize the [Git CodeLens](command:gitlens.showSettingsPage?%22code-lens%22 'Jump to the Git CodeLens settings').
+⚙️ 可在 [Git CodeLens 设置](command:gitlens.showSettingsPage?%22code-lens%22 '跳转到 Git CodeLens 设置') 中进一步自定义。

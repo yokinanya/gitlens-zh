@@ -50,7 +50,7 @@ export class StashesViewNode extends RepositoriesSubscribeableNode<StashesView, 
 		if (this.children == null) {
 			const repositories = this.view.container.git.openRepositories;
 			if (repositories.length === 0) {
-				this.view.message = 'No stashes could be found.';
+				this.view.message = '未找到储藏。';
 
 				return [];
 			}
@@ -68,8 +68,8 @@ export class StashesViewNode extends RepositoriesSubscribeableNode<StashesView, 
 
 			const stash = await child.repo.getStash();
 			if (stash == null) {
-				this.view.message = 'No stashes could be found.';
-				this.view.title = 'Stashes';
+				this.view.message = '未找到储藏。';
+				this.view.title = '储藏';
 
 				void child.ensureSubscription();
 
@@ -77,7 +77,7 @@ export class StashesViewNode extends RepositoriesSubscribeableNode<StashesView, 
 			}
 
 			this.view.message = undefined;
-			this.view.title = `Stashes (${stash?.commits.size ?? 0})`;
+			this.view.title = `储藏 (${stash?.commits.size ?? 0})`;
 
 			return child.getChildren();
 		}
@@ -86,7 +86,7 @@ export class StashesViewNode extends RepositoriesSubscribeableNode<StashesView, 
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Stashes', TreeItemCollapsibleState.Expanded);
+		const item = new TreeItem('储藏', TreeItemCollapsibleState.Expanded);
 		return item;
 	}
 }
@@ -95,7 +95,7 @@ export class StashesView extends ViewBase<StashesViewNode, StashesViewConfig> {
 	protected readonly configKey = 'stashes';
 
 	constructor(container: Container) {
-		super('gitlens.views.stashes', 'Stashes', container);
+		super('gitlens.views.stashes', '储藏', container);
 	}
 
 	override get canReveal(): boolean {
@@ -206,7 +206,7 @@ export class StashesView extends ViewBase<StashesViewNode, StashesViewConfig> {
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(stash, { icon: false, quoted: true })} in the side bar...`,
+				title: `正在侧边栏中定位 ${GitReference.toString(stash, { icon: false, quoted: true })}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {

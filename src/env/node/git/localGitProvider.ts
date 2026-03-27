@@ -361,7 +361,7 @@ export class LocalGitProvider implements GitProvider, Disposable {
 			} else {
 				const msg: string = ex?.message ?? '';
 				if (msg) {
-					void window.showErrorMessage(`Unable to initialize Git; ${msg}`);
+					void window.showErrorMessage(`无法初始化 Git；${msg}`);
 				}
 			}
 
@@ -807,14 +807,14 @@ export class LocalGitProvider implements GitProvider, Disposable {
 			const msg: string = ex?.toString() ?? '';
 			if (patch && /patch does not apply/i.test(msg)) {
 				const result = await window.showWarningMessage(
-					'Unable to apply changes cleanly. Retry and allow conflicts?',
-					{ title: 'Yes' },
-					{ title: 'No', isCloseAffordance: true },
+					'无法干净地应用更改。是否重试并允许冲突？',
+					{ title: '是' },
+					{ title: '否', isCloseAffordance: true },
 				);
 
-				if (result == null || result.title !== 'Yes') return;
+				if (result == null || result.title !== '是') return;
 
-				if (result.title === 'Yes') {
+				if (result.title === '是') {
 					try {
 						void (await this.git.apply(root, patch, { allowConflicts: true }));
 
@@ -827,7 +827,7 @@ export class LocalGitProvider implements GitProvider, Disposable {
 			}
 
 			Logger.error(ex, cc);
-			void Messages.showGenericErrorMessage('Unable to apply changes');
+			void Messages.showGenericErrorMessage('无法应用更改');
 		}
 	}
 
@@ -845,13 +845,13 @@ export class LocalGitProvider implements GitProvider, Disposable {
 			const msg: string = ex?.toString() ?? '';
 			if (/overwritten by checkout/i.test(msg)) {
 				void Messages.showGenericErrorMessage(
-					`Unable to checkout '${ref}'. Please commit or stash your changes before switching branches`,
+					`无法检出 '${ref}'。切换分支前请先提交或储藏你的更改`,
 				);
 				return;
 			}
 
 			Logger.error(ex, cc);
-			void void Messages.showGenericErrorMessage(`Unable to checkout '${ref}'`);
+			void void Messages.showGenericErrorMessage(`无法检出 '${ref}'`);
 		}
 	}
 
@@ -3562,9 +3562,9 @@ export class LocalGitProvider implements GitProvider, Disposable {
 		} catch (ex) {
 			const msg: string = ex?.toString() ?? '';
 			if (msg === 'No diff tool found' || /Unknown .+? tool/.test(msg)) {
-				const viewDocs = 'View Git Docs';
+				const viewDocs = '查看 Git 文档';
 				const result = await window.showWarningMessage(
-					'Unable to open changes because the specified diff tool cannot be found or no Git diff tool is configured',
+					'无法打开变更，因为找不到指定的 diff 工具，或者尚未配置 Git diff 工具',
 					viewDocs,
 				);
 				if (result === viewDocs) {
@@ -3577,7 +3577,7 @@ export class LocalGitProvider implements GitProvider, Disposable {
 			}
 
 			Logger.error(ex, 'openDiffTool');
-			void Messages.showGenericErrorMessage('Unable to open compare');
+			void Messages.showGenericErrorMessage('无法打开比较');
 		}
 	}
 
@@ -3597,9 +3597,9 @@ export class LocalGitProvider implements GitProvider, Disposable {
 		} catch (ex) {
 			const msg: string = ex?.toString() ?? '';
 			if (msg === 'No diff tool found' || /Unknown .+? tool/.test(msg)) {
-				const viewDocs = 'View Git Docs';
+				const viewDocs = '查看 Git 文档';
 				const result = await window.showWarningMessage(
-					'Unable to open directory compare because the specified diff tool cannot be found or no Git diff tool is configured',
+					'无法打开目录比较，因为找不到指定的 diff 工具，或者尚未配置 Git diff 工具',
 					viewDocs,
 				);
 				if (result === viewDocs) {
@@ -3612,7 +3612,7 @@ export class LocalGitProvider implements GitProvider, Disposable {
 			}
 
 			Logger.error(ex, 'openDirectoryCompare');
-			void Messages.showGenericErrorMessage('Unable to open directory compare');
+			void Messages.showGenericErrorMessage('无法打开目录比较');
 		}
 	}
 
@@ -3709,15 +3709,15 @@ export class LocalGitProvider implements GitProvider, Disposable {
 						((ex.stdout.includes('Auto-merging') && ex.stdout.includes('CONFLICT')) ||
 							ex.stdout.includes('needs merge')))
 				) {
-					void window.showInformationMessage('Stash applied with conflicts');
+					void window.showInformationMessage('储藏已应用，但存在冲突');
 
 					return;
 				}
 
-				throw new StashApplyError(`Unable to apply stash \u2014 ${msg.trim().replace(/\n+?/g, '; ')}`, ex);
+				throw new StashApplyError(`无法应用储藏 — ${msg.trim().replace(/\n+?/g, '; ')}`, ex);
 			}
 
-			throw new StashApplyError(`Unable to apply stash \u2014 ${String(ex)}`, ex);
+			throw new StashApplyError(`无法应用储藏 — ${String(ex)}`, ex);
 		}
 	}
 
@@ -3737,8 +3737,8 @@ export class LocalGitProvider implements GitProvider, Disposable {
 
 		await this.ensureGitVersion(
 			'2.13.2',
-			'Stashing individual files',
-			' Please retry by stashing everything or install a more recent version of Git and try again.',
+			'储藏单个文件',
+			' 请改为储藏全部文件后重试，或安装更高版本的 Git 再试。',
 		);
 
 		const pathspecs = uris.map(u => `./${splitPath(u, repoPath)[0]}`);
@@ -3749,8 +3749,8 @@ export class LocalGitProvider implements GitProvider, Disposable {
 		if (!stdin && countStringLength(pathspecs) > maxGitCliLength) {
 			await this.ensureGitVersion(
 				stdinVersion,
-				`Stashing so many files (${pathspecs.length}) at once`,
-				' Please retry by stashing fewer files or install a more recent version of Git and try again.',
+				`一次性储藏过多文件（${pathspecs.length}）`,
+				' 请减少要储藏的文件数量后重试，或安装更高版本的 Git 再试。',
 			);
 		}
 
@@ -3791,8 +3791,8 @@ export class LocalGitProvider implements GitProvider, Disposable {
 	async getWorktrees(repoPath: string): Promise<GitWorktree[]> {
 		await this.ensureGitVersion(
 			'2.7.6',
-			'Displaying worktrees',
-			' Please install a more recent version of Git and try again.',
+			'显示工作树',
+			' 请安装更高版本的 Git 后重试。',
 		);
 
 		const data = await this.git.worktree__list(repoPath);
@@ -3816,8 +3816,8 @@ export class LocalGitProvider implements GitProvider, Disposable {
 	async deleteWorktree(repoPath: string, path: string, options?: { force?: boolean }) {
 		await this.ensureGitVersion(
 			'2.17.0',
-			'Deleting worktrees',
-			' Please install a more recent version of Git and try again.',
+			'删除工作树',
+			' 请安装更高版本的 Git 后重试。',
 		);
 
 		try {

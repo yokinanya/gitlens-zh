@@ -128,26 +128,26 @@ export class DiffWithCommand extends Command {
 				this.container.git.getBestRevisionUri(args.repoPath, args.rhs.uri.fsPath, args.rhs.sha),
 			]);
 
-			let rhsSuffix = GitRevision.shorten(rhsSha, { strings: { uncommitted: 'Working Tree' } });
+			let rhsSuffix = GitRevision.shorten(rhsSha, { strings: { uncommitted: '工作树' } });
 			if (rhs == null) {
 				if (GitRevision.isUncommitted(args.rhs.sha)) {
-					rhsSuffix = 'deleted';
+					rhsSuffix = '已删除';
 				} else if (rhsSuffix.length === 0 && args.rhs.sha === GitRevision.deletedOrMissing) {
-					rhsSuffix = 'not in Working Tree';
+					rhsSuffix = '不在工作树中';
 				} else {
-					rhsSuffix = `deleted${rhsSuffix.length === 0 ? '' : ` in ${rhsSuffix}`}`;
+					rhsSuffix = `已删除${rhsSuffix.length === 0 ? '' : `，位置：${rhsSuffix}`}`;
 				}
 			} else if (lhs == null) {
-				rhsSuffix = `added${rhsSuffix.length === 0 ? '' : ` in ${rhsSuffix}`}`;
+				rhsSuffix = `已新增${rhsSuffix.length === 0 ? '' : `，位置：${rhsSuffix}`}`;
 			}
 
 			let lhsSuffix = args.lhs.sha !== GitRevision.deletedOrMissing ? GitRevision.shorten(lhsSha) : '';
 			if (lhs == null && args.rhs.sha.length === 0) {
 				if (rhs != null) {
-					lhsSuffix = lhsSuffix.length === 0 ? '' : `not in ${lhsSuffix}`;
+					lhsSuffix = lhsSuffix.length === 0 ? '' : `不在 ${lhsSuffix} 中`;
 					rhsSuffix = '';
 				} else {
-					lhsSuffix = `deleted${lhsSuffix.length === 0 ? '' : ` in ${lhsSuffix}`}`;
+					lhsSuffix = `已删除${lhsSuffix.length === 0 ? '' : `，位置：${lhsSuffix}`}`;
 				}
 			}
 
@@ -186,7 +186,7 @@ export class DiffWithCommand extends Command {
 			));
 		} catch (ex) {
 			Logger.error(ex, 'DiffWithCommand', 'getVersionedFile');
-			void Messages.showGenericErrorMessage('Unable to open compare');
+			void Messages.showGenericErrorMessage('无法打开比较');
 		}
 	}
 }

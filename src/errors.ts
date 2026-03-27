@@ -8,11 +8,11 @@ export class AccessDeniedError extends Error {
 	constructor(subscription: Subscription, required: RequiredSubscriptionPlans | undefined) {
 		let message;
 		if (subscription.account?.verified === false) {
-			message = 'Email verification required';
+			message = '需要验证邮箱';
 		} else if (required != null && isSubscriptionPaidPlan(required)) {
-			message = 'Paid subscription required';
+			message = '需要付费订阅';
 		} else {
-			message = 'Subscription required';
+			message = '需要订阅';
 		}
 
 		super(message);
@@ -56,7 +56,7 @@ export class AuthenticationError extends Error {
 		let message;
 		let reason: AuthenticationErrorReason | undefined;
 		if (messageOrReason == null) {
-			message = `Unable to get required authentication session for '${id}'`;
+			message = `无法获取 '${id}' 所需的身份验证会话`;
 		} else if (typeof messageOrReason === 'string') {
 			message = messageOrReason;
 			reason = undefined;
@@ -64,13 +64,13 @@ export class AuthenticationError extends Error {
 			reason = messageOrReason;
 			switch (reason) {
 				case AuthenticationErrorReason.UserDidNotConsent:
-					message = `'${id}' authentication is required for this operation`;
+					message = `此操作需要 '${id}' 身份验证`;
 					break;
 				case AuthenticationErrorReason.Unauthorized:
-					message = `Your '${id}' credentials are either invalid or expired`;
+					message = `你的 '${id}' 凭据无效或已过期`;
 					break;
 				case AuthenticationErrorReason.Forbidden:
-					message = `Your '${id}' credentials do not have the required access`;
+					message = `你的 '${id}' 凭据没有所需的访问权限`;
 					break;
 			}
 		}
@@ -86,7 +86,7 @@ export class AuthenticationError extends Error {
 export class ExtensionNotFoundError extends Error {
 	constructor(public readonly extensionId: string, public readonly extensionName: string) {
 		super(
-			`Unable to find the ${extensionName} extension (${extensionId}). Please ensure it is installed and enabled.`,
+			`未找到扩展 ${extensionName}（${extensionId}）。请确认其已安装并启用。`,
 		);
 
 		Error.captureStackTrace?.(this, ExtensionNotFoundError);
@@ -115,26 +115,26 @@ export class OpenVirtualRepositoryError extends Error {
 		let message;
 		let reason: OpenVirtualRepositoryErrorReason | undefined;
 		if (messageOrReason == null) {
-			message = `Unable to open the virtual repository: ${repoPath}`;
+			message = `无法打开虚拟仓库：${repoPath}`;
 		} else if (typeof messageOrReason === 'string') {
 			message = messageOrReason;
 			reason = undefined;
 		} else {
 			reason = messageOrReason;
-			message = `Unable to open the virtual repository: ${repoPath}; `;
+			message = `无法打开虚拟仓库：${repoPath}；`;
 			switch (reason) {
 				case OpenVirtualRepositoryErrorReason.RemoteHubApiNotFound:
 					message +=
-						'Unable to get required api from the GitHub Repositories extension. Please ensure that the GitHub Repositories extension is installed and enabled';
+						'无法从 GitHub Repositories 扩展获取所需 API。请确认该扩展已安装并启用';
 					break;
 				case OpenVirtualRepositoryErrorReason.NotAGitHubRepository:
-					message += 'Only GitHub repositories are supported currently';
+					message += '目前仅支持 GitHub 仓库';
 					break;
 				case OpenVirtualRepositoryErrorReason.GitHubAuthenticationNotFound:
-					message += 'Unable to get required GitHub authentication';
+					message += '无法获取所需的 GitHub 身份验证';
 					break;
 				case OpenVirtualRepositoryErrorReason.GitHubAuthenticationDenied:
-					message += 'GitHub authentication is required';
+					message += '需要 GitHub 身份验证';
 					break;
 			}
 		}
@@ -150,7 +150,7 @@ export class OpenVirtualRepositoryError extends Error {
 export class ProviderNotFoundError extends Error {
 	constructor(pathOrUri: string | Uri | undefined) {
 		super(
-			`No provider registered for '${
+			`未为以下对象注册提供程序：'${
 				pathOrUri == null
 					? String(pathOrUri)
 					: typeof pathOrUri === 'string'

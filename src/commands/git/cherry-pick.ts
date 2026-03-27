@@ -44,8 +44,8 @@ type CherryPickStepState<T extends State = State> = ExcludeSome<StepState<T>, 'r
 
 export class CherryPickGitCommand extends QuickCommand<State> {
 	constructor(container: Container, args?: CherryPickGitCommandArgs) {
-		super(container, 'cherry-pick', 'cherry-pick', 'Cherry Pick', {
-			description: 'integrates changes from specified commits into the current branch',
+		super(container, 'cherry-pick', 'cherry-pick', '拣选提交', {
+			description: '将指定提交的更改应用到当前分支',
 		});
 
 		let counter = 0;
@@ -128,7 +128,7 @@ export class CherryPickGitCommand extends QuickCommand<State> {
 				context.destination = branch;
 			}
 
-			context.title = `${this.title} into ${GitReference.toString(context.destination, { icon: false })}`;
+			context.title = `${this.title}到 ${GitReference.toString(context.destination, { icon: false })}`;
 
 			if (state.counter < 2 || state.references == null || state.references.length === 0) {
 				const result: StepResult<GitReference> = yield* pickBranchOrTagStep(
@@ -136,8 +136,7 @@ export class CherryPickGitCommand extends QuickCommand<State> {
 					context,
 					{
 						filter: { branches: b => b.id !== context.destination.id },
-						placeholder: context =>
-							`Choose a branch${context.showTags ? ' or tag' : ''} to cherry-pick from`,
+						placeholder: context => `选择分支${context.showTags ? '或标签' : ''}以从中拣选提交`,
 						picked: context.selectedBranchOrTag?.ref,
 						value: context.selectedBranchOrTag == null ? state.references?.[0]?.ref : undefined,
 					},
@@ -177,12 +176,8 @@ export class CherryPickGitCommand extends QuickCommand<State> {
 						picked: state.references?.map(r => r.ref),
 						placeholder: (context, log) =>
 							log == null
-								? `No pickable commits found on ${GitReference.toString(context.selectedBranchOrTag, {
-										icon: false,
-								  })}`
-								: `Choose commits to cherry-pick into ${GitReference.toString(context.destination, {
-										icon: false,
-								  })}`,
+								? `在 ${GitReference.toString(context.selectedBranchOrTag, { icon: false })} 上未找到可拣选的提交`
+								: `选择要拣选到 ${GitReference.toString(context.destination, { icon: false })} 的提交`,
 					},
 				);
 				if (result === StepResult.Break) continue;
@@ -206,27 +201,27 @@ export class CherryPickGitCommand extends QuickCommand<State> {
 
 	private *confirmStep(state: CherryPickStepState, context: Context): StepResultGenerator<Flags[]> {
 		const step: QuickPickStep<FlagsQuickPickItem<Flags>> = QuickCommand.createConfirmStep(
-			appendReposToTitle(`Confirm ${context.title}`, state, context),
+			appendReposToTitle(`确认${context.title}`, state, context),
 			[
 				FlagsQuickPickItem.create<Flags>(state.flags, [], {
 					label: this.title,
-					detail: `Will apply ${GitReference.toString(state.references)} to ${GitReference.toString(
+					detail: `将把 ${GitReference.toString(state.references)} 应用到 ${GitReference.toString(
 						context.destination,
 					)}`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--edit'], {
-					label: `${this.title} & Edit`,
+					label: `${this.title}并编辑`,
 					description: '--edit',
-					detail: `Will edit and apply ${GitReference.toString(state.references)} to ${GitReference.toString(
+					detail: `将编辑并把 ${GitReference.toString(state.references)} 应用到 ${GitReference.toString(
 						context.destination,
 					)}`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--no-commit'], {
-					label: `${this.title} without Committing`,
+					label: `${this.title}但不提交`,
 					description: '--no-commit',
-					detail: `Will apply ${GitReference.toString(state.references)} to ${GitReference.toString(
+					detail: `将把 ${GitReference.toString(state.references)} 应用到 ${GitReference.toString(
 						context.destination,
-					)} without Committing`,
+					)}，但不提交`,
 				}),
 			],
 			context,

@@ -31,7 +31,7 @@ export class ReflogNode extends ViewNode<RepositoriesView> implements PageableVi
 
 			const reflog = await this.getReflog();
 			if (reflog === undefined || reflog.records.length === 0) {
-				return [new MessageNode(this.view, this, 'No activity could be found.')];
+				return [new MessageNode(this.view, this, '未找到活动记录。')];
 			}
 
 			children.push(...reflog.records.map(r => new ReflogRecordNode(this.view, this, r)));
@@ -46,10 +46,10 @@ export class ReflogNode extends ViewNode<RepositoriesView> implements PageableVi
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Incoming Activity', TreeItemCollapsibleState.Collapsed);
+		const item = new TreeItem('传入活动', TreeItemCollapsibleState.Collapsed);
 		item.id = this.id;
 		item.contextValue = ContextValues.Reflog;
-		item.description = 'experimental';
+		item.description = '实验性';
 		item.iconPath = {
 			dark: this.view.container.context.asAbsolutePath('images/dark/icon-activity.svg'),
 			light: this.view.container.context.asAbsolutePath('images/light/icon-activity.svg'),

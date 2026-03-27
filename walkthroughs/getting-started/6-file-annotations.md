@@ -1,43 +1,43 @@
-## File Annotations
+## 文件注解
 
 <p align="center">
-  <img src="../../images/docs/gutter-toggle.png" alt="Toggle File Annotations" />
+  <img src="../../images/docs/gutter-toggle.png" alt="切换文件注解" />
 </p>
 
-GitLens adds on-demand annotations for the whole file directly to the editor's scroll bar and in the gutter area, the space beside the line number, to help you gain more insights into your code.
+GitLens 可按需为整个文件添加注解，并直接显示在编辑器滚动条和装订线区域，帮助你更深入地理解代码历史。
 
-### File Blame
+### 文件归属
 
 <p align="center">
-  <img src="../../images/docs/gutter-blame.png" alt="Gutter Blame" />
+  <img src="../../images/docs/gutter-blame.png" alt="装订线归属" />
 </p>
 
-When activated, GitLens expands the gutter area to show the commit and author for each line of the file, similar to the current line blame. On the right edge of the gutter, an age indicator (heatmap) is shown to provide an easy, at-a-glance way to tell how recently lines were changed (see the Heatmap below for more details). An additional indicator, which highlights other lines that were also changed as part of the current line's commit, is shown both the far left edge and on the scrollbar.
+启用后，GitLens 会扩展装订线区域，为文件的每一行显示提交和作者信息，效果类似当前行归属注释。装订线右侧还会显示一个年龄指示器（热力图），让你一眼看出各行最近一次被修改的时间。此外，还会在最左侧边缘和滚动条上高亮与当前行所属提交同时变更的其他行。
 
-💡 On an active file, use the [Toggle File Blame](command:workbench.action.quickOpen?%22>GitLens%3A%20Toggle%20File%20Blame%22) command from the Command Palette to turn the annotation on and off.
+💡 在活动文件上，可使用 [GitLens: 切换文件归属](command:gitlens.toggleFileBlame) 命令来开启或关闭该注解。
 
-⚙️ Use the settings editor to customize the [file blame](command:gitlens.showSettingsPage?%22blame%22 'Jump to the Gutter Blame settings').
+⚙️ 可在 [文件归属设置](command:gitlens.showSettingsPage?%22blame%22 '跳转到装订线归属设置') 中进一步自定义。
 
-### File Changes
+### 文件更改
 
 <p align="center">
-  <img src="../../images/docs/gutter-changes.png" alt="Gutter Changes" />
+  <img src="../../images/docs/gutter-changes.png" alt="装订线更改" />
 </p>
 
-When activated, indicators are shown on the left edge of the gutter to highlight any local, unpublished, changes or lines changed by the most recent commit.
+启用后，装订线左侧会显示指示标记，用于突出显示本地未发布的更改，或最近一次提交中修改过的行。
 
-💡 On an active file, use the [Toggle File Changes](command:workbench.action.quickOpen?%22>GitLens%3A%20Toggle%20File%20Changes%22) command from the Command Palette to turn the annotation on and off.
+💡 在活动文件上，可使用 [GitLens: 切换文件更改](command:gitlens.toggleFileChanges) 命令来开启或关闭该注解。
 
-⚙️ Use the settings editor to customize the [file changes](command:gitlens.showSettingsPage?%22changes%22 'Jump to the Gutter Changes settings').
+⚙️ 可在 [文件更改设置](command:gitlens.showSettingsPage?%22changes%22 '跳转到装订线更改设置') 中进一步自定义。
 
-### Heatmap
+### 热力图
 
 <p align="center">
-  <img src="../../images/docs/gutter-heatmap.png" alt="Gutter Heatmap" />
+  <img src="../../images/docs/gutter-heatmap.png" alt="装订线热力图" />
 </p>
 
-When activated, a color-coded indicator line is shown on the left edge of the gutter to show how recently lines were changed relative to all the other changes in the file. The colors range from hot, orange, to cold, blue, based on the age of the most recent change. Changes are considered cold after 90 days.
+启用后，装订线左侧会显示一条带颜色的指示线，用于表示某一行相对于文件中其他更改而言有多“新”。颜色会根据最近一次更改的时间从暖橙色逐步过渡到冷蓝色；超过 90 天的更改会被视为较冷。
 
-💡 On an active file, use the [Toggle File Heatmap](command:workbench.action.quickOpen?%22>GitLens%3A%20Toggle%20File%20Heatmap%22) command from the Command Palette to turn the annotation on and off.
+💡 在活动文件上，可使用 [GitLens: 切换文件热力图](command:gitlens.toggleFileHeatmap) 命令来开启或关闭该注解。
 
-⚙️ Use the settings editor to customize the [file heatmap](command:gitlens.showSettingsPage?%22heatmap%22 'Jump to the Gutter Heatmap settings').
+⚙️ 可在 [文件热力图设置](command:gitlens.showSettingsPage?%22heatmap%22 '跳转到装订线热力图设置') 中进一步自定义。

@@ -78,7 +78,7 @@ export class GitTerminalLinkProvider implements Disposable, TerminalLinkProvider
 				const link: GitTerminalLink<ShowQuickBranchHistoryCommandArgs> = {
 					startIndex: match.index,
 					length: ref.length,
-					tooltip: 'Show HEAD',
+					tooltip: '显示 HEAD',
 					command: {
 						command: Commands.ShowQuickBranchHistory,
 						args: {
@@ -102,7 +102,7 @@ export class GitTerminalLinkProvider implements Disposable, TerminalLinkProvider
 				const link: GitTerminalLink<ShowQuickBranchHistoryCommandArgs> = {
 					startIndex: match.index,
 					length: ref.length,
-					tooltip: 'Show Branch',
+					tooltip: '显示分支',
 					command: {
 						command: Commands.ShowQuickBranchHistory,
 						args: { repoPath: repoPath, branch: branch.name },
@@ -123,7 +123,7 @@ export class GitTerminalLinkProvider implements Disposable, TerminalLinkProvider
 				const link: GitTerminalLink<ShowQuickBranchHistoryCommandArgs> = {
 					startIndex: match.index,
 					length: ref.length,
-					tooltip: 'Show Tag',
+					tooltip: '显示标签',
 					command: {
 						command: Commands.ShowQuickBranchHistory,
 						args: { repoPath: repoPath, tag: tag.name },
@@ -139,7 +139,7 @@ export class GitTerminalLinkProvider implements Disposable, TerminalLinkProvider
 					const link: GitTerminalLink<GitCommandsCommandArgs> = {
 						startIndex: match.index,
 						length: ref.length,
-						tooltip: 'Show Commits',
+						tooltip: '显示提交',
 						command: {
 							command: Commands.GitCommands,
 							args: {
@@ -161,7 +161,7 @@ export class GitTerminalLinkProvider implements Disposable, TerminalLinkProvider
 				const link: GitTerminalLink<ShowQuickCommitCommandArgs> = {
 					startIndex: match.index,
 					length: ref.length,
-					tooltip: 'Show Commit',
+					tooltip: '显示提交',
 					command: {
 						command: Commands.ShowQuickCommit,
 						args: {

@@ -229,10 +229,10 @@ export class SubscriptionService implements Disposable {
 			} = this._subscription;
 
 			if (account?.verified === false) {
-				const confirm: MessageItem = { title: 'Resend Verification', isCloseAffordance: true };
-				const cancel: MessageItem = { title: 'Cancel' };
+				const confirm: MessageItem = { title: '重新发送验证邮件', isCloseAffordance: true };
+				const cancel: MessageItem = { title: '取消' };
 				const result = await window.showInformationMessage(
-					`Before you can access your ${actual.name} account, you must verify your email address.`,
+					`在访问你的 ${actual.name} 账户之前，你必须先验证电子邮件地址。`,
 					confirm,
 					cancel,
 				);
@@ -243,14 +243,10 @@ export class SubscriptionService implements Disposable {
 			} else if (isSubscriptionTrial(this._subscription)) {
 				const remaining = getSubscriptionTimeRemaining(this._subscription, 'days');
 
-				const confirm: MessageItem = { title: 'OK', isCloseAffordance: true };
-				const learn: MessageItem = { title: 'Learn More' };
+				const confirm: MessageItem = { title: '确定', isCloseAffordance: true };
+				const learn: MessageItem = { title: '了解更多' };
 				const result = await window.showInformationMessage(
-					`You are now signed in to your ${
-						actual.name
-					} account which gives you access to GitLens+ features on public repos.\n\nYou were also granted a trial of ${
-						effective.name
-					} for both public and private repos for ${pluralize('more day', remaining ?? 0)}.`,
+					`你现已登录到 ${actual.name} 账户，可在公开仓库中使用 GitLens+ 功能。\n\n你还获得了 ${effective.name} 的试用，可在公开和私有仓库中使用，剩余 ${remaining ?? 0} 天。`,
 					{ modal: true },
 					confirm,
 					learn,
@@ -260,7 +256,7 @@ export class SubscriptionService implements Disposable {
 					void this.learn();
 				}
 			} else {
-				void window.showInformationMessage(`You are now signed in to your ${actual.name} account.`, 'OK');
+				void window.showInformationMessage(`你现已登录到 ${actual.name} 账户。`, '确定');
 			}
 		}
 		return loggedIn;
@@ -337,15 +333,15 @@ export class SubscriptionService implements Disposable {
 				debugger;
 				Logger.error('', cc, `Unable to resend verification email; status=(${rsp.status}): ${rsp.statusText}`);
 
-				void window.showErrorMessage(`Unable to resend verification email; Status: ${rsp.statusText}`, 'OK');
+				void window.showErrorMessage(`无法重新发送验证邮件；状态：${rsp.statusText}`, '确定');
 
 				return;
 			}
 
-			const confirm = { title: 'Recheck' };
-			const cancel = { title: 'Cancel' };
+			const confirm = { title: '重新检查' };
+			const cancel = { title: '取消' };
 			const result = await window.showInformationMessage(
-				"Once you have verified your email address, click 'Recheck'.",
+				'完成邮箱验证后，点击“重新检查”。',
 				confirm,
 				cancel,
 			);
@@ -356,7 +352,7 @@ export class SubscriptionService implements Disposable {
 			Logger.error(ex, cc);
 			debugger;
 
-			void window.showErrorMessage('Unable to resend verification email', 'OK');
+			void window.showErrorMessage('无法重新发送验证邮件', '确定');
 		}
 	}
 
@@ -383,10 +379,10 @@ export class SubscriptionService implements Disposable {
 			void this.showHomeView();
 
 			if (plan.effective.id === SubscriptionPlanId.Free) {
-				const confirm: MessageItem = { title: 'Sign in to GitLens+', isCloseAffordance: true };
-				const cancel: MessageItem = { title: 'Cancel' };
+				const confirm: MessageItem = { title: '登录 GitLens+', isCloseAffordance: true };
+				const cancel: MessageItem = { title: '取消' };
 				const result = await window.showInformationMessage(
-					'Your GitLens+ features trial has ended.\nPlease sign in to use GitLens+ features on public repos and get a free 7-day trial for both public and private repos.',
+					'你的 GitLens+ 功能试用已结束。\n请登录以便在公开仓库中使用 GitLens+ 功能，并获得适用于公开和私有仓库的 7 天免费试用。',
 					{ modal: true },
 					confirm,
 					cancel,
@@ -427,10 +423,10 @@ export class SubscriptionService implements Disposable {
 			previewTrial: previewTrial,
 		});
 
-		const confirm: MessageItem = { title: 'OK', isCloseAffordance: true };
-		const learn: MessageItem = { title: 'Learn More' };
+		const confirm: MessageItem = { title: '确定', isCloseAffordance: true };
+		const learn: MessageItem = { title: '了解更多' };
 		const result = await window.showInformationMessage(
-			`You have started a ${days} day trial of GitLens+ features for both public and private repos.`,
+			`你已开始 GitLens+ 功能试用，可在公开和私有仓库中使用，试用期为 ${days} 天。`,
 			{ modal: true },
 			confirm,
 			learn,
@@ -667,8 +663,8 @@ export class SubscriptionService implements Disposable {
 
 				if (createIfNeeded) {
 					void window.showErrorMessage(
-						`Unable to sign in to your GitLens+ account. Please try again. If this issue persists, please contact support. Account=${name} Error=${ex.message}`,
-						'OK',
+						`无法登录你的 GitLens+ 账户。请重试；如果问题仍然存在，请联系支持团队。账户=${name} 错误=${ex.message}`,
+						'确定',
 					);
 				}
 			}
@@ -800,29 +796,28 @@ export class SubscriptionService implements Disposable {
 			);
 		}
 
-		this._statusBarSubscription.name = 'GitLens+ Subscription';
+		this._statusBarSubscription.name = 'GitLens+ 订阅';
 		this._statusBarSubscription.command = Commands.ShowHomeView;
 
 		if (account?.verified === false) {
-			this._statusBarSubscription.text = `$(warning) ${effective.name} (Unverified)`;
+			this._statusBarSubscription.text = `$(warning) ${effective.name}（未验证）`;
 			this._statusBarSubscription.backgroundColor = new ThemeColor('statusBarItem.warningBackground');
 			this._statusBarSubscription.tooltip = new MarkdownString(
 				trial
-					? `**Please verify your email**\n\nBefore you can start your **${effective.name}** trial, please verify the email for the account you created.\n\nClick for details`
-					: `**Please verify your email**\n\nBefore you can use GitLens+ features, please verify the email for the account you created.\n\nClick for details`,
+					? `**请先验证你的邮箱**\n\n在开始 **${effective.name}** 试用前，请先验证你创建该账户时使用的邮箱。\n\n点击查看详情`
+					: `**请先验证你的邮箱**\n\n在使用 GitLens+ 功能前，请先验证你创建该账户时使用的邮箱。\n\n点击查看详情`,
 				true,
 			);
 		} else {
 			const remaining = getSubscriptionTimeRemaining(this._subscription, 'days');
 
-			this._statusBarSubscription.text = `${effective.name} (Trial)`;
+			this._statusBarSubscription.text = `${effective.name}（试用中）`;
 			this._statusBarSubscription.tooltip = new MarkdownString(
-				`You are currently trialing **${
-					effective.name
-				}**, which gives you access to GitLens+ features on both public and private repos. You have ${pluralize(
-					'day',
+				`你当前正在试用 **${effective.name}**，可在公开和私有仓库中使用 GitLens+ 功能。试用还剩 ${pluralize(
+					'天',
 					remaining ?? 0,
-				)} remaining in your trial.\n\nClick for details`,
+					{ plural: '天' },
+				)}。\n\n点击查看详情`,
 				true,
 			);
 		}

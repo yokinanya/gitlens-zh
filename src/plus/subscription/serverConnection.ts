@@ -152,8 +152,8 @@ export class ServerConnection implements Disposable {
 	private updateStatusBarItem(signingIn?: boolean) {
 		if (signingIn && this._statusBarItem == null) {
 			this._statusBarItem = window.createStatusBarItem('gitlens.plus.signIn', StatusBarAlignment.Left);
-			this._statusBarItem.name = 'GitLens+ Sign in';
-			this._statusBarItem.text = 'Signing into GitLens+...';
+			this._statusBarItem.name = 'GitLens+ 登录';
+			this._statusBarItem.text = '正在登录 GitLens+...';
 			this._statusBarItem.show();
 		}
 

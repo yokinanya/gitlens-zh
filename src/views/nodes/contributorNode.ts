@@ -56,7 +56,7 @@ export class ContributorNode extends ViewNode<ContributorsView | RepositoriesVie
 
 	async getChildren(): Promise<ViewNode[]> {
 		const log = await this.getLog();
-		if (log == null) return [new MessageNode(this.view, this, 'No commits could be found.')];
+		if (log == null) return [new MessageNode(this.view, this, '未找到提交。')];
 
 		const getBranchAndTagTips = await this.view.container.git.getBranchesAndTagsTipsFn(this.uri.repoPath);
 		const children = [
@@ -79,7 +79,7 @@ export class ContributorNode extends ViewNode<ContributorsView | RepositoriesVie
 		const presence = this._options?.presence?.get(this.contributor.email!);
 
 		const item = new TreeItem(
-			this.contributor.current ? `${this.contributor.label} (you)` : this.contributor.label,
+			this.contributor.current ? `${this.contributor.label}（你）` : this.contributor.label,
 			TreeItemCollapsibleState.Collapsed,
 		);
 		item.id = this.id;
@@ -90,9 +90,10 @@ export class ContributorNode extends ViewNode<ContributorsView | RepositoriesVie
 			presence != null && presence.status !== 'offline'
 				? `${presence.statusText} ${GlyphChars.Space}${GlyphChars.Dot}${GlyphChars.Space} `
 				: ''
-		}${this.contributor.date != null ? `${this.contributor.formatDateFromNow()}, ` : ''}${pluralize(
-			'commit',
+		}${this.contributor.date != null ? `${this.contributor.formatDateFromNow()}，` : ''}${pluralize(
+			'次提交',
 			this.contributor.count,
+			{ plural: '次提交' },
 		)}`;
 
 		let avatarUri;
@@ -105,9 +106,9 @@ export class ContributorNode extends ViewNode<ContributorsView | RepositoriesVie
 			});
 
 			if (presence != null) {
-				const title = `${this.contributor.count ? 'You are' : `${this.contributor.label} is`} ${
-					presence.status === 'dnd' ? 'in ' : ''
-				}${presence.statusText.toLocaleLowerCase()}`;
+				const title = `${
+					this.contributor.current ? '你的状态' : `${this.contributor.label} 的状态`
+				}：${presence.statusText}`;
 
 				avatarMarkdown = `![${title}](${avatarUri.toString(
 					true,
@@ -125,29 +126,32 @@ export class ContributorNode extends ViewNode<ContributorsView | RepositoriesVie
 
 		const stats =
 			this.contributor.stats != null
-				? `\\\n${pluralize('file', this.contributor.stats.files, {
+				? `\\\n${pluralize('个文件', this.contributor.stats.files, {
 						format: numberFormatter.format,
-				  })} changed, ${pluralize('addition', this.contributor.stats.additions, {
+						plural: '个文件',
+				  })}已更改，${pluralize('处新增', this.contributor.stats.additions, {
 						format: numberFormatter.format,
-				  })}, ${pluralize('deletion', this.contributor.stats.deletions, {
+						plural: '处新增',
+				  })}，${pluralize('处删除', this.contributor.stats.deletions, {
 						format: numberFormatter.format,
+						plural: '处删除',
 				  })}`
 				: '';
 
 		const link = this.contributor.email
-			? `__[${this.contributor.name}](mailto:${this.contributor.email} "Email ${this.contributor.label} (${this.contributor.email})")__`
+			? `__[${this.contributor.name}](mailto:${this.contributor.email} "给 ${this.contributor.label} 发邮件 (${this.contributor.email})")__`
 			: `__${this.contributor.label}__`;
 
 		const lastCommitted =
 			this.contributor.date != null
-				? `Last commit ${this.contributor.formatDateFromNow()} (${this.contributor.formatDate()})\\\n`
+				? `最近一次提交于 ${this.contributor.formatDateFromNow()} (${this.contributor.formatDate()})\\\n`
 				: '';
 
 		const markdown = new MarkdownString(
 			`${avatarMarkdown != null ? avatarMarkdown : ''} &nbsp;${link} \n\n${lastCommitted}${pluralize(
-				'commit',
+				'次提交',
 				this.contributor.count,
-				{ format: numberFormatter.format },
+				{ format: numberFormatter.format, plural: '次提交' },
 			)}${stats}`,
 		);
 		markdown.supportHtml = true;

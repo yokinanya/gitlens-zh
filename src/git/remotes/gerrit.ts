@@ -20,7 +20,7 @@ export class GerritRemote extends RemoteProvider {
 				{
 					prefix: 'Change-Id: ',
 					url: `${this.baseReviewUrl}/q/<num>`,
-					title: `Open Change #<num> on ${this.name}`,
+					title: `在 ${this.name} 上打开变更 #<num>`,
 					alphanumeric: true,
 				},
 			];

@@ -45,7 +45,7 @@ export class TagNode extends ViewRefNode<TagsView | RepositoriesView, GitTagRefe
 
 	async getChildren(): Promise<ViewNode[]> {
 		const log = await this.getLog();
-		if (log == null) return [new MessageNode(this.view, this, 'No commits could be found.')];
+		if (log == null) return [new MessageNode(this.view, this, '未找到提交。')];
 
 		const getBranchAndTagTips = await this.view.container.git.getBranchesAndTagsTipsFn(
 			this.uri.repoPath,

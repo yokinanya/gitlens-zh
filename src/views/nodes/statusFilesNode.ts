@@ -5,7 +5,7 @@ import { GitCommit, GitFileWithCommit, GitLog, GitStatus, GitStatusFile, GitTrac
 import { groupBy, makeHierarchical } from '../../system/array';
 import { filter, flatMap, map } from '../../system/iterable';
 import { joinPaths, normalizePath } from '../../system/path';
-import { pluralize, sortCompare } from '../../system/string';
+import { sortCompare } from '../../system/string';
 import { RepositoriesView } from '../repositoriesView';
 import { WorktreesView } from '../worktreesView';
 import { FileNode, FolderNode } from './folderNode';
@@ -149,7 +149,7 @@ export class StatusFilesNode extends ViewNode<RepositoriesView | WorktreesView> 
 			}
 		}
 
-		const label = files === -1 ? '?? files changed' : `${pluralize('file', files)} changed`;
+		const label = files === -1 ? '?? 个文件已更改' : `${files} 个文件已更改`;
 		const item = new TreeItem(label, TreeItemCollapsibleState.Collapsed);
 		item.id = this.id;
 		item.contextValue = ContextValues.StatusFiles;

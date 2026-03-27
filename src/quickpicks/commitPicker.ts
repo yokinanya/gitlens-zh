@@ -38,7 +38,7 @@ export namespace CommitPicker {
 			log = await log;
 
 			if (log == null) {
-				quickpick.placeholder = 'Unable to show commit history';
+				quickpick.placeholder = '无法显示提交历史';
 			}
 		}
 
@@ -226,7 +226,7 @@ export namespace StashPicker {
 		}
 
 		if (stash == null || quickpick.items.length <= (options?.showOtherReferences?.length ?? 0)) {
-			quickpick.placeholder = stash == null ? 'No stashes found' : options?.empty ?? `No matching stashes found`;
+			quickpick.placeholder = stash == null ? '未找到储藏' : options?.empty ?? `未找到匹配的储藏`;
 			quickpick.items = [DirectiveQuickPickItem.create(Directive.Cancel)];
 		}
 

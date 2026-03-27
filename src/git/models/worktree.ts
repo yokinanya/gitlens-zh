@@ -29,7 +29,7 @@ export class GitWorktree {
 	get name(): string {
 		switch (this.type) {
 			case 'bare':
-				return '(bare)';
+				return '（裸仓库）';
 			case 'detached':
 				return GitRevision.shorten(this.sha);
 			default:

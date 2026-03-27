@@ -42,7 +42,7 @@ type ResetStepState<T extends State = State> = ExcludeSome<StepState<T>, 'repo',
 
 export class ResetGitCommand extends QuickCommand<State> {
 	constructor(container: Container, args?: ResetGitCommandArgs) {
-		super(container, 'reset', 'reset', 'Reset', { description: 'resets the current branch to a specified commit' });
+		super(container, 'reset', 'reset', '重置', { description: '将当前分支重置到指定提交' });
 
 		let counter = 0;
 		if (args?.state?.repo != null) {
@@ -129,8 +129,8 @@ export class ResetGitCommand extends QuickCommand<State> {
 					onDidLoadMore: log => context.cache.set(ref, Promise.resolve(log)),
 					placeholder: (context, log) =>
 						log == null
-							? `${context.destination.name} has no commits`
-							: `Choose a commit to reset ${context.destination.name} to`,
+							? `${context.destination.name} 没有提交`
+							: `选择要将 ${context.destination.name} 重置到的提交`,
 					picked: state.reference?.ref,
 				});
 				if (result === StepResult.Break) {
@@ -161,27 +161,27 @@ export class ResetGitCommand extends QuickCommand<State> {
 
 	private *confirmStep(state: ResetStepState, context: Context): StepResultGenerator<Flags[]> {
 		const step: QuickPickStep<FlagsQuickPickItem<Flags>> = this.createConfirmStep(
-			appendReposToTitle(`Confirm ${context.title}`, state, context),
+			appendReposToTitle(`确认${context.title}`, state, context),
 			[
 				FlagsQuickPickItem.create<Flags>(state.flags, [], {
 					label: this.title,
-					detail: `Will reset (leaves changes in the working tree) ${GitReference.toString(
-						context.destination,
-					)} to ${GitReference.toString(state.reference)}`,
+					detail: `将重置 ${GitReference.toString(context.destination)} 到 ${GitReference.toString(
+						state.reference,
+					)}（保留工作树中的更改）`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--soft'], {
-					label: `Soft ${this.title}`,
+					label: `软${this.title}`,
 					description: '--soft',
-					detail: `Will soft reset (leaves changes in the index and working tree) ${GitReference.toString(
-						context.destination,
-					)} to ${GitReference.toString(state.reference)}`,
+					detail: `将软重置 ${GitReference.toString(context.destination)} 到 ${GitReference.toString(
+						state.reference,
+					)}（保留索引和工作树中的更改）`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--hard'], {
-					label: `Hard ${this.title}`,
+					label: `硬${this.title}`,
 					description: '--hard',
-					detail: `Will hard reset (discards all changes) ${GitReference.toString(
-						context.destination,
-					)} to ${GitReference.toString(state.reference)}`,
+					detail: `将硬重置 ${GitReference.toString(context.destination)} 到 ${GitReference.toString(
+						state.reference,
+					)}（丢弃所有更改）`,
 				}),
 			],
 		);

@@ -1,10 +1,10 @@
 <section id="repositories-view" class="section--settings section--collapsible">
 	<div class="section__header">
 		<h2>
-			Repositories view
+			仓库视图
 			<a
 				class="link__learn-more"
-				title="Learn more"
+				title="了解更多"
 				href="https://github.com/gitkraken/vscode-gitlens/#repositories-view-"
 			>
 				<i class="icon icon__info"></i>
@@ -12,13 +12,13 @@
 		</h2>
 
 		<p class="section__header-hint">
-			Adds a
+			添加一个
 			<a
 				class="command command--show-view"
-				title="Show View in Side Bar"
+				title="在侧边栏中显示视图"
 				href="command:gitlens.showRepositoriesView"
-				>Repositories view</a
-			>, hidden by default, to visualize, explore, and manage Git repositories
+				>仓库视图</a
+			>，默认隐藏，用于可视化、浏览和管理 Git 仓库
 		</p>
 	</div>
 
@@ -28,7 +28,7 @@
 				<div class="settings settings--fixed ml-1">
 					<div class="setting">
 						<div class="setting__input">
-							<label class="non-interactive">Show the following sections under each repository</label>
+							<label class="non-interactive">在每个仓库下显示以下分组</label>
 						</div>
 					</div>
 
@@ -42,7 +42,7 @@
 									value="working"
 									data-setting
 								/>
-								<label for="views.repositories.showBranchComparison">Comparison of the</label>
+								<label for="views.repositories.showBranchComparison">将</label>
 								<div class="select-container">
 									<select
 										id="views.repositories.showBranchComparison"
@@ -50,12 +50,12 @@
 										data-setting
 										data-enablement="views.repositories.showBranchComparison !false"
 									>
-										<option value="branch">current branch</option>
-										<option value="working">working tree</option>
+										<option value="branch">当前分支</option>
+										<option value="working">工作树</option>
 									</select>
 								</div>
 								<label for="views.repositories.showBranchComparison"
-									>with a user-selected reference (branch, tag, etc)
+									>与用户选择的引用（分支、标签等）进行比较
 								</label>
 							</div>
 						</div>
@@ -68,7 +68,7 @@
 									type="checkbox"
 									data-setting
 								/>
-								<label for="views.repositories.showUpstreamStatus">Current branch status</label>
+								<label for="views.repositories.showUpstreamStatus">当前分支状态</label>
 							</div>
 						</div>
 
@@ -80,7 +80,7 @@
 									type="checkbox"
 									data-setting
 								/>
-								<label for="views.repositories.includeWorkingTree">Working tree file changes</label>
+								<label for="views.repositories.includeWorkingTree">工作树文件变更</label>
 							</div>
 						</div>
 
@@ -96,11 +96,11 @@
 												data-setting
 											/>
 											<label for="views.repositories.pullRequests.enabled"
-												>Associated pull requests</label
+												>关联的拉取请求</label
 											>
 										</div>
 										<p class="setting__hint">
-											Requires a connection to a supported remote service (e.g. GitHub)
+											需要连接到受支持的远程服务（如 GitHub）
 										</p>
 									</div>
 
@@ -115,7 +115,7 @@
 													disabled
 												/>
 												<label for="views.repositories.pullRequests.showForBranches"
-													>Show the pull request associated with each branch</label
+													>显示与每个分支关联的拉取请求</label
 												>
 											</div>
 										</div>
@@ -130,7 +130,7 @@
 													disabled
 												/>
 												<label for="views.repositories.pullRequests.showForCommits"
-													>Show the pull request that introduced each commit</label
+													>显示引入每次提交的拉取请求</label
 												>
 											</div>
 										</div>
@@ -147,7 +147,7 @@
 									type="checkbox"
 									data-setting
 								/>
-								<label for="views.repositories.showCommits">Commits</label>
+								<label for="views.repositories.showCommits">提交</label>
 							</div>
 						</div>
 
@@ -159,7 +159,7 @@
 									type="checkbox"
 									data-setting
 								/>
-								<label for="views.repositories.showBranches">Branches</label>
+								<label for="views.repositories.showBranches">分支</label>
 							</div>
 						</div>
 
@@ -171,7 +171,7 @@
 									type="checkbox"
 									data-setting
 								/>
-								<label for="views.repositories.showRemotes">Remotes</label>
+								<label for="views.repositories.showRemotes">远程</label>
 							</div>
 						</div>
 
@@ -183,7 +183,7 @@
 									type="checkbox"
 									data-setting
 								/>
-								<label for="views.repositories.showStashes">Stashes</label>
+								<label for="views.repositories.showStashes">储藏</label>
 							</div>
 						</div>
 
@@ -195,7 +195,7 @@
 									type="checkbox"
 									data-setting
 								/>
-								<label for="views.repositories.showTags">Tags</label>
+								<label for="views.repositories.showTags">标签</label>
 							</div>
 						</div>
 
@@ -207,7 +207,7 @@
 									type="checkbox"
 									data-setting
 								/>
-								<label for="views.repositories.showContributors">Contributors</label>
+								<label for="views.repositories.showContributors">贡献者</label>
 							</div>
 						</div>
 
@@ -220,7 +220,7 @@
 									data-setting
 								/>
 								<label for="views.repositories.showIncomingActivity"
-									>Incoming Activity (experimental)</label
+									>传入活动（实验性）</label
 								>
 							</div>
 						</div>
@@ -235,7 +235,7 @@
 								data-setting
 							/>
 							<label for="views.repositories.autoRefresh"
-								>Automatically refresh when a repository or the file system changes</label
+								>当仓库或文件系统发生变化时自动刷新</label
 							>
 						</div>
 					</div>
@@ -249,7 +249,7 @@
 								data-setting
 							/>
 							<label for="views.repositories.autoReveal"
-								>Automatically reveal repository when opening files</label
+								>打开文件时自动显示所属仓库</label
 							>
 						</div>
 					</div>
@@ -262,21 +262,21 @@
 								type="checkbox"
 								data-setting
 							/>
-							<label for="views.repositories.avatars">Use author avatars</label>
+							<label for="views.repositories.avatars">使用作者头像</label>
 						</div>
 					</div>
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="views.repositories.branches.layout">Layout branches</label>
+							<label for="views.repositories.branches.layout">分支布局</label>
 							<div class="select-container">
 								<select
 									id="views.repositories.branches.layout"
 									name="views.repositories.branches.layout"
 									data-setting
 								>
-									<option value="list">as a list</option>
-									<option value="tree">as a tree</option>
+									<option value="list">列表</option>
+									<option value="tree">树形</option>
 								</select>
 							</div>
 						</div>
@@ -284,21 +284,21 @@
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="views.repositories.files.layout">Layout files</label>
+							<label for="views.repositories.files.layout">文件布局</label>
 							<div class="select-container">
 								<select
 									id="views.repositories.files.layout"
 									name="views.repositories.files.layout"
 									data-setting
 								>
-									<option value="auto">automatically</option>
-									<option value="list">as a list</option>
-									<option value="tree">as a tree</option>
+									<option value="auto">自动</option>
+									<option value="list">列表</option>
+									<option value="tree">树形</option>
 								</select>
 							</div>
 						</div>
 						<p class="setting__hint" data-visibility="views.repositories.files.layout =auto">
-							Chooses the best layout based on the number of files at each nesting level
+							根据每一级嵌套中的文件数量自动选择最合适的布局
 						</p>
 					</div>
 
@@ -310,20 +310,20 @@
 								type="checkbox"
 								data-setting
 							/>
-							<label for="views.repositories.files.compact">Use compact file layout</label>
+							<label for="views.repositories.files.compact">使用紧凑文件布局</label>
 						</div>
-						<p class="setting__hint">Compacts (flattens) unnecessary nesting when using a tree layouts</p>
+						<p class="setting__hint">使用树形布局时压平不必要的嵌套层级</p>
 					</div>
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="sortBranchesBy">Sort branches</label>
+							<label for="sortBranchesBy">分支排序</label>
 							<div class="select-container">
 								<select id="sortBranchesBy" name="sortBranchesBy" data-setting>
-									<option value="date:desc">by recent commit date, descending</option>
-									<option value="date:asc">by recent commit date, ascending</option>
-									<option value="name:asc">by name, ascending</option>
-									<option value="name:desc">by name, descending</option>
+									<option value="date:desc">按最近提交日期降序</option>
+									<option value="date:asc">按最近提交日期升序</option>
+									<option value="name:asc">按名称升序</option>
+									<option value="name:desc">按名称降序</option>
 								</select>
 							</div>
 						</div>
@@ -331,15 +331,15 @@
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="sortContributorsBy">Sort contributors</label>
+							<label for="sortContributorsBy">贡献者排序</label>
 							<div class="select-container">
 								<select id="sortContributorsBy" name="sortContributorsBy" data-setting>
-									<option value="count:desc">by commit count, descending</option>
-									<option value="count:asc">by commit count, ascending</option>
-									<option value="date:desc">by recent commit date, descending</option>
-									<option value="date:asc">by recent commit date, ascending</option>
-									<option value="name:asc">by name, ascending</option>
-									<option value="name:desc">by name, descending</option>
+									<option value="count:desc">按提交次数降序</option>
+									<option value="count:asc">按提交次数升序</option>
+									<option value="date:desc">按最近提交日期降序</option>
+									<option value="date:asc">按最近提交日期升序</option>
+									<option value="name:asc">按名称升序</option>
+									<option value="name:desc">按名称降序</option>
 								</select>
 							</div>
 						</div>
@@ -347,13 +347,13 @@
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="sortTagsBy">Sort tags</label>
+							<label for="sortTagsBy">标签排序</label>
 							<div class="select-container">
 								<select id="sortTagsBy" name="sortTagsBy" data-setting>
-									<option value="date:desc">by recent commit date, descending</option>
-									<option value="date:asc">by recent commit date, ascending</option>
-									<option value="name:asc">by name, ascending</option>
-									<option value="name:desc">by name, descending</option>
+									<option value="date:desc">按最近提交日期降序</option>
+									<option value="date:asc">按最近提交日期升序</option>
+									<option value="name:asc">按名称升序</option>
+									<option value="name:desc">按名称降序</option>
 								</select>
 							</div>
 						</div>
@@ -368,14 +368,14 @@
 
 		<div class="section__group">
 			<p class="section__hint">
-				<i class="icon icon__info"></i> For more options, open
+				<i class="icon icon__info"></i> 如需更多选项，打开
 				<a
 					class="command"
-					title="Open Settings"
+					title="打开设置"
 					href="command:workbench.action.openSettings?%22gitlens.views.repositories%22"
-					>Settings</a
+					>设置</a
 				>
-				and search for <b><i>gitlens.views.repositories</i></b> or
+				并搜索 <b><i>gitlens.views.repositories</i></b> 或
 				<b><i>gitlens.views</i></b>
 			</p>
 		</div>

@@ -232,11 +232,11 @@ export namespace GitActions {
 
 			if (files.length > 10) {
 				const result = await window.showWarningMessage(
-					`Are your sure you want to open the changes for all ${files.length} files?`,
-					{ title: 'Yes' },
-					{ title: 'No', isCloseAffordance: true },
+					`确定要打开全部 ${files.length} 个文件的更改吗？`,
+					{ title: '确定' },
+					{ title: '取消', isCloseAffordance: true },
 				);
-				if (result == null || result.title === 'No') return;
+				if (result == null || result.title === '取消') return;
 			}
 
 			options = { preserveFocus: true, preview: false, ...options };
@@ -272,11 +272,11 @@ export namespace GitActions {
 
 			if (files.length > 10) {
 				const result = await window.showWarningMessage(
-					`Are your sure you want to open the changes for all ${files.length} files?`,
-					{ title: 'Yes' },
-					{ title: 'No', isCloseAffordance: true },
+					`确定要打开全部 ${files.length} 个文件的更改吗？`,
+					{ title: '确定' },
+					{ title: '取消', isCloseAffordance: true },
 				);
-				if (result == null || result.title === 'No') return;
+				if (result == null || result.title === '取消') return;
 			}
 
 			for (const file of files) {
@@ -319,11 +319,11 @@ export namespace GitActions {
 
 			if (files.length > 10) {
 				const result = await window.showWarningMessage(
-					`Are your sure you want to open the changes for all ${files.length} files?`,
-					{ title: 'Yes' },
-					{ title: 'No', isCloseAffordance: true },
+					`确定要打开全部 ${files.length} 个文件的更改吗？`,
+					{ title: '确定' },
+					{ title: '取消', isCloseAffordance: true },
 				);
-				if (result == null || result.title === 'No') return;
+				if (result == null || result.title === '取消') return;
 			}
 
 			options = { preserveFocus: true, preview: false, ...options };
@@ -595,11 +595,11 @@ export namespace GitActions {
 
 			if (files.length > 10) {
 				const result = await window.showWarningMessage(
-					`Are your sure you want to open all ${files.length} files?`,
-					{ title: 'Yes' },
-					{ title: 'No', isCloseAffordance: true },
+					`确定要打开全部 ${files.length} 个文件吗？`,
+					{ title: '确定' },
+					{ title: '取消', isCloseAffordance: true },
 				);
-				if (result == null || result.title === 'No') return;
+				if (result == null || result.title === '取消') return;
 			}
 
 			const uris: Uri[] = (
@@ -641,11 +641,11 @@ export namespace GitActions {
 
 			if (files.length > 10) {
 				const result = await window.showWarningMessage(
-					`Are your sure you want to open all ${files.length} file revisions?`,
-					{ title: 'Yes' },
-					{ title: 'No', isCloseAffordance: true },
+					`确定要打开全部 ${files.length} 个文件修订版本吗？`,
+					{ title: '确定' },
+					{ title: '取消', isCloseAffordance: true },
 				);
-				if (result == null || result.title === 'No') return;
+				if (result == null || result.title === '取消') return;
 			}
 
 			findOrOpenEditors(
@@ -726,14 +726,14 @@ export namespace GitActions {
 				repo = Container.instance.git.highlander;
 
 				if (repo == null) {
-					const pick = await RepositoryPicker.show(undefined, 'Choose a repository to add a remote to');
+					const pick = await RepositoryPicker.show(undefined, '选择要添加远程的仓库');
 					repo = pick?.item;
 					if (repo == null) return undefined;
 				}
 			}
 
 			const name = await window.showInputBox({
-				prompt: 'Please provide a name for the remote',
+				prompt: '请输入远程名称',
 				placeHolder: 'Remote name',
 				value: undefined,
 				ignoreFocusOut: true,
@@ -741,7 +741,7 @@ export namespace GitActions {
 			if (name == null || name.length === 0) return undefined;
 
 			const url = await window.showInputBox({
-				prompt: 'Please provide the repository url for the remote',
+				prompt: '请输入该远程的仓库 URL',
 				placeHolder: 'Remote repository url',
 				value: undefined,
 				ignoreFocusOut: true,

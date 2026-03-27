@@ -58,7 +58,7 @@ export class RepositoriesView extends ViewBase<RepositoriesNode, RepositoriesVie
 	protected readonly configKey = 'repositories';
 
 	constructor(container: Container) {
-		super('gitlens.views.repositories', 'Repositories', container);
+		super('gitlens.views.repositories', '仓库', container);
 	}
 
 	private _onDidChangeAutoRefresh = new EventEmitter<void>();
@@ -529,10 +529,10 @@ export class RepositoriesView extends ViewBase<RepositoriesNode, RepositoriesVie
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(branch, {
+				title: `正在仓库视图中定位 ${GitReference.toString(branch, {
 					icon: false,
 					quoted: true,
-				})} in the Repositories view...`,
+				})}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {
@@ -590,10 +590,10 @@ export class RepositoriesView extends ViewBase<RepositoriesNode, RepositoriesVie
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(commit, {
+				title: `正在仓库视图中定位 ${GitReference.toString(commit, {
 					icon: false,
 					quoted: true,
-				})} in the Repositories view...`,
+				})}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {
@@ -619,7 +619,7 @@ export class RepositoriesView extends ViewBase<RepositoriesNode, RepositoriesVie
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing contributor '${contributor.name} in the Repositories view...`,
+				title: `正在仓库视图中定位贡献者“${contributor.name}”...`,
 				cancellable: true,
 			},
 			async (progress, token) => {
@@ -645,7 +645,7 @@ export class RepositoriesView extends ViewBase<RepositoriesNode, RepositoriesVie
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing remote '${remote.name}' in the side bar...`,
+				title: `正在侧边栏中定位远程仓库“${remote.name}”...`,
 				cancellable: true,
 			},
 			async (progress, token) => {
@@ -694,10 +694,10 @@ export class RepositoriesView extends ViewBase<RepositoriesNode, RepositoriesVie
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(stash, {
+				title: `正在仓库视图中定位 ${GitReference.toString(stash, {
 					icon: false,
 					quoted: true,
-				})} in the Repositories view...`,
+				})}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {
@@ -755,10 +755,10 @@ export class RepositoriesView extends ViewBase<RepositoriesNode, RepositoriesVie
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(tag, {
+				title: `正在仓库视图中定位 ${GitReference.toString(tag, {
 					icon: false,
 					quoted: true,
-				})} in the Repositories view...`,
+				})}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {
@@ -816,7 +816,7 @@ export class RepositoriesView extends ViewBase<RepositoriesNode, RepositoriesVie
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing worktree '${worktree.name}' in the side bar...`,
+				title: `正在侧边栏中定位工作树“${worktree.name}”...`,
 				cancellable: true,
 			},
 			async (progress, token) => {

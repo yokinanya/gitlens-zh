@@ -64,7 +64,7 @@ export class ConnectRemoteProviderCommand extends Command {
 			} else {
 				const pick = await RepositoryPicker.show(
 					undefined,
-					'Choose which repository to connect to the remote provider',
+					'选择要连接到远程提供方的仓库',
 					[...repos.keys()],
 				);
 				if (pick?.item == null) return undefined;
@@ -155,7 +155,7 @@ export class DisconnectRemoteProviderCommand extends Command {
 			} else {
 				const pick = await RepositoryPicker.show(
 					undefined,
-					'Choose which repository to disconnect from the remote provider',
+					'选择要与远程提供方断开连接的仓库',
 					[...repos.keys()],
 				);
 				if (pick?.item == null) return undefined;

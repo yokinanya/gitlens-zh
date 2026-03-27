@@ -50,7 +50,7 @@ export class TagsViewNode extends RepositoriesSubscribeableNode<TagsView, TagsRe
 		if (this.children == null) {
 			const repositories = this.view.container.git.openRepositories;
 			if (repositories.length === 0) {
-				this.view.message = 'No tags could be found.';
+				this.view.message = '未找到标签。';
 
 				return [];
 			}
@@ -68,8 +68,8 @@ export class TagsViewNode extends RepositoriesSubscribeableNode<TagsView, TagsRe
 
 			const tags = await child.repo.getTags();
 			if (tags.values.length === 0) {
-				this.view.message = 'No tags could be found.';
-				this.view.title = 'Tags';
+				this.view.message = '未找到标签。';
+				this.view.title = '标签';
 
 				void child.ensureSubscription();
 
@@ -77,7 +77,7 @@ export class TagsViewNode extends RepositoriesSubscribeableNode<TagsView, TagsRe
 			}
 
 			this.view.message = undefined;
-			this.view.title = `Tags (${tags.values.length})`;
+			this.view.title = `标签 (${tags.values.length})`;
 
 			return child.getChildren();
 		}
@@ -86,7 +86,7 @@ export class TagsViewNode extends RepositoriesSubscribeableNode<TagsView, TagsRe
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Tags', TreeItemCollapsibleState.Expanded);
+		const item = new TreeItem('标签', TreeItemCollapsibleState.Expanded);
 		return item;
 	}
 }
@@ -95,7 +95,7 @@ export class TagsView extends ViewBase<TagsViewNode, TagsViewConfig> {
 	protected readonly configKey = 'tags';
 
 	constructor(container: Container) {
-		super('gitlens.views.tags', 'Tags', container);
+		super('gitlens.views.tags', '标签', container);
 	}
 
 	override get canReveal(): boolean {
@@ -228,7 +228,7 @@ export class TagsView extends ViewBase<TagsViewNode, TagsViewConfig> {
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing ${GitReference.toString(tag, { icon: false, quoted: true })} in the side bar...`,
+				title: `正在侧边栏中定位 ${GitReference.toString(tag, { icon: false, quoted: true })}...`,
 				cancellable: true,
 			},
 			async (progress, token) => {

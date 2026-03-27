@@ -6,5 +6,5 @@ dist
 out
 node_modules
 images/settings
-gitlens-*.vsix
+*.vsix
 tsconfig*.tsbuildinfo

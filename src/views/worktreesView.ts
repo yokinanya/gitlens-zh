@@ -18,7 +18,6 @@ import { GitWorktree, RepositoryChange, RepositoryChangeComparisonMode, Reposito
 import { ensurePlusFeaturesEnabled } from '../plus/subscription/utils';
 import { getSubscriptionTimeRemaining, SubscriptionState } from '../subscription';
 import { gate } from '../system/decorators/gate';
-import { pluralize } from '../system/string';
 import {
 	RepositoriesSubscribeableNode,
 	RepositoryFolderNode,
@@ -56,7 +55,7 @@ export class WorktreesViewNode extends RepositoriesSubscribeableNode<WorktreesVi
 		if (this.children == null) {
 			const repositories = this.view.container.git.openRepositories;
 			if (repositories.length === 0) {
-				this.view.message = 'No worktrees could be found.';
+				this.view.message = '未找到工作树。';
 
 				return [];
 			}
@@ -75,7 +74,7 @@ export class WorktreesViewNode extends RepositoriesSubscribeableNode<WorktreesVi
 			const children = await child.getChildren();
 			if (children.length <= 1) {
 				this.view.message = undefined;
-				this.view.title = 'Worktrees';
+				this.view.title = '工作树';
 
 				void child.ensureSubscription();
 
@@ -83,7 +82,7 @@ export class WorktreesViewNode extends RepositoriesSubscribeableNode<WorktreesVi
 			}
 
 			this.view.message = undefined;
-			this.view.title = `Worktrees (${children.length})`;
+			this.view.title = `工作树 (${children.length})`;
 
 			return children;
 		}
@@ -92,7 +91,7 @@ export class WorktreesViewNode extends RepositoriesSubscribeableNode<WorktreesVi
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Worktrees', TreeItemCollapsibleState.Expanded);
+		const item = new TreeItem('工作树', TreeItemCollapsibleState.Expanded);
 		return item;
 	}
 }
@@ -101,7 +100,7 @@ export class WorktreesView extends ViewBase<WorktreesViewNode, WorktreesViewConf
 	protected readonly configKey = 'worktrees';
 
 	constructor(container: Container) {
-		super('gitlens.views.worktrees', 'Worktrees', container);
+		super('gitlens.views.worktrees', '工作树', container);
 
 		this.disposables.push(
 			window.registerFileDecorationProvider({
@@ -117,7 +116,7 @@ export class WorktreesView extends ViewBase<WorktreesViewNode, WorktreesViewConf
 					return {
 						badge: '●',
 						color: new ThemeColor('gitlens.decorations.worktreeView.hasUncommittedChangesForegroundColoSr'),
-						tooltip: 'Has Uncommitted Changes',
+						tooltip: '存在未提交的更改',
 					};
 				},
 			}),
@@ -154,16 +153,16 @@ export class WorktreesView extends ViewBase<WorktreesViewNode, WorktreesViewConf
 			case SubscriptionState.Free:
 			case SubscriptionState.FreePreviewExpired:
 			case SubscriptionState.VerificationRequired:
-				this.description = '✨ GitLens+ feature';
+				this.description = '✨ GitLens+ 功能';
 				break;
 			case SubscriptionState.FreeInPreview: {
 				const days = getSubscriptionTimeRemaining(subscription, 'days')!;
-				this.description = `✨⏳ ${pluralize('more day', days)} to try worktrees on public and private repos`;
+				this.description = `✨⏳ 还可在公共和私有仓库中试用工作树功能 ${days} 天`;
 				break;
 			}
 			case SubscriptionState.FreePlusInTrial: {
 				const days = getSubscriptionTimeRemaining(subscription, 'days')!;
-				this.description = `✨⏳ ${pluralize('more day', days)} to try worktrees on private repos`;
+				this.description = `✨⏳ 还可在私有仓库中试用工作树功能 ${days} 天`;
 				break;
 			}
 			case SubscriptionState.FreePlusTrialExpired:
@@ -308,7 +307,7 @@ export class WorktreesView extends ViewBase<WorktreesViewNode, WorktreesViewConf
 		return window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Revealing worktree '${worktree.name}' in the side bar...`,
+				title: `正在侧边栏中定位工作树“${worktree.name}”...`,
 				cancellable: true,
 			},
 			async (progress, token) => {

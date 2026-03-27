@@ -60,7 +60,7 @@ export class OpenRevisionFileCommand extends ActiveEditorCommand {
 			}));
 		} catch (ex) {
 			Logger.error(ex, 'OpenRevisionFileCommand');
-			void Messages.showGenericErrorMessage('Unable to open file revision');
+			void Messages.showGenericErrorMessage('无法打开文件修订版本');
 		}
 	}
 }

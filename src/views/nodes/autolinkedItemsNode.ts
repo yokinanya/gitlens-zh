@@ -80,14 +80,14 @@ export class AutolinkedItemsNode extends ViewNode<ViewsWithCommits> {
 			}
 
 			if (children == null || children.length === 0) {
-				children = [new MessageNode(this.view, this, 'No autolinked issues or pull requests could be found.')];
+				children = [new MessageNode(this.view, this, '未找到自动链接的议题或拉取请求。')];
 			}
 
 			if (this.log.hasMore) {
 				children.push(
 					new LoadMoreNode(this.view, this.parent as any, children[children.length - 1], {
 						context: { expandAutolinks: true },
-						message: 'Load more commits to search for autolinks',
+						message: '加载更多提交以搜索自动链接',
 					}),
 				);
 			}
@@ -99,7 +99,7 @@ export class AutolinkedItemsNode extends ViewNode<ViewsWithCommits> {
 
 	getTreeItem(): TreeItem {
 		const item = new TreeItem(
-			'Autolinked Issues and Pull Requests',
+			'自动链接的议题与拉取请求',
 			this.expand ? TreeItemCollapsibleState.Expanded : TreeItemCollapsibleState.Collapsed,
 		);
 		item.id = this.id;

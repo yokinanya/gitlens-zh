@@ -261,7 +261,7 @@ export class GitUri extends (Uri as any as UriEx) {
 				const repository = await Container.instance.git.getOrOpenRepository(Uri.file(data.path));
 				if (repository == null) {
 					debugger;
-					throw new Error(`Unable to find repository for uri=${uri.toString(false)}`);
+					throw new Error(`无法找到与 uri=${uri.toString(false)} 对应的仓库`);
 				}
 
 				let ref;
@@ -309,7 +309,7 @@ export class GitUri extends (Uri as any as UriEx) {
 				const repository = await Container.instance.git.getOrOpenRepository(Uri.file(data.fileName));
 				if (repository == null) {
 					debugger;
-					throw new Error(`Unable to find repository for uri=${uri.toString(false)}`);
+					throw new Error(`无法找到与 uri=${uri.toString(false)} 对应的仓库`);
 				}
 
 				let repoPath = normalizePath(uri.fsPath);

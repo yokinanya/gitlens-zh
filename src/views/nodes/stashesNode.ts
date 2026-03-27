@@ -30,7 +30,7 @@ export class StashesNode extends ViewNode<StashesView | RepositoriesView> {
 	async getChildren(): Promise<ViewNode[]> {
 		if (this._children == null) {
 			const stash = await this.repo.getStash();
-			if (stash == null) return [new MessageNode(this.view, this, 'No stashes could be found.')];
+			if (stash == null) return [new MessageNode(this.view, this, '未找到储藏。')];
 
 			this._children = [...map(stash.commits.values(), c => new StashNode(this.view, this, c))];
 		}
@@ -39,7 +39,7 @@ export class StashesNode extends ViewNode<StashesView | RepositoriesView> {
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Stashes', TreeItemCollapsibleState.Collapsed);
+		const item = new TreeItem('储藏', TreeItemCollapsibleState.Collapsed);
 		item.id = this.id;
 		item.contextValue = ContextValues.Stashes;
 

@@ -1,9 +1,9 @@
-## Git Worktrees
+## Git 工作树
 
 <p align="center">
-  <img src="../../images/docs/worktrees-view.png" alt="Worktrees View in Side Bar"/>
+  <img src="../../images/docs/worktrees-view.png" alt="侧边栏中的工作树视图"/>
 </p>
 
-Worktrees make developing on and testing multiple branches easier, by minimizing the context switching between branches. Worktrees allow you to easily work on different branches of a repository simultaneously. You can create multiple working trees, each of which can be opened in individual windows or all together in a single workspace.
+工作树能减少在不同分支之间来回切换的上下文成本，让你更轻松地同时开发和测试多个分支。你可以创建多个工作树，并把它们分别打开在独立窗口中，或一起放进同一个工作区中使用。
 
-_Note: Worktrees do not yet work with VS Code on the web._
+_注意：工作树目前尚不支持 VS Code Web。_

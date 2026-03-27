@@ -34,7 +34,7 @@ export class RemotesNode extends ViewNode<RemotesView | RepositoriesView> {
 		if (this._children == null) {
 			const remotes = await this.repo.getRemotes({ sort: true });
 			if (remotes.length === 0) {
-				return [new MessageNode(this.view, this, 'No remotes could be found')];
+				return [new MessageNode(this.view, this, '未找到远程仓库。')];
 			}
 
 			this._children = remotes.map(r => new RemoteNode(this.uri, this.view, this, r, this.repo));
@@ -44,7 +44,7 @@ export class RemotesNode extends ViewNode<RemotesView | RepositoriesView> {
 	}
 
 	getTreeItem(): TreeItem {
-		const item = new TreeItem('Remotes', TreeItemCollapsibleState.Collapsed);
+		const item = new TreeItem('远程', TreeItemCollapsibleState.Collapsed);
 		item.id = this.id;
 		item.contextValue = ContextValues.Remotes;
 		item.iconPath = new ThemeIcon('cloud');

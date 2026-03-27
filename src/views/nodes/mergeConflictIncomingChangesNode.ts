@@ -29,7 +29,7 @@ export class MergeConflictIncomingChangesNode extends ViewNode<ViewsWithCommits 
 			this.status.type === 'rebase' ? this.status.steps.current.commit.ref : this.status.HEAD.ref,
 		);
 
-		const item = new TreeItem('Incoming changes', TreeItemCollapsibleState.None);
+		const item = new TreeItem('传入变更', TreeItemCollapsibleState.None);
 		item.contextValue = ContextValues.MergeConflictIncomingChanges;
 		item.description = `${GitReference.toString(this.status.incoming, { expand: false, icon: false })}${
 			this.status.type === 'rebase'
@@ -42,9 +42,9 @@ export class MergeConflictIncomingChangesNode extends ViewNode<ViewsWithCommits 
 			: new ThemeIcon('diff');
 
 		const markdown = new MarkdownString(
-			`Incoming changes to $(file)${GlyphChars.Space}${this.file.path}${
+			`$(file)${GlyphChars.Space}${this.file.path} 的传入变更${
 				this.status.incoming != null
-					? ` from ${GitReference.toString(this.status.incoming)}${
+					? `，来自 ${GitReference.toString(this.status.incoming)}${
 							commit != null
 								? `\n\n${await CommitFormatter.fromTemplateAsync(
 										`\${avatar}&nbsp;__\${author}__, \${ago} &nbsp; _(\${date})_ \n\n\${message}\n\n\${link}\${' via 'pullRequest}`,
@@ -80,7 +80,7 @@ export class MergeConflictIncomingChangesNode extends ViewNode<ViewsWithCommits 
 	override getCommand(): Command | undefined {
 		if (this.status.mergeBase == null) {
 			return {
-				title: 'Open Revision',
+				title: '打开修订版本',
 				command: CoreCommands.Open,
 				arguments: [
 					this.view.container.git.getRevisionUri(this.status.HEAD.ref, this.file.path, this.status.repoPath),
@@ -92,7 +92,7 @@ export class MergeConflictIncomingChangesNode extends ViewNode<ViewsWithCommits 
 			lhs: {
 				sha: this.status.mergeBase,
 				uri: GitUri.fromFile(this.file, this.status.repoPath, undefined, true),
-				title: `${this.file.path} (merge-base)`,
+				title: `${this.file.path}（合并基点）`,
 			},
 			rhs: {
 				sha: this.status.HEAD.ref,
@@ -100,7 +100,7 @@ export class MergeConflictIncomingChangesNode extends ViewNode<ViewsWithCommits 
 				title: `${this.file.path} (${
 					this.status.incoming != null
 						? GitReference.toString(this.status.incoming, { expand: false, icon: false })
-						: 'incoming'
+						: '传入更改'
 				})`,
 			},
 			repoPath: this.status.repoPath,
@@ -111,7 +111,7 @@ export class MergeConflictIncomingChangesNode extends ViewNode<ViewsWithCommits 
 			},
 		};
 		return {
-			title: 'Open Changes',
+			title: '打开变更',
 			command: Commands.DiffWith,
 			arguments: [commandArgs],
 		};

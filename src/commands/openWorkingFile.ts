@@ -41,7 +41,7 @@ export class OpenWorkingFileCommand extends ActiveEditorCommand {
 				const workingUri = await this.container.git.getWorkingUri(args.uri.repoPath!, args.uri);
 				if (workingUri === undefined) {
 					void window.showWarningMessage(
-						'Unable to open working file. File could not be found in the working tree',
+						'无法打开工作文件。工作树中找不到该文件',
 					);
 
 					return;
@@ -65,7 +65,7 @@ export class OpenWorkingFileCommand extends ActiveEditorCommand {
 			}));
 		} catch (ex) {
 			Logger.error(ex, 'OpenWorkingFileCommand');
-			void Messages.showGenericErrorMessage('Unable to open working file');
+			void Messages.showGenericErrorMessage('无法打开工作文件');
 		}
 	}
 }

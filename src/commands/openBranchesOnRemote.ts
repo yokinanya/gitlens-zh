@@ -45,7 +45,7 @@ export class OpenBranchesOnRemoteCommand extends ActiveEditorCommand {
 			await RepositoryPicker.getBestRepositoryOrShow(
 				gitUri,
 				editor,
-				args?.clipboard ? 'Copy Remote Branches Url' : 'Open Branches on Remote',
+				args?.clipboard ? '复制远程分支 URL' : '在远程上打开分支',
 			)
 		)?.path;
 		if (!repoPath) return;
@@ -61,9 +61,7 @@ export class OpenBranchesOnRemoteCommand extends ActiveEditorCommand {
 			}));
 		} catch (ex) {
 			Logger.error(ex, 'OpenBranchesOnRemoteCommand');
-			void window.showErrorMessage(
-				'Unable to open branches on remote provider. See output channel for more details',
-			);
+			void window.showErrorMessage('无法在远程提供方中打开分支。更多细节请查看输出频道');
 		}
 	}
 }

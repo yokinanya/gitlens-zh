@@ -39,19 +39,19 @@ export class GitHubRemote extends RichRemoteProvider {
 				{
 					prefix: '#',
 					url: `${this.baseUrl}/issues/<num>`,
-					title: `Open Issue #<num> on ${this.name}`,
+					title: `在 ${this.name} 上打开议题 #<num>`,
 				},
 				{
 					prefix: 'gh-',
 					url: `${this.baseUrl}/issues/<num>`,
-					title: `Open Issue #<num> on ${this.name}`,
+					title: `在 ${this.name} 上打开议题 #<num>`,
 					ignoreCase: true,
 				},
 				{
 					linkify: (text: string) =>
 						text.replace(
 							issueEnricher3rdPartyRegex,
-							`[$&](${this.protocol}://${this.domain}/$<repo>/issues/$<num> "Open Issue #$<num> from $<repo> on ${this.name}")`,
+							`[$&](${this.protocol}://${this.domain}/$<repo>/issues/$<num> "在 ${this.name} 上打开来自 $<repo> 的议题 #$<num>")`,
 						),
 				},
 			];

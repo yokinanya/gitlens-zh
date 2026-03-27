@@ -165,7 +165,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 		const author = this._padOrTruncate(name, this._options.tokenOptions.author);
 		if (!this._options.markdown) return author;
 
-		return `[${author}](mailto:${email} "Email ${name} (${email})")`;
+		return `[${author}](mailto:${email} "给 ${name} 发邮件 (${email})")`;
 	}
 
 	get authorAgo(): string {
@@ -201,7 +201,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 		const author = this._padOrTruncate(name, this._options.tokenOptions.authorNotYou);
 		if (!this._options.markdown) return author;
 
-		return `[${author}](mailto:${email} "Email ${name} (${email})")`;
+		return `[${author}](mailto:${email} "给 ${name} 发邮件 (${email})")`;
 	}
 
 	get avatar(): string | Promise<string> {
@@ -293,13 +293,13 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 					},
 					repoPath: this._item.repoPath,
 					line: this._options.editor?.line,
-				})} "Open Changes with Previous Revision")`;
+				})} "打开与上一修订版本的对比")`;
 
 				commands += ` &nbsp;&nbsp;[$(versions)](${OpenFileAtRevisionCommand.getMarkdownCommandArgs(
 					Container.instance.git.getRevisionUri(diffUris.previous),
 					FileAnnotationType.Blame,
 					this._options.editor?.line,
-				)} "Open Blame Prior to this Change")`;
+				)} "打开此更改前的归属信息")`;
 			} else {
 				commands = `\`${this._padOrTruncate(
 					GitRevision.shorten(
@@ -316,12 +316,12 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 
 		commands = `---\n\n[\`$(git-commit) ${this.id}\`](${ShowQuickCommitCommand.getMarkdownCommandArgs(
 			this._item.sha,
-		)} "Show Commit")`;
+		)} "显示提交")`;
 
 		commands += ` &nbsp;[$(chevron-left)$(compare-changes)](${DiffWithCommand.getMarkdownCommandArgs(
 			this._item,
 			this._options.editor?.line,
-		)} "Open Changes with Previous Revision")`;
+		)} "打开与上一修订版本的对比")`;
 
 		if (this._item.file != null && this._item.unresolvedPreviousSha != null) {
 			const uri = Container.instance.git.getRevisionUri(
@@ -333,7 +333,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 				uri,
 				FileAnnotationType.Blame,
 				this._options.editor?.line,
-			)} "Open Blame Prior to this Change")`;
+			)} "打开此更改前的归属信息")`;
 		}
 
 		if (this._options.remotes != null && this._options.remotes.length !== 0) {
@@ -341,7 +341,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 
 			commands += ` &nbsp;&nbsp;[$(globe)](${OpenCommitOnRemoteCommand.getMarkdownCommandArgs(
 				this._item.sha,
-			)} "Open Commit on ${providers?.length ? providers[0].name : 'Remote'}")`;
+			)} "在 ${providers?.length ? providers[0].name : '远程服务'} 上打开提交")`;
 		}
 
 		const { pullRequestOrRemote: pr } = this._options;
@@ -353,19 +353,19 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 					repoPath: this._item.repoPath,
 					provider: { id: pr.provider.id, name: pr.provider.name, domain: pr.provider.domain },
 					pullRequest: { id: pr.id, url: pr.url },
-				})} "Open Pull Request \\#${pr.id}${
+				})} "打开拉取请求 \\#${pr.id}${
 					Container.instance.actionRunners.count('openPullRequest') == 1 ? ` on ${pr.provider.name}` : '...'
 				}\n${GlyphChars.Dash.repeat(2)}\n${escapeMarkdown(pr.title).replace(/"/g, '\\"')}\n${
 					pr.state
 				}, ${pr.formatDateFromNow()}")`;
 			} else if (pr instanceof PromiseCancelledError) {
-				commands += `${separator}[$(git-pull-request) PR $(loading~spin)](command:${Commands.RefreshHover} "Searching for a Pull Request (if any) that introduced this commit...")`;
+				commands += `${separator}[$(git-pull-request) PR $(loading~spin)](command:${Commands.RefreshHover} "正在搜索引入此提交的拉取请求（如果有）...")`;
 			} else if (pr.provider != null && Container.instance.config.integrations.enabled) {
-				commands += `${separator}[$(plug) Connect to ${pr.provider.name}${
+				commands += `${separator}[$(plug) 连接到 ${pr.provider.name}${
 					GlyphChars.Ellipsis
-				}](${ConnectRemoteProviderCommand.getMarkdownCommandArgs(pr)} "Connect to ${
+				}](${ConnectRemoteProviderCommand.getMarkdownCommandArgs(pr)} "连接到 ${
 					pr.provider.name
-				} to enable the display of the Pull Request (if any) that introduced this commit")`;
+				} 以显示引入此提交的拉取请求（如果有）")`;
 			}
 		}
 
@@ -391,7 +391,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 								line: this._options.editor?.line,
 						  }
 						: undefined,
-			})} "Show Team Actions")`;
+			})} "显示团队操作")`;
 		}
 
 		const gitUri = this._item.getGitUri();
@@ -401,7 +401,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 						revisionUri: Container.instance.git.getRevisionUri(gitUri).toString(true),
 				  }
 				: { commit: this._item },
-		)} "Show More Actions")`;
+		)} "显示更多操作")`;
 
 		return this._padOrTruncate(commands, this._options.tokenOptions.commands);
 	}
@@ -470,7 +470,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 		const sha = this._padOrTruncate(this._item.shortSha ?? '', this._options.tokenOptions.id);
 		const link = `[\`$(git-commit) ${sha}\`](${ShowQuickCommitCommand.getMarkdownCommandArgs(
 			this._item.sha,
-		)} "Show Commit")`;
+		)} "显示提交")`;
 
 		return this._padOrTruncate(link, this._options.tokenOptions.link);
 	}
@@ -527,7 +527,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 					repoPath: this._item.repoPath,
 					provider: { id: pr.provider.id, name: pr.provider.name, domain: pr.provider.domain },
 					pullRequest: { id: pr.id, url: pr.url },
-				})} "Open Pull Request \\#${pr.id}${
+				})} "打开拉取请求 \\#${pr.id}${
 					Container.instance.actionRunners.count('openPullRequest') == 1 ? ` on ${pr.provider.name}` : '...'
 				}\n${GlyphChars.Dash.repeat(2)}\n${escapeMarkdown(pr.title).replace(/"/g, '\\"')}\n${
 					pr.state
@@ -537,7 +537,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 					const index = this._options.footnotes.size + 1;
 					this._options.footnotes.set(
 						index,
-						`${PullRequest.getMarkdownIcon(pr)} [**${prTitle}**](${pr.url} "Open Pull Request \\#${
+						`${PullRequest.getMarkdownIcon(pr)} [**${prTitle}**](${pr.url} "打开拉取请求 \\#${
 							pr.id
 						} on ${pr.provider.name}")\\\n${GlyphChars.Space.repeat(4)} #${
 							pr.id
@@ -557,7 +557,7 @@ export class CommitFormatter extends Formatter<GitCommit, CommitFormatOptions> {
 			}
 		} else if (pr instanceof PromiseCancelledError) {
 			text = this._options.markdown
-				? `[PR $(loading~spin)](command:${Commands.RefreshHover} "Searching for a Pull Request (if any) that introduced this commit...")`
+				? `[PR $(loading~spin)](command:${Commands.RefreshHover} "正在搜索引入此提交的拉取请求（如果有）...")`
 				: this._options?.pullRequestPendingMessage ?? '';
 		} else {
 			return this._padOrTruncate('', this._options.tokenOptions.pullRequest);

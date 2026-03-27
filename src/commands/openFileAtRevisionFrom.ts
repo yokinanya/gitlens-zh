@@ -33,7 +33,7 @@ export class OpenFileAtRevisionFromCommand extends ActiveEditorCommand {
 
 		const gitUri = await GitUri.fromUri(uri);
 		if (!gitUri.repoPath) {
-			void Messages.showNoRepositoryWarningMessage('Unable to open file revision');
+			void Messages.showNoRepositoryWarningMessage('无法打开文件修订版本');
 			return;
 		}
 
@@ -46,11 +46,11 @@ export class OpenFileAtRevisionFromCommand extends ActiveEditorCommand {
 			if (args?.stash) {
 				const path = this.container.git.getRelativePath(gitUri, gitUri.repoPath);
 
-				const title = `Open Changes with Stash${pad(GlyphChars.Dot, 2, 2)}`;
+				const title = `打开与储藏的对比${pad(GlyphChars.Dot, 2, 2)}`;
 				const pick = await StashPicker.show(
 					this.container.git.getStash(gitUri.repoPath),
 					`${title}${gitUri.getFormattedFileName({ truncateTo: quickPickTitleMaxChars - title.length })}`,
-					'Choose a stash to compare with',
+					'选择要比较的储藏',
 					// Stashes should always come with files, so this should be fine (but protect it just in case)
 					{ filter: c => c.files?.some(f => f.path === path || f.originalPath === path) ?? true },
 				);
@@ -58,11 +58,11 @@ export class OpenFileAtRevisionFromCommand extends ActiveEditorCommand {
 
 				args.reference = pick;
 			} else {
-				const title = `Open File at Branch or Tag${pad(GlyphChars.Dot, 2, 2)}`;
+				const title = `在分支或标签处打开文件${pad(GlyphChars.Dot, 2, 2)}`;
 				const pick = await ReferencePicker.show(
 					gitUri.repoPath,
 					`${title}${gitUri.getFormattedFileName({ truncateTo: quickPickTitleMaxChars - title.length })}`,
-					'Choose a branch or tag to open the file revision from',
+					'选择分支或标签以打开对应的文件修订版本',
 					{
 						allowEnteringRefs: true,
 						keys: ['right', 'alt+right', 'ctrl+right'],

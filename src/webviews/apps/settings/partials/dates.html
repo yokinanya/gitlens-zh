@@ -1,6 +1,6 @@
 <section id="dates" class="section--settings section--collapsible">
 	<div class="section__header">
-		<h2>Dates & Times</h2>
+		<h2>日期与时间</h2>
 	</div>
 
 	<div class="section__collapsible">
@@ -16,13 +16,13 @@
 							data-value-off="absolute"
 							data-setting
 						/>
-						<label for="defaultDateStyle">Allow relative date formatting</label>
+						<label for="defaultDateStyle">允许使用相对日期格式</label>
 					</div>
 					<span class="setting__hint hidden" data-visibility="defaultDateStyle =relative"
-						>Shows some dates relatively, e.g. 1 day ago</span
+						>以相对方式显示部分日期，例如 1 天前</span
 					>
 					<span class="setting__hint hidden" data-visibility="defaultDateStyle =absolute"
-						>Shows dates absolutely, e.g.
+						>以绝对方式显示日期，例如
 						<span
 							data-setting-preview="defaultDateFormat"
 							data-setting-preview-type="date"
@@ -34,33 +34,30 @@
 				<div class="settings">
 					<div class="setting">
 						<div class="setting__input">
-							<label for="defaultDateLocale">Date&nbsp;locale</label>
+							<label for="defaultDateLocale">日期区域设置</label>
 							<input
 								id="defaultDateLocale"
 								name="defaultDateLocale"
 								type="text"
-								placeholder="defaults to VS Code locale"
+								placeholder="默认使用 VS Code 区域设置"
 								data-setting
 								data-setting-preview
 							/>
 							<a
 								class="link__learn-more"
-								title="See possible BCP 47 language tag for supported locale values"
+								title="查看支持的 BCP 47 语言标签"
 								href="https://en.wikipedia.org/wiki/IETF_language_tag#List_of_major_primary_language_subtags"
 							>
-								<i class="icon icon__info"
-									>Can use <code>system</code> to follow the system locale, or enter a locale language
-									tag, e.g. en-US</i
-								>
+								<i class="icon icon__info"></i>
 							</a>
 						</div>
 						<span class="setting__hint">
 							<span style="line-height: 2rem">
-								<i class="icon icon--sm icon__info"></i> Use <code>system</code> for the system locale,
-								or a locale language tag, e.g. en-US
+								<i class="icon icon--sm icon__info"></i> 可使用 <code>system</code>
+								跟随系统区域设置，或输入区域语言标签，例如 en-US
 							</span>
 							<br />
-							Example date:
+							示例日期：
 							<span
 								data-setting-preview="defaultDateLocale"
 								data-setting-preview-type="date-locale"
@@ -71,25 +68,25 @@
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="defaultDateFormat">Date&nbsp;format</label>
+							<label for="defaultDateFormat">日期格式</label>
 							<input
 								id="defaultDateFormat"
 								name="defaultDateFormat"
 								type="text"
-								placeholder="defaults to MMMM Do, YYYY h:mma"
+								placeholder="默认值为 MMMM Do, YYYY h:mma"
 								data-setting
 								data-setting-preview
 							/>
 							<a
 								class="link__learn-more"
-								title="See Moment.js docs for supported date formats"
+								title="查看 Moment.js 支持的日期格式"
 								href="https://momentjs.com/docs/#/displaying/format/"
 							>
 								<i class="icon icon__info"></i>
 							</a>
 						</div>
 						<span class="setting__hint"
-							>Example date:
+							>示例日期：
 							<span
 								data-setting-preview="defaultDateFormat"
 								data-setting-preview-type="date"
@@ -100,25 +97,25 @@
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="defaultDateShortFormat">Short&nbsp;date&nbsp;format</label>
+							<label for="defaultDateShortFormat">短日期格式</label>
 							<input
 								id="defaultDateShortFormat"
 								name="defaultDateShortFormat"
 								type="text"
-								placeholder="defaults to MMM D, YYYY"
+								placeholder="默认值为 MMM D, YYYY"
 								data-setting
 								data-setting-preview
 							/>
 							<a
 								class="link__learn-more"
-								title="See Moment.js docs for supported date formats"
+								title="查看 Moment.js 支持的日期格式"
 								href="https://momentjs.com/docs/#/displaying/format/"
 							>
 								<i class="icon icon__info"></i>
 							</a>
 						</div>
 						<span class="setting__hint"
-							>Example short date:
+							>短日期示例：
 							<span
 								data-setting-preview="defaultDateShortFormat"
 								data-setting-preview-type="date"
@@ -129,25 +126,25 @@
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="defaultTimeFormat">Time&nbsp;format</label>
+							<label for="defaultTimeFormat">时间格式</label>
 							<input
 								id="defaultTimeFormat"
 								name="defaultTimeFormat"
 								type="text"
-								placeholder="defaults to h:mma"
+								placeholder="默认值为 h:mma"
 								data-setting
 								data-setting-preview
 							/>
 							<a
 								class="link__learn-more"
-								title="See Moment.js docs for supported date formats"
+								title="查看 Moment.js 支持的日期格式"
 								href="https://momentjs.com/docs/#/displaying/format/"
 							>
 								<i class="icon icon__info"></i>
 							</a>
 						</div>
 						<span class="setting__hint"
-							>Example date:
+							>示例时间：
 							<span
 								data-setting-preview="defaultTimeFormat"
 								data-setting-preview-type="date"
@@ -161,14 +158,14 @@
 
 		<div class="section__group">
 			<p class="section__hint">
-				<i class="icon icon__info"></i> For more options, open
+				<i class="icon icon__info"></i> 如需更多选项，打开
 				<a
 					class="command"
-					title="Open Settings"
+					title="打开设置"
 					href="command:workbench.action.openSettings?%22gitlens.default%22"
-					>Settings</a
+					>设置</a
 				>
-				and search for <b><i>gitlens.default</i></b>
+				并搜索 <b><i>gitlens.default</i></b>
 			</p>
 		</div>
 	</div>

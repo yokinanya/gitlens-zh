@@ -124,7 +124,7 @@ export class ResultsFileNode extends ViewRefFileNode implements FileNode {
 			},
 		};
 		return {
-			title: 'Open Changes',
+			title: '打开变更',
 			command: Commands.DiffWith,
 			arguments: [commandArgs],
 		};

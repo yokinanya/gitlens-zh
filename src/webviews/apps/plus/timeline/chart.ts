@@ -289,7 +289,7 @@ export class TimelineChart {
 				},
 				y2: {
 					label: {
-						text: 'Lines changed',
+						text: '变更行数',
 						position: 'outer-middle',
 					},
 					// min: 0,

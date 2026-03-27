@@ -1,10 +1,10 @@
 <section id="worktrees-view" class="section--settings section--collapsible">
 	<div class="section__header">
 		<h2>
-			Worktrees view
+			工作树视图
 			<a
 				class="link__learn-more"
-				title="Learn more"
+				title="了解更多"
 				href="https://github.com/gitkraken/vscode-gitlens/#worktrees-view-"
 			>
 				<i class="icon icon__info"></i>
@@ -12,11 +12,11 @@
 		</h2>
 
 		<p class="section__header-hint">
-			Adds a
-			<a class="command command--show-view" title="Show View in Side Bar" href="command:gitlens.showWorktreesView"
-				>Worktrees view</a
+			添加一个
+			<a class="command command--show-view" title="在侧边栏中显示视图" href="command:gitlens.showWorktreesView"
+				>工作树视图</a
 			>
-			to visualize, explore, and manage Git worktrees
+			用于可视化、浏览和管理 Git 工作树
 		</p>
 	</div>
 
@@ -32,23 +32,23 @@
 								type="checkbox"
 								data-setting
 							/>
-							<label for="worktrees.promptForLocation">Always ask where to put new worktrees</label>
+							<label for="worktrees.promptForLocation">始终询问新工作树的放置位置</label>
 						</div>
 					</div>
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="worktrees.defaultLocation">Default&nbsp;worktree&nbsp;location</label>
+							<label for="worktrees.defaultLocation">默认工作树位置</label>
 							<input
 								id="worktrees.defaultLocation"
 								name="worktrees.defaultLocation"
 								type="text"
-								placeholder="absolute path to put new worktrees into"
+								placeholder="放置新工作树的绝对路径"
 								data-setting
 							/>
 						</div>
 						<p class="setting__hint">
-							<i class="icon icon__info"></i> Can be configured on a per-workspace or per-folder basis
+							<i class="icon icon__info"></i> 可按工作区或文件夹分别配置
 						</p>
 					</div>
 
@@ -62,8 +62,7 @@
 								data-setting
 							/>
 							<label for="views.worktrees.showBranchComparison"
-								>Show a comparison of the worktree branch with a user-selected reference (branch, tag,
-								etc)
+								>显示工作树分支与用户选择的引用（分支、标签等）的比较结果
 							</label>
 						</div>
 					</div>
@@ -80,11 +79,11 @@
 											data-setting
 										/>
 										<label for="views.worktrees.pullRequests.enabled"
-											>Show associated pull requests</label
+											>显示关联的拉取请求</label
 										>
 									</div>
 									<p class="setting__hint">
-										Requires a connection to a supported remote service (e.g. GitHub)
+										需要连接到受支持的远程服务（如 GitHub）
 									</p>
 								</div>
 
@@ -99,7 +98,7 @@
 												disabled
 											/>
 											<label for="views.worktrees.pullRequests.showForBranches"
-												>Show the pull request associated with the worktree branch</label
+												>显示与工作树分支关联的拉取请求</label
 											>
 										</div>
 									</div>
@@ -114,7 +113,7 @@
 												disabled
 											/>
 											<label for="views.worktrees.pullRequests.showForCommits"
-												>Show the pull request that introduced each commit</label
+												>显示引入每次提交的拉取请求</label
 											>
 										</div>
 									</div>
@@ -125,21 +124,21 @@
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="views.worktrees.files.layout">Layout files</label>
+							<label for="views.worktrees.files.layout">文件布局</label>
 							<div class="select-container">
 								<select
 									id="views.worktrees.files.layout"
 									name="views.worktrees.files.layout"
 									data-setting
 								>
-									<option value="auto">automatically</option>
-									<option value="list">as a list</option>
-									<option value="tree">as a tree</option>
+									<option value="auto">自动</option>
+									<option value="list">列表</option>
+									<option value="tree">树形</option>
 								</select>
 							</div>
 						</div>
 						<p class="setting__hint" data-visibility="views.worktrees.files.layout =auto">
-							Chooses the best layout based on the number of files at each nesting level
+							根据每一级嵌套中的文件数量自动选择最合适的布局
 						</p>
 					</div>
 
@@ -151,9 +150,9 @@
 								type="checkbox"
 								data-setting
 							/>
-							<label for="views.worktrees.files.compact">Use compact file layout</label>
+							<label for="views.worktrees.files.compact">使用紧凑文件布局</label>
 						</div>
-						<p class="setting__hint">Compacts (flattens) unnecessary nesting when using a tree layouts</p>
+						<p class="setting__hint">使用树形布局时压平不必要的嵌套层级</p>
 					</div>
 
 					<div class="setting">
@@ -164,7 +163,7 @@
 								type="checkbox"
 								data-setting
 							/>
-							<label for="views.worktrees.avatars">Use author avatars</label>
+							<label for="views.worktrees.avatars">使用作者头像</label>
 						</div>
 					</div>
 				</div>
@@ -212,14 +211,14 @@
 
 		<div class="section__group">
 			<p class="section__hint">
-				<i class="icon icon__info"></i> For more options, open
+				<i class="icon icon__info"></i> 如需更多选项，打开
 				<a
 					class="command"
-					title="Open Settings"
+					title="打开设置"
 					href="command:workbench.action.openSettings?%22gitlens.views.worktrees%22"
-					>Settings</a
+					>设置</a
 				>
-				and search for <b><i>gitlens.views.worktrees</i></b> or
+				并搜索 <b><i>gitlens.views.worktrees</i></b> 或
 				<b><i>gitlens.views</i></b>
 			</p>
 		</div>

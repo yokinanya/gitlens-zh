@@ -21,7 +21,7 @@ export namespace ModePicker {
 			const item: ModesQuickPickItem = {
 				label: `${mode === key ? '$(check)\u00a0\u00a0' : '\u00a0\u00a0\u00a0\u00a0\u00a0'}${
 					modeCfg.name
-				} mode`,
+				} 模式`,
 				description: modeCfg.description ? `\u00a0${GlyphChars.Dash}\u00a0 ${modeCfg.description}` : '',
 				key: key,
 			};
@@ -30,13 +30,13 @@ export namespace ModePicker {
 
 		if (mode) {
 			items.splice(0, 0, {
-				label: `Exit ${modes[mode].name} mode`,
+				label: `退出 ${modes[mode].name} 模式`,
 				key: undefined,
 			});
 		}
 
 		const pick = await window.showQuickPick(items, {
-			placeHolder: 'select a GitLens mode to enter',
+			placeHolder: '选择要进入的 GitLens 模式',
 		});
 
 		return pick;

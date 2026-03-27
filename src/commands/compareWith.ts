@@ -54,16 +54,16 @@ export class CompareWithCommand extends ActiveEditorCommand {
 			let title;
 			switch (args.ref1) {
 				case null:
-					title = 'Compare';
+					title = '比较';
 					break;
 				case '':
-					title = 'Compare Working Tree with';
+					title = '将工作树与以下内容比较';
 					break;
 				case 'HEAD':
-					title = 'Compare HEAD with';
+					title = '将 HEAD 与以下内容比较';
 					break;
 				default:
-					title = `Compare ${args.ref1} with`;
+					title = `将 ${args.ref1} 与以下内容比较`;
 					break;
 			}
 
@@ -77,7 +77,7 @@ export class CompareWithCommand extends ActiveEditorCommand {
 			}
 		} catch (ex) {
 			Logger.error(ex, 'CompareWithCommmand');
-			void Messages.showGenericErrorMessage('Unable to open comparison');
+			void Messages.showGenericErrorMessage('无法打开比较');
 		}
 	}
 }

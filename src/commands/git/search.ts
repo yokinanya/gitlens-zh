@@ -44,25 +44,25 @@ export interface SearchGitCommandArgs {
 }
 
 const searchOperatorToTitleMap = new Map<SearchOperators, string>([
-	['', 'Search by Message'],
-	['=:', 'Search by Message'],
-	['message:', 'Search by Message'],
-	['@:', 'Search by Author'],
-	['author:', 'Search by Author'],
-	['#:', 'Search by Commit SHA'],
-	['commit:', 'Search by Commit SHA'],
-	['?:', 'Search by File'],
-	['file:', 'Search by File'],
-	['~:', 'Search by Changes'],
-	['change:', 'Search by Changes'],
+	['', '按消息搜索'],
+	['=:', '按消息搜索'],
+	['message:', '按消息搜索'],
+	['@:', '按作者搜索'],
+	['author:', '按作者搜索'],
+	['#:', '按提交 SHA 搜索'],
+	['commit:', '按提交 SHA 搜索'],
+	['?:', '按文件搜索'],
+	['file:', '按文件搜索'],
+	['~:', '按更改搜索'],
+	['change:', '按更改搜索'],
 ]);
 
 type SearchStepState<T extends State = State> = ExcludeSome<StepState<T>, 'repo', string>;
 
 export class SearchGitCommand extends QuickCommand<State> {
 	constructor(container: Container, args?: SearchGitCommandArgs) {
-		super(container, 'search', 'search', 'Commit Search', {
-			description: 'aka grep, searches for commits',
+		super(container, 'search', 'search', '提交搜索', {
+			description: '即 grep，用于搜索提交',
 		});
 
 		let counter = 0;
@@ -176,7 +176,7 @@ export class SearchGitCommand extends QuickCommand<State> {
 					state.repo.path,
 					search,
 					{
-						label: { label: `for ${state.pattern}` },
+						label: { label: `与“${state.pattern}”匹配的提交` },
 					},
 					context.resultsPromise,
 					state.showResultsInSideBar instanceof SearchResultsNode ? state.showResultsInSideBar : undefined,
@@ -193,19 +193,20 @@ export class SearchGitCommand extends QuickCommand<State> {
 					onDidLoadMore: log => (context.resultsPromise = Promise.resolve(log)),
 					placeholder: (context, log) =>
 						log == null
-							? `No results for ${state.pattern}`
-							: `${pluralize('result', log.count, {
+							? `未找到与“${state.pattern}”匹配的结果`
+							: `${pluralize('条结果', log.count, {
 									format: c => (log.hasMore ? `${c}+` : undefined),
-							  })} for ${state.pattern}`,
+									plural: '条结果',
+							  })}，匹配“${state.pattern}”`,
 					picked: context.commit?.ref,
 					showInSideBarCommand: new ActionQuickPickItem(
-						'$(link-external)  Show Results in Side Bar',
+						'$(link-external)  在侧边栏中显示结果',
 						() =>
 							void this.container.searchAndCompareView.search(
 								repoPath,
 								search,
 								{
-									label: { label: `for ${state.pattern}` },
+									label: { label: `与“${state.pattern}”匹配的提交` },
 									reveal: {
 										select: true,
 										focus: false,
@@ -222,7 +223,7 @@ export class SearchGitCommand extends QuickCommand<State> {
 								repoPath,
 								search,
 								{
-									label: { label: `for ${state.pattern}` },
+									label: { label: `与“${state.pattern}”匹配的提交` },
 									reveal: {
 										select: true,
 										focus: false,
@@ -265,31 +266,31 @@ export class SearchGitCommand extends QuickCommand<State> {
 		const items: QuickPickItemOfT<SearchOperators>[] = [
 			{
 				label: searchOperatorToTitleMap.get('')!,
-				description: `pattern or message: pattern or =: pattern ${GlyphChars.Dash} use quotes to search for phrases`,
+				description: `输入内容，或使用 message: 内容 / =: 内容 ${GlyphChars.Dash} 使用引号可搜索短语`,
 				item: 'message:' as const,
 			},
 			{
 				label: searchOperatorToTitleMap.get('author:')!,
-				description: 'author: pattern or @: pattern',
+				description: 'author: 作者 或 @: 作者',
 				item: 'author:' as const,
 			},
 			{
 				label: searchOperatorToTitleMap.get('commit:')!,
-				description: 'commit: sha or #: sha',
+				description: 'commit: SHA 或 #: SHA',
 				item: 'commit:' as const,
 			},
 			context.hasVirtualFolders
 				? undefined
 				: {
 						label: searchOperatorToTitleMap.get('file:')!,
-						description: 'file: glob or ?: glob',
+						description: 'file: glob 或 ?: glob',
 						item: 'file:' as const,
 				  },
 			context.hasVirtualFolders
 				? undefined
 				: {
 						label: searchOperatorToTitleMap.get('change:')!,
-						description: 'change: pattern or ~: pattern',
+						description: 'change: 内容 或 ~: 内容',
 						item: 'change:' as const,
 				  },
 		].filter(<T>(i?: T): i is T => i != null);
@@ -300,7 +301,7 @@ export class SearchGitCommand extends QuickCommand<State> {
 
 		const step = QuickCommand.createPickStep<QuickPickItemOfT<SearchOperators>>({
 			title: appendReposToTitle(context.title, state, context),
-			placeholder: 'e.g. "Updates dependencies" author:eamodio',
+			placeholder: '例如："更新依赖" author:eamodio',
 			matchOnDescription: true,
 			matchOnDetail: true,
 			additionalButtons: [matchCaseButton, matchAllButton, matchRegexButton],
@@ -343,7 +344,7 @@ export class SearchGitCommand extends QuickCommand<State> {
 				quickpick.title = appendReposToTitle(
 					operations.size === 0 || operations.size > 1
 						? context.title
-						: `Commit ${searchOperatorToTitleMap.get(operations.keys().next().value)!}`,
+						: `${context.title} · ${searchOperatorToTitleMap.get(operations.keys().next().value)!}`,
 					state,
 					context,
 				);
@@ -357,7 +358,7 @@ export class SearchGitCommand extends QuickCommand<State> {
 
 					quickpick.items = [
 						{
-							label: 'Search for',
+							label: '搜索',
 							description: quickpick.value,
 							item: quickpick.value as SearchOperators,
 						},

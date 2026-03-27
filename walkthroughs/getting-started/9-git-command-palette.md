@@ -1,9 +1,9 @@
-## Git Command Palette
+## Git 命令面板
 
 <p align="center">
   <img src="../../images/docs/git-command-palette.png" alt="Git command palette"/>
 </p>
 
-The [Git Command Palette](command:gitlens.gitCommands) provides guided, step-by-step access to many common Git commands, as well as quick access to commits (history and search), stashes, and status (current branch and working tree).
+[Git 命令面板](command:gitlens.gitCommands) 提供有引导的分步方式来访问许多常用 Git 命令，同时也能快速访问提交（历史和搜索）、储藏和状态（当前分支与工作区）。
 
-You can quickly navigate and safely execute Git commands through easy-to-use menus where each command can require an explicit confirmation step before executing.
+你可以通过易于使用的菜单快速导航并安全执行 Git 命令，其中每个命令都可以在执行前要求显式确认。

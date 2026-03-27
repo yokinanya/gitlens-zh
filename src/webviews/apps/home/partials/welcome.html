@@ -1,23 +1,18 @@
 <template id="welcome">
 	<section class="welcome">
-		<h3>Welcome to GitLens 12</h3>
-		<a class="link--preview" title="See What's New" href="command:gitlens.showWelcomePage">
-			<img class="image--preview" src="#{webroot}/media/gitlens-12-card.webp" alt="What's new" />
+		<h3>欢迎使用 GitLens 12</h3>
+		<a class="link--preview" title="查看新功能" href="command:gitlens.showWelcomePage">
+			<img class="image--preview" src="#{webroot}/media/gitlens-12-card.webp" alt="新功能" />
 		</a>
 		<p>
-			GitLens <b>supercharges</b> Git inside VS Code and unlocks the <b>untapped knowledge</b> within each
-			repository. It helps you to <b>visualize code authorship</b> at a glance via Git blame annotations and
-			CodeLens, <b>seamlessly navigate and explore</b> Git repositories, <b>gain valuable insights</b> via rich
-			visualizations and powerful comparison commands, and so much more.
+			GitLens 可在 VS Code 中显著增强 Git 体验，帮助你挖掘每个仓库中的历史信息。它能通过 Git 归属注释和
+			CodeLens 让你快速看清代码作者信息，顺畅浏览和探索 Git 仓库，并借助丰富的可视化与强大的比较命令获得更多洞察。
 		</p>
-		<vscode-button data-action="command:gitlens.showWelcomePage">Quick setup</vscode-button>
-		<vscode-button data-action="command:gitlens.getStarted">Get started walkthrough</vscode-button>
-		<p>
-			Use the quick setup experience to personalize GitLens to meet your needs, or jump over to the getting
-			started walkthrough to familiarize yourself with the rich features GitLens provides.
-		</p>
+		<vscode-button data-action="command:gitlens.showWelcomePage">快速设置</vscode-button>
+		<vscode-button data-action="command:gitlens.getStarted">入门引导</vscode-button>
+		<p>使用快速设置即可按你的需要配置 GitLens；也可以直接进入入门引导，快速熟悉 GitLens 提供的丰富功能。</p>
 		<vscode-button data-action="command:gitlens.home.toggleWelcome" appearance="secondary"
-			>Dismiss welcome</vscode-button
+			>关闭欢迎提示</vscode-button
 		>
 	</section>
 </template>

@@ -1,31 +1,31 @@
-## Current Line Blame []()
+## 当前行归属 []()
 
 <p align="center">
-  <img src="../../images/docs/current-line-blame.png" alt="Current Line Blame" />
+  <img src="../../images/docs/current-line-blame.png" alt="当前行归属" />
 </p>
 
-GitLens adds an unobtrusive Git blame annotation at the end of the current line, which shows the author, date, and message of the current line's most recent commit.
+GitLens 会在当前行末尾添加低干扰的 Git 归属注释，显示当前行最近一次提交的作者、日期和消息。
 
-💡 Use the [Toggle Line Blame](command:workbench.action.quickOpen?%22>GitLens%3A%20Toggle%20Line%20Blame%22) command from the Command Palette to turn the annotation on and off.
+💡 可使用 [GitLens: 切换行归属](command:gitlens.toggleLineBlame) 命令来开启或关闭该注解。
 
-⚙️ Use the settings editor to customize the [current line annotations](command:gitlens.showSettingsPage?%22current-line%22 'Jump to the Current Line Blame settings').
+⚙️ 可在 [当前行注解设置](command:gitlens.showSettingsPage?%22current-line%22 '跳转到当前行归属设置') 中进一步自定义。
 
-## Hovers
+## 悬停提示
 
 <p align="center">
-  <img src="../../images/docs/hovers-current-line.png" alt="Current Line Blame Hover" />
+  <img src="../../images/docs/hovers-current-line.png" alt="当前行归属悬停提示" />
 </p>
 
-Hovering over these blame annotations will reveal more details and links to explore. The **details** hover (the top section) provides many commit details and actions, including autolinks in commit messages, while the **changes** hover (the bottom section) shows a diff of the current line with its previous version and related actions.
+将鼠标悬停在这些归属注释上会显示更多详情和可探索的链接。`details` 悬停提示会提供提交详情和相关操作；`changes` 悬停提示则显示当前行与前一个版本之间的 diff 及相关操作。
 
-⚙️ Use the settings editor to customize the [hovers](command:gitlens.showSettingsPage?%22hovers%22 'Jump to the Hover settings').
+⚙️ 可在 [悬停提示设置](command:gitlens.showSettingsPage?%22hovers%22 '跳转到悬停提示设置') 中进一步自定义。
 
-## Status Bar Blame
+## 状态栏归属
 
 <p align="center">
-  <img src="../../images/docs/status-bar.png" alt="Status Bar Blame" />
+  <img src="../../images/docs/status-bar.png" alt="状态栏归属" />
 </p>
 
-GitLens also adds Git blame information about the current line to the status bar.
+GitLens 也会在状态栏中显示当前行的 Git 归属信息。
 
-⚙️ Use the settings editor to customize the [status bar](command:gitlens.showSettingsPage?%22status-bar%22 'Jump to the Status Bar settings').
+⚙️ 可在 [状态栏设置](command:gitlens.showSettingsPage?%22status-bar%22 '跳转到状态栏设置') 中进一步自定义。

@@ -1,10 +1,10 @@
 <section id="commits-view" class="section--settings section--collapsible">
 	<div class="section__header">
 		<h2>
-			Commits view
+			提交视图
 			<a
 				class="link__learn-more"
-				title="Learn more"
+				title="了解更多"
 				href="https://github.com/gitkraken/vscode-gitlens/#commits-view-"
 			>
 				<i class="icon icon__info"></i>
@@ -12,11 +12,11 @@
 		</h2>
 
 		<p class="section__header-hint">
-			Adds a
-			<a class="command command--show-view" title="Show View in Side Bar" href="command:gitlens.showCommitsView"
-				>Commits view</a
+			添加一个
+			<a class="command command--show-view" title="在侧边栏中显示视图" href="command:gitlens.showCommitsView"
+				>提交视图</a
 			>
-			to visualize, explore, and manage Git commits
+			用于可视化、浏览和管理 Git 提交
 		</p>
 	</div>
 
@@ -33,7 +33,7 @@
 								value="working"
 								data-setting
 							/>
-							<label for="views.commits.showBranchComparison">Show a comparison of the</label>
+							<label for="views.commits.showBranchComparison">显示</label>
 							<div class="select-container">
 								<select
 									id="views.commits.showBranchComparison"
@@ -41,12 +41,12 @@
 									data-setting
 									data-enablement="views.commits.showBranchComparison !false"
 								>
-									<option value="branch">current branch</option>
-									<option value="working">working tree</option>
+									<option value="branch">当前分支</option>
+									<option value="working">工作树</option>
 								</select>
 							</div>
 							<label for="views.commits.showBranchComparison"
-								>with a user-selected reference (branch, tag, etc)
+								>与用户选择的引用（分支、标签等）进行比较
 							</label>
 						</div>
 					</div>
@@ -63,11 +63,11 @@
 											data-setting
 										/>
 										<label for="views.commits.pullRequests.enabled"
-											>Show associated pull requests</label
+											>显示关联的拉取请求</label
 										>
 									</div>
 									<p class="setting__hint">
-										Requires a connection to a supported remote service (e.g. GitHub)
+										需要连接到受支持的远程服务（如 GitHub）
 									</p>
 								</div>
 
@@ -82,7 +82,7 @@
 												disabled
 											/>
 											<label for="views.commits.pullRequests.showForBranches"
-												>Show the pull request associated with the current branch</label
+												>显示与当前分支关联的拉取请求</label
 											>
 										</div>
 									</div>
@@ -97,7 +97,7 @@
 												disabled
 											/>
 											<label for="views.commits.pullRequests.showForCommits"
-												>Show the pull request that introduced each commit</label
+												>显示引入每次提交的拉取请求</label
 											>
 										</div>
 									</div>
@@ -108,17 +108,17 @@
 
 					<div class="setting">
 						<div class="setting__input">
-							<label for="views.commits.files.layout">Layout files</label>
+							<label for="views.commits.files.layout">文件布局</label>
 							<div class="select-container">
 								<select id="views.commits.files.layout" name="views.commits.files.layout" data-setting>
-									<option value="auto">automatically</option>
-									<option value="list">as a list</option>
-									<option value="tree">as a tree</option>
+									<option value="auto">自动</option>
+									<option value="list">列表</option>
+									<option value="tree">树形</option>
 								</select>
 							</div>
 						</div>
 						<p class="setting__hint" data-visibility="views.commits.files.layout =auto">
-							Chooses the best layout based on the number of files at each nesting level
+							根据每一级嵌套中的文件数量自动选择最合适的布局
 						</p>
 					</div>
 
@@ -130,9 +130,9 @@
 								type="checkbox"
 								data-setting
 							/>
-							<label for="views.commits.files.compact">Use compact file layout</label>
+							<label for="views.commits.files.compact">使用紧凑文件布局</label>
 						</div>
-						<p class="setting__hint">Compacts (flattens) unnecessary nesting when using a tree layouts</p>
+						<p class="setting__hint">使用树形布局时压平不必要的嵌套层级</p>
 					</div>
 
 					<div class="setting">
@@ -143,13 +143,13 @@
 								type="checkbox"
 								data-setting
 							/>
-							<label for="views.commits.avatars">Use author avatars</label>
+							<label for="views.commits.avatars">使用作者头像</label>
 						</div>
 					</div>
 
 					<div class="setting">
 						<div class="setting__input setting__input--format">
-							<label for="views.formats.commits.label">Commit&nbsp;label&nbsp;format</label>
+							<label for="views.formats.commits.label">提交标签格式</label>
 							<input
 								id="views.formats.commits.label"
 								name="views.formats.commits.label"
@@ -160,13 +160,13 @@
 								data-default-value="${❰ tips ❱➤  }${message}"
 								data-popup-trigger
 							/>
-							<label for="views.formats.commits.label" title="See available tokens">
+							<label for="views.formats.commits.label" title="查看可用标记">
 								<i class="icon icon__chevron-down"></i>
 							</label>
 						</div>
 						<div id="views.formats.commits.label.popup" class="popup hidden"></div>
 						<span class="setting__hint"
-							>Example:
+							>示例：
 							<span
 								data-setting-preview="views.formats.commits.label"
 								data-setting-preview-type="commit"
@@ -177,7 +177,7 @@
 
 					<div class="setting">
 						<div class="setting__input setting__input--format">
-							<label for="views.formats.commits.description">Commit&nbsp;description&nbsp;format</label>
+							<label for="views.formats.commits.description">提交说明格式</label>
 							<input
 								id="views.formats.commits.description"
 								name="views.formats.commits.description"
@@ -188,13 +188,13 @@
 								data-default-value="${author, }${agoOrDate}"
 								data-popup-trigger
 							/>
-							<label for="views.formats.commits.description" title="See available tokens">
+							<label for="views.formats.commits.description" title="查看可用标记">
 								<i class="icon icon__chevron-down"></i>
 							</label>
 						</div>
 						<div id="views.formats.commits.description.popup" class="popup hidden"></div>
 						<span class="setting__hint"
-							>Example:
+							>示例：
 							<span
 								data-setting-preview="views.formats.commits.description"
 								data-setting-preview-type="commit"
@@ -332,14 +332,14 @@
 
 		<div class="section__group">
 			<p class="section__hint">
-				<i class="icon icon__info"></i> For more options, open
+				<i class="icon icon__info"></i> 如需更多选项，打开
 				<a
 					class="command"
-					title="Open Settings"
+					title="打开设置"
 					href="command:workbench.action.openSettings?%22gitlens.views.commits%22"
-					>Settings</a
+					>设置</a
 				>
-				and search for <b><i>gitlens.views.commits</i></b> or
+				并搜索 <b><i>gitlens.views.commits</i></b> 或
 				<b><i>gitlens.views</i></b>
 			</p>
 		</div>

@@ -74,14 +74,14 @@ export class ShowQuickCommitFileCommand extends ActiveEditorCachedCommand {
 			try {
 				const blame = await this.container.git.getBlameForLine(gitUri, blameline);
 				if (blame == null) {
-					void Messages.showFileNotUnderSourceControlWarningMessage('Unable to show commit file details');
+					void Messages.showFileNotUnderSourceControlWarningMessage('无法显示提交文件详情');
 
 					return;
 				}
 
 				// Because the previous sha of an uncommitted file isn't trust worthy we just have to kick out
 				if (blame.commit.isUncommitted) {
-					void Messages.showLineUncommittedWarningMessage('Unable to show commit file details');
+					void Messages.showLineUncommittedWarningMessage('无法显示提交文件详情');
 
 					return;
 				}
@@ -91,7 +91,7 @@ export class ShowQuickCommitFileCommand extends ActiveEditorCachedCommand {
 				args.commit = blame.commit;
 			} catch (ex) {
 				Logger.error(ex, 'ShowQuickCommitFileDetailsCommand', `getBlameForLine(${blameline})`);
-				void window.showErrorMessage('Unable to show commit file details. See output channel for more details');
+				void window.showErrorMessage('无法显示提交文件详情。更多细节请查看输出频道');
 
 				return;
 			}
@@ -113,7 +113,7 @@ export class ShowQuickCommitFileCommand extends ActiveEditorCachedCommand {
 						ref: args.sha,
 					});
 					if (args.commit == null) {
-						void Messages.showCommitNotFoundWarningMessage('Unable to show commit file details');
+						void Messages.showCommitNotFoundWarningMessage('无法显示提交文件详情');
 
 						return;
 					}
@@ -121,7 +121,7 @@ export class ShowQuickCommitFileCommand extends ActiveEditorCachedCommand {
 			}
 
 			if (args.commit == null) {
-				void Messages.showCommitNotFoundWarningMessage('Unable to show commit file details');
+				void Messages.showCommitNotFoundWarningMessage('无法显示提交文件详情');
 
 				return;
 			}
@@ -189,7 +189,7 @@ export class ShowQuickCommitFileCommand extends ActiveEditorCachedCommand {
 			// return undefined;
 		} catch (ex) {
 			Logger.error(ex, 'ShowQuickCommitFileDetailsCommand');
-			void Messages.showGenericErrorMessage('Unable to show commit file details');
+			void Messages.showGenericErrorMessage('无法显示提交文件详情');
 		}
 	}
 }

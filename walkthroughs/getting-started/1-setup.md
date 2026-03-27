@@ -1,9 +1,9 @@
-## Quick Setup
+## 快速设置
 
 <p align="center">
-  <img src="../../images/docs/quick-setup.png" alt="GitLens Interactive Quick Setup" />
+  <img src="../../images/docs/quick-setup.png" alt="GitLens 交互式快速设置" />
 </p>
 
-GitLens is powerful, feature rich, and highly customizable to meet your needs. Do you find code lens intrusive or the current line blame annotation distracting — no problem, quickly turn them off or change how they behave using the Quick Setup.
+GitLens 功能丰富且高度可定制。若你觉得 CodeLens 过于显眼，或当前行归属注释会分散注意力，也没关系，可以直接通过快速设置关闭它们，或快速调整它们的行为方式。
 
-💡 Use the [GitLens: Welcome (Quick Setup)](command:gitlens.showWelcomePage?%22quick-setup%22) command from the [Command Palette](command:workbench.action.quickOpen?%22>GitLens%3A%20Welcome%22) to open it.
+💡 可通过 [GitLens: 欢迎页（快速设置）](command:gitlens.showWelcomePage?%22quick-setup%22) 命令打开快速设置。

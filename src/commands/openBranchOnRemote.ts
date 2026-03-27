@@ -48,7 +48,7 @@ export class OpenBranchOnRemoteCommand extends ActiveEditorCommand {
 			await RepositoryPicker.getBestRepositoryOrShow(
 				gitUri,
 				editor,
-				args?.clipboard ? 'Copy Remote Branch Url' : 'Open Branch On Remote',
+				args?.clipboard ? '复制远程分支 URL' : '在远程上打开分支',
 			)
 		)?.path;
 		if (!repoPath) return;
@@ -59,8 +59,8 @@ export class OpenBranchOnRemoteCommand extends ActiveEditorCommand {
 			if (args.branch == null) {
 				const pick = await ReferencePicker.show(
 					repoPath,
-					args.clipboard ? 'Copy Remote Branch Url' : 'Open Branch On Remote',
-					args.clipboard ? 'Choose a branch to copy the url from' : 'Choose a branch to open',
+					args.clipboard ? '复制远程分支 URL' : '在远程上打开分支',
+					args.clipboard ? '选择要复制 URL 的分支' : '选择要打开的分支',
 					{
 						autoPick: true,
 						// checkmarks: false,
@@ -86,7 +86,7 @@ export class OpenBranchOnRemoteCommand extends ActiveEditorCommand {
 		} catch (ex) {
 			Logger.error(ex, 'OpenBranchOnRemoteCommand');
 			void window.showErrorMessage(
-				'Unable to open branch on remote provider. See output channel for more details',
+				'无法在远程提供方中打开分支。更多细节请查看输出频道',
 			);
 		}
 	}

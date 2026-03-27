@@ -43,7 +43,7 @@ export class WorktreesNode extends ViewNode<WorktreesView | RepositoriesView> {
 			if (!access.allowed) return [];
 
 			const worktrees = await this.repo.getWorktrees();
-			if (worktrees.length === 0) return [new MessageNode(this.view, this, 'No worktrees could be found.')];
+			if (worktrees.length === 0) return [new MessageNode(this.view, this, '未找到工作树。')];
 
 			this._children = worktrees.map(c => new WorktreeNode(this.uri, this.view, this, c));
 		}
@@ -55,14 +55,14 @@ export class WorktreesNode extends ViewNode<WorktreesView | RepositoriesView> {
 		const access = await this.repo.access(PlusFeatures.Worktrees);
 
 		const item = new TreeItem(
-			'Worktrees',
+			'工作树',
 			access.allowed ? TreeItemCollapsibleState.Collapsed : TreeItemCollapsibleState.None,
 		);
 		item.id = this.id;
 		item.contextValue = ContextValues.Worktrees;
 		item.description = access.allowed
 			? undefined
-			: ` ${GlyphChars.Warning}  GitLens+ feature which requires an account`;
+			: ` ${GlyphChars.Warning}  需要登录账户才能使用 GitLens+ 功能`;
 		// TODO@eamodio `folder` icon won't work here for some reason
 		item.iconPath = new ThemeIcon('folder-opened');
 		return item;

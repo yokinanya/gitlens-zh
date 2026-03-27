@@ -34,33 +34,33 @@ export namespace DirectiveQuickPickItem {
 		if (label == null) {
 			switch (directive) {
 				case Directive.Back:
-					label = 'Back';
+					label = '返回';
 					break;
 				case Directive.Cancel:
-					label = 'Cancel';
+					label = '取消';
 					break;
 				case Directive.LoadMore:
-					label = 'Load more';
+					label = '加载更多';
 					break;
 				case Directive.Noop:
-					label = 'Try again';
+					label = '重试';
 					break;
 				case Directive.StartPreviewTrial:
-					label = 'Try GitLens+ Features Now';
-					detail = 'Try GitLens+ features now, without an account, for 3 days';
+					label = '立即试用 GitLens+ 功能';
+					detail = '无需账号即可立即试用 GitLens+ 功能 3 天';
 					break;
 				case Directive.RequiresVerification:
-					label = 'Resend Verification Email';
-					detail = 'You must verify your account email address before you can continue';
+					label = '重新发送验证邮件';
+					detail = '继续前必须先验证你的账户邮箱地址';
 					break;
 				case Directive.RequiresFreeSubscription:
-					label = 'Sign in to GitLens+';
+					label = '登录 GitLens+';
 					detail =
-						'To use GitLens+ features on public repos and get a free 7-day trial for both public and private repos';
+						'登录后可在公共仓库中使用 GitLens+ 功能，并获得适用于公共和私有仓库的 7 天免费试用';
 					break;
 				case Directive.RequiresPaidSubscription:
-					label = 'Upgrade your account';
-					detail = 'To use GitLens+ features on both public and private repos';
+					label = '升级账户';
+					detail = '升级后可在公共和私有仓库中使用 GitLens+ 功能';
 					break;
 			}
 		}

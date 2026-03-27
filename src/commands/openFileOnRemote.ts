@@ -148,9 +148,9 @@ export class OpenFileOnRemoteCommand extends ActiveEditorCommand {
 					const pick = await ReferencePicker.show(
 						gitUri.repoPath,
 						args.clipboard
-							? `Copy Remote File Url From${pad(GlyphChars.Dot, 2, 2)}${gitUri.relativePath}`
-							: `Open File on Remote From${pad(GlyphChars.Dot, 2, 2)}${gitUri.relativePath}`,
-						`Choose a branch or tag to ${args.clipboard ? 'copy' : 'open'} the file revision from`,
+							? `复制远程文件 URL 来源${pad(GlyphChars.Dot, 2, 2)}${gitUri.relativePath}`
+							: `在远程上打开文件来源${pad(GlyphChars.Dot, 2, 2)}${gitUri.relativePath}`,
+						`选择要${args.clipboard ? '复制' : '打开'}文件修订版本的分支或标签`,
 						{
 							allowEnteringRefs: true,
 							autoPick: true,
@@ -204,7 +204,7 @@ export class OpenFileOnRemoteCommand extends ActiveEditorCommand {
 			}));
 		} catch (ex) {
 			Logger.error(ex, 'OpenFileOnRemoteCommand');
-			void window.showErrorMessage('Unable to open file on remote provider. See output channel for more details');
+			void window.showErrorMessage('无法在远程提供方中打开文件。更多细节请查看输出频道');
 		}
 	}
 }

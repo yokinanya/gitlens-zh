@@ -303,9 +303,7 @@ class RebaseEditor extends App<State> {
 		$subhead.appendChild($el);
 
 		$el = document.createTextNode(
-			`Rebasing ${state.entries.length} commit${state.entries.length !== 1 ? 's' : ''}${
-				state.onto ? ' onto' : ''
-			}`,
+			`正在变基 ${state.entries.length} 个提交${state.onto ? ' 到' : ''}`,
 		);
 		$subhead.appendChild($el);
 
@@ -330,7 +328,7 @@ class RebaseEditor extends App<State> {
 			const $entry = document.createElement('li');
 
 			const $el = document.createElement('h3');
-			$el.textContent = 'No commits to rebase';
+			$el.textContent = '没有可变基的提交';
 
 			$entry.appendChild($el);
 			$container.appendChild($entry);

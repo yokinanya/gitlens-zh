@@ -8,7 +8,6 @@ import { ReferencePicker } from '../../quickpicks/referencePicker';
 import { BranchComparison, BranchComparisons, WorkspaceStorageKeys } from '../../storage';
 import { gate } from '../../system/decorators/gate';
 import { debug, log } from '../../system/decorators/log';
-import { pluralize } from '../../system/string';
 import { BranchesView } from '../branchesView';
 import { CommitsView } from '../commitsView';
 import { RepositoriesView } from '../repositoriesView';
@@ -96,7 +95,7 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 					},
 					{
 						id: 'behind',
-						description: pluralize('commit', aheadBehindCounts?.behind ?? 0),
+						description: `${aheadBehindCounts?.behind ?? 0} 个提交`,
 						expand: false,
 					},
 				),
@@ -104,7 +103,7 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 					this.view,
 					this,
 					this.uri.repoPath!,
-					'Ahead',
+					'领先',
 					{
 						query: this.getCommitsQuery(
 							GitRevision.createRange(ahead.ref1, this.compareWithWorkingTree ? '' : ahead.ref2, '..'),
@@ -119,7 +118,7 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 					},
 					{
 						id: 'ahead',
-						description: pluralize('commit', aheadBehindCounts?.ahead ?? 0),
+						description: `${aheadBehindCounts?.ahead ?? 0} 个提交`,
 						expand: false,
 					},
 				),
@@ -144,20 +143,14 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 		let state: TreeItemCollapsibleState;
 		let label;
 		let tooltip;
+		const sourceLabel = this.compareWithWorkingTree ? '工作树' : this.branch.name;
 		if (this._compareWith == null) {
-			label = `Compare ${
-				this.compareWithWorkingTree ? 'Working Tree' : this.branch.name
-			} with <branch, tag, or ref>`;
+			label = `比较 ${sourceLabel} 与 <分支、标签或引用>`;
 			state = TreeItemCollapsibleState.None;
-			tooltip = `Click to compare ${
-				this.compareWithWorkingTree ? 'Working Tree' : this.branch.name
-			} with a branch, tag, or ref`;
+			tooltip = `点击以将 ${sourceLabel} 与分支、标签或引用比较`;
 		} else {
-			label = `Compare ${
-				this.compareWithWorkingTree ? 'Working Tree' : this.branch.name
-			} with ${GitRevision.shorten(this._compareWith.ref, {
-				strings: { working: 'Working Tree' },
-			})}`;
+			const compareWithLabel = GitRevision.shorten(this._compareWith.ref, { strings: { working: '工作树' } });
+			label = `比较 ${sourceLabel} 与 ${compareWithLabel}`;
 			state = TreeItemCollapsibleState.Collapsed;
 		}
 
@@ -169,7 +162,7 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 
 		if (this._compareWith == null) {
 			item.command = {
-				title: `Compare ${this.branch.name}${this.compareWithWorkingTree ? ' (working)' : ''} with${
+				title: `比较 ${this.branch.name}${this.compareWithWorkingTree ? '（工作树）' : ''} 与${
 					GlyphChars.Ellipsis
 				}`,
 				command: 'gitlens.views.editNode',
@@ -227,8 +220,8 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 	private async compareWith() {
 		const pick = await ReferencePicker.show(
 			this.branch.repoPath,
-			`Compare ${this.branch.name}${this.compareWithWorkingTree ? ' (working)' : ''} with`,
-			'Choose a reference to compare with',
+			`比较 ${this.branch.name}${this.compareWithWorkingTree ? '（工作树）' : ''} 与`,
+			'选择要比较的引用',
 			{
 				allowEnteringRefs: true,
 				picked: this.branch.ref,
@@ -273,7 +266,7 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 		}
 
 		return {
-			label: `${pluralize('file', files?.length ?? 0, { zero: 'No' })} changed`,
+			label: `${files?.length ?? 0} 个文件已更改`,
 			files: files,
 		};
 	}
@@ -285,7 +278,7 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 		);
 
 		return {
-			label: `${pluralize('file', files?.length ?? 0, { zero: 'No' })} changed`,
+			label: `${files?.length ?? 0} 个文件已更改`,
 			files: files,
 		};
 	}
@@ -326,7 +319,7 @@ export class CompareBranchNode extends ViewNode<BranchesView | CommitsView | Rep
 		const files = await this.view.container.git.getDiffStatus(this.uri.repoPath!, comparison);
 
 		return {
-			label: `${pluralize('file', files?.length ?? 0, { zero: 'No' })} changed`,
+			label: `${files?.length ?? 0} 个文件已更改`,
 			files: files,
 		};
 	}

@@ -86,7 +86,7 @@ export class OpenFileAtRevisionCommand extends ActiveEditorCommand {
 			}
 
 			if (args.revisionUri == null) {
-				void Messages.showGenericErrorMessage('Unable to open blame');
+				void Messages.showGenericErrorMessage('无法打开归属信息');
 				return undefined;
 			}
 		}
@@ -117,18 +117,16 @@ export class OpenFileAtRevisionCommand extends ActiveEditorCommand {
 							: undefined),
 				);
 
-				const title = `Open ${
-					args.annotationType === FileAnnotationType.Blame ? 'Blame' : 'File'
-				} at Revision${pad(GlyphChars.Dot, 2, 2)}`;
+				const title = `打开${
+					args.annotationType === FileAnnotationType.Blame ? '归属信息' : '文件'
+				}修订版本${pad(GlyphChars.Dot, 2, 2)}`;
 				const pick = await CommitPicker.show(
 					log,
 					`${title}${gitUri.getFormattedFileName({
 						suffix: gitUri.sha ? `:${GitRevision.shorten(gitUri.sha)}` : undefined,
 						truncateTo: quickPickTitleMaxChars - title.length,
 					})}`,
-					`Choose a commit to ${
-						args.annotationType === FileAnnotationType.Blame ? 'blame' : 'open'
-					} the file revision from`,
+					`选择要${args.annotationType === FileAnnotationType.Blame ? '查看归属信息' : '打开'}的文件修订版本提交`,
 					{
 						picked: gitUri.sha,
 						keys: ['right', 'alt+right', 'ctrl+right'],
@@ -142,11 +140,11 @@ export class OpenFileAtRevisionCommand extends ActiveEditorCommand {
 						},
 						showOtherReferences: [
 							CommandQuickPickItem.fromCommand(
-								'Choose a Branch or Tag...',
+								'选择分支或标签...',
 								Commands.OpenFileAtRevisionFrom,
 							),
 							CommandQuickPickItem.fromCommand<OpenFileAtRevisionFromCommandArgs>(
-								'Choose a Stash...',
+								'选择储藏...',
 								Commands.OpenFileAtRevisionFrom,
 								{ stash: true },
 							),
@@ -171,7 +169,7 @@ export class OpenFileAtRevisionCommand extends ActiveEditorCommand {
 			}));
 		} catch (ex) {
 			Logger.error(ex, 'OpenFileAtRevisionCommand');
-			void Messages.showGenericErrorMessage('Unable to open file at revision');
+			void Messages.showGenericErrorMessage('无法打开该修订版本的文件');
 		}
 	}
 }

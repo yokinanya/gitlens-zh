@@ -326,7 +326,7 @@ export namespace QuickCommand {
 		options: Partial<QuickPickStep<T>> = {},
 	): QuickPickStep<T> {
 		return createPickStep<T>({
-			placeholder: `Confirm ${context.title}`,
+			placeholder: `确认${context.title}`,
 			title: title,
 			ignoreFocusOut: true,
 			items: [...confirmations, cancel ?? DirectiveQuickPickItem.create(Directive.Cancel)],

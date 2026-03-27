@@ -7,7 +7,7 @@ import { findExecutable, run } from './shell';
 
 export class UnableToFindGitError extends Error {
 	constructor(public readonly original?: Error) {
-		super('Unable to find git');
+		super('无法找到 Git');
 
 		Error.captureStackTrace?.(this, UnableToFindGitError);
 	}
@@ -15,7 +15,7 @@ export class UnableToFindGitError extends Error {
 
 export class InvalidGitConfigError extends Error {
 	constructor(public readonly original: Error) {
-		super('Invalid Git configuration');
+		super('Git 配置无效');
 
 		Error.captureStackTrace?.(this, InvalidGitConfigError);
 	}
@@ -37,7 +37,7 @@ async function findSpecificGit(path: string): Promise<GitLocation> {
 	try {
 		version = await run<string>(path, ['--version'], 'utf8');
 	} catch (ex) {
-		sw.stop({ message: ` ${GlyphChars.Dot} Unable to find git` });
+		sw.stop({ message: ` ${GlyphChars.Dot} 无法找到 Git` });
 
 		if (/bad config/i.test(ex.message)) throw new InvalidGitConfigError(ex);
 		throw ex;
@@ -51,7 +51,7 @@ async function findSpecificGit(path: string): Promise<GitLocation> {
 		try {
 			version = await run<string>(foundPath, ['--version'], 'utf8');
 		} catch (ex) {
-			sw.stop({ message: ` ${GlyphChars.Dot} Unable to find git` });
+			sw.stop({ message: ` ${GlyphChars.Dot} 无法找到 Git` });
 
 			if (/bad config/i.test(ex.message)) throw new InvalidGitConfigError(ex);
 			throw ex;

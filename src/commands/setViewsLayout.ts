@@ -26,20 +26,20 @@ export class SetViewsLayoutCommand extends Command {
 			const pick = await window.showQuickPick(
 				[
 					{
-						label: 'Source Control Layout',
-						description: '(default)',
-						detail: 'Shows all the views together on the Source Control side bar',
+						label: '源代码管理布局',
+						description: '（默认）',
+						detail: '在“源代码管理”侧边栏中集中显示所有视图',
 						layout: ViewsLayout.SourceControl,
 					},
 					{
-						label: 'GitLens Layout',
+						label: 'GitLens 布局',
 						description: '',
-						detail: 'Shows all the views together on the GitLens side bar',
+						detail: '在 GitLens 侧边栏中集中显示所有视图',
 						layout: ViewsLayout.GitLens,
 					},
 				],
 				{
-					placeHolder: 'Choose a GitLens views layout',
+					placeHolder: '选择 GitLens 视图布局',
 				},
 			);
 			if (pick == null) return;

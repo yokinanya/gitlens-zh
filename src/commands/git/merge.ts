@@ -2,7 +2,6 @@ import { Container } from '../../container';
 import { GitBranch, GitLog, GitReference, GitRevision, Repository } from '../../git/models';
 import { Directive, DirectiveQuickPickItem } from '../../quickpicks/items/directive';
 import { FlagsQuickPickItem } from '../../quickpicks/items/flags';
-import { pluralize } from '../../system/string';
 import { ViewsWithRepositoryFolders } from '../../views/viewBase';
 import {
 	appendReposToTitle,
@@ -49,8 +48,8 @@ type MergeStepState<T extends State = State> = ExcludeSome<StepState<T>, 'repo',
 
 export class MergeGitCommand extends QuickCommand<State> {
 	constructor(container: Container, args?: MergeGitCommandArgs) {
-		super(container, 'merge', 'merge', 'Merge', {
-			description: 'integrates changes from a specified branch into the current branch',
+		super(container, 'merge', 'merge', '合并', {
+			description: '将指定分支中的更改合并到当前分支',
 		});
 
 		let counter = 0;
@@ -124,7 +123,7 @@ export class MergeGitCommand extends QuickCommand<State> {
 				context.destination = branch;
 			}
 
-			context.title = `${this.title} into ${GitReference.toString(context.destination, { icon: false })}`;
+			context.title = `${this.title}到 ${GitReference.toString(context.destination, { icon: false })}`;
 			context.pickCommitForItem = false;
 
 			if (state.counter < 2 || state.reference == null) {
@@ -134,7 +133,7 @@ export class MergeGitCommand extends QuickCommand<State> {
 				});
 
 				const result: StepResult<GitReference> = yield* pickBranchOrTagStep(state as MergeStepState, context, {
-					placeholder: context => `Choose a branch${context.showTags ? ' or tag' : ''} to merge`,
+					placeholder: context => `选择要合并的分支${context.showTags ? '或标签' : ''}`,
 					picked: context.selectedBranchOrTag?.ref,
 					value: context.selectedBranchOrTag == null ? state.reference?.ref : undefined,
 					additionalButtons: [pickCommitToggle],
@@ -175,12 +174,12 @@ export class MergeGitCommand extends QuickCommand<State> {
 					onDidLoadMore: log => context.cache.set(ref, Promise.resolve(log)),
 					placeholder: (context, log) =>
 						log == null
-							? `No commits found on ${GitReference.toString(context.selectedBranchOrTag, {
+							? `未在 ${GitReference.toString(context.selectedBranchOrTag, {
 									icon: false,
-							  })}`
-							: `Choose a commit to merge into ${GitReference.toString(context.destination, {
+							  })} 上找到提交`
+							: `选择要合并到 ${GitReference.toString(context.destination, {
 									icon: false,
-							  })}`,
+							  })} 的提交`,
 					picked: state.reference?.ref,
 				});
 				if (result === StepResult.Break) continue;
@@ -207,13 +206,13 @@ export class MergeGitCommand extends QuickCommand<State> {
 		const count = aheadBehind != null ? aheadBehind.ahead + aheadBehind.behind : 0;
 		if (count === 0) {
 			const step: QuickPickStep<DirectiveQuickPickItem> = this.createConfirmStep(
-				appendReposToTitle(`Confirm ${context.title}`, state, context),
+				appendReposToTitle(`确认${context.title}`, state, context),
 				[],
 				DirectiveQuickPickItem.create(Directive.Cancel, true, {
-					label: `Cancel ${this.title}`,
+					label: `取消${this.title}`,
 					detail: `${GitReference.toString(context.destination, {
 						capitalize: true,
-					})} is up to date with ${GitReference.toString(state.reference)}`,
+					})} 与 ${GitReference.toString(state.reference)} 保持同步`,
 				}),
 			);
 			const selection: StepSelection<typeof step> = yield step;
@@ -222,44 +221,31 @@ export class MergeGitCommand extends QuickCommand<State> {
 		}
 
 		const step: QuickPickStep<FlagsQuickPickItem<Flags>> = this.createConfirmStep(
-			appendReposToTitle(`Confirm ${context.title}`, state, context),
+			appendReposToTitle(`确认${context.title}`, state, context),
 			[
 				FlagsQuickPickItem.create<Flags>(state.flags, [], {
 					label: this.title,
-					detail: `Will merge ${pluralize('commit', count)} from ${GitReference.toString(
-						state.reference,
-					)} into ${GitReference.toString(context.destination)}`,
+					detail: `将把 ${count} 次提交从 ${GitReference.toString(state.reference)} 合并到 ${GitReference.toString(context.destination)}`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--ff-only'], {
-					label: `Fast-forward ${this.title}`,
+					label: `快进${this.title}`,
 					description: '--ff-only',
-					detail: `Will fast-forward merge ${pluralize('commit', count)} from ${GitReference.toString(
-						state.reference,
-					)} into ${GitReference.toString(context.destination)}`,
+					detail: `将以快进方式把 ${count} 次提交从 ${GitReference.toString(state.reference)} 合并到 ${GitReference.toString(context.destination)}`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--squash'], {
-					label: `Squash ${this.title}`,
+					label: `压缩${this.title}`,
 					description: '--squash',
-					detail: `Will squash ${pluralize('commit', count)} from ${GitReference.toString(
-						state.reference,
-					)} into one when merging into ${GitReference.toString(context.destination)}`,
+					detail: `将把来自 ${GitReference.toString(state.reference)} 的 ${count} 次提交压缩为一次提交，再合并到 ${GitReference.toString(context.destination)}`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--no-ff'], {
-					label: `${this.title} without Fast-Forwarding`,
+					label: `非快进${this.title}`,
 					description: '--no-ff',
-					detail: `Will create a merge commit when merging ${pluralize(
-						'commit',
-						count,
-					)} from ${GitReference.toString(state.reference)} into ${GitReference.toString(
-						context.destination,
-					)}`,
+					detail: `将创建合并提交，把 ${count} 次提交从 ${GitReference.toString(state.reference)} 合并到 ${GitReference.toString(context.destination)}`,
 				}),
 				FlagsQuickPickItem.create<Flags>(state.flags, ['--no-ff', '--no-commit'], {
-					label: `${this.title} without Fast-Forwarding or Committing`,
+					label: `非快进且不提交的${this.title}`,
 					description: '--no-ff --no-commit',
-					detail: `Will merge ${pluralize('commit', count)} from ${GitReference.toString(
-						state.reference,
-					)} into ${GitReference.toString(context.destination)} without Committing`,
+					detail: `将把 ${count} 次提交从 ${GitReference.toString(state.reference)} 合并到 ${GitReference.toString(context.destination)}，但不提交`,
 				}),
 			],
 		);

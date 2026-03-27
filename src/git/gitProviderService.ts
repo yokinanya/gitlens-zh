@@ -1009,7 +1009,7 @@ export class GitProviderService implements Disposable {
 		await window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Fetching ${repositories.length} repositories`,
+				title: `正在抓取 ${repositories.length} 个仓库`,
 			},
 			() => Promise.all(repositories!.map(r => r.fetch({ progress: false, ...options }))),
 		);
@@ -1034,7 +1034,7 @@ export class GitProviderService implements Disposable {
 		await window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Pulling ${repositories.length} repositories`,
+				title: `正在拉取 ${repositories.length} 个仓库`,
 			},
 			() => Promise.all(repositories!.map(r => r.pull({ progress: false, ...options }))),
 		);
@@ -1066,7 +1066,7 @@ export class GitProviderService implements Disposable {
 		await window.withProgress(
 			{
 				location: ProgressLocation.Notification,
-				title: `Pushing ${repositories.length} repositories`,
+				title: `正在推送 ${repositories.length} 个仓库`,
 			},
 			() => Promise.all(repositories!.map(r => r.push({ progress: false, ...options }))),
 		);

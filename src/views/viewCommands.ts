@@ -811,7 +811,7 @@ export class ViewCommands {
 
 		return this.container.searchAndCompareView.compare(
 			node.repoPath,
-			{ ref: commonAncestor, label: `ancestry with ${node.ref.ref} (${GitRevision.shorten(commonAncestor)})` },
+			{ ref: commonAncestor, label: `与 ${node.ref.ref} 的共同祖先 (${GitRevision.shorten(commonAncestor)})` },
 			'',
 		);
 	}

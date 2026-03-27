@@ -3,7 +3,6 @@ import { Container } from '../../container';
 import { GitReference, GitTagReference, Repository } from '../../git/models';
 import { QuickPickItemOfT } from '../../quickpicks/items/common';
 import { FlagsQuickPickItem } from '../../quickpicks/items/flags';
-import { pluralize } from '../../system/string';
 import { ViewsWithRepositoryFolders } from '../../views/viewBase';
 import {
 	appendReposToTitle,
@@ -52,8 +51,8 @@ type CreateStepState<T extends CreateState = CreateState> = TagStepState<Exclude
 type DeleteStepState<T extends DeleteState = DeleteState> = TagStepState<ExcludeSome<T, 'repo', string>>;
 
 const subcommandToTitleMap = new Map<State['subcommand'], string>([
-	['create', 'Create'],
-	['delete', 'Delete'],
+	['create', '创建'],
+	['delete', '删除'],
 ]);
 function getTitle(title: string, subcommand: State['subcommand'] | undefined) {
 	return subcommand == null ? title : `${subcommandToTitleMap.get(subcommand)} ${title}`;
@@ -69,8 +68,8 @@ export class TagGitCommand extends QuickCommand<State> {
 	private subcommand: State['subcommand'] | undefined;
 
 	constructor(container: Container, args?: TagGitCommandArgs) {
-		super(container, 'tag', 'tag', 'Tag', {
-			description: 'create, or delete tags',
+		super(container, 'tag', 'tag', '标签', {
+			description: '创建或删除标签',
 		});
 
 		let counter = 0;
@@ -167,7 +166,7 @@ export class TagGitCommand extends QuickCommand<State> {
 				}
 			}
 
-			context.title = getTitle(state.subcommand === 'delete' ? 'Tags' : this.title, state.subcommand);
+			context.title = getTitle(state.subcommand === 'delete' ? '标签' : this.title, state.subcommand);
 
 			switch (state.subcommand) {
 				case 'create': {
@@ -196,17 +195,17 @@ export class TagGitCommand extends QuickCommand<State> {
 	private *pickSubcommandStep(state: PartialStepState<State>): StepResultGenerator<State['subcommand']> {
 		const step = QuickCommand.createPickStep<QuickPickItemOfT<State['subcommand']>>({
 			title: this.title,
-			placeholder: `Choose a ${this.label} command`,
+			placeholder: `选择${this.label}命令`,
 			items: [
 				{
-					label: 'create',
-					description: 'creates a new tag',
+					label: '创建',
+					description: '创建新标签',
 					picked: state.subcommand === 'create',
 					item: 'create',
 				},
 				{
-					label: 'delete',
-					description: 'deletes the specified tags',
+					label: '删除',
+					description: '删除指定标签',
 					picked: state.subcommand === 'delete',
 					item: 'delete',
 				},
@@ -225,10 +224,9 @@ export class TagGitCommand extends QuickCommand<State> {
 		while (this.canStepsContinue(state)) {
 			if (state.counter < 3 || state.reference == null) {
 				const result = yield* pickBranchOrTagStep(state, context, {
-					placeholder: context =>
-						`Choose a branch${context.showTags ? ' or tag' : ''} to create the new tag from`,
+					placeholder: context => `选择分支${context.showTags ? '或标签' : ''}以从中创建新标签`,
 					picked: state.reference?.ref ?? (await state.repo.getBranch())?.ref,
-					titleContext: ' from',
+					titleContext: '，来源为',
 					value: GitReference.isRevision(state.reference) ? state.reference.ref : undefined,
 				});
 				// Always break on the first step (so we will go back)
@@ -239,8 +237,8 @@ export class TagGitCommand extends QuickCommand<State> {
 
 			if (state.counter < 4 || state.name == null) {
 				const result = yield* inputTagNameStep(state, context, {
-					placeholder: 'Please provide a name for the new tag',
-					titleContext: ` at ${GitReference.toString(state.reference, { capitalize: true, icon: false })}`,
+					placeholder: '请输入新标签名称',
+					titleContext: `，位置为 ${GitReference.toString(state.reference, { capitalize: true, icon: false })}`,
 					value: state.name ?? GitReference.getNameWithoutRemote(state.reference),
 				});
 				if (result === StepResult.Break) continue;
@@ -282,13 +280,13 @@ export class TagGitCommand extends QuickCommand<State> {
 	): AsyncStepResultGenerator<string> {
 		const step = QuickCommand.createInputStep({
 			title: appendReposToTitle(
-				`${context.title} at ${GitReference.toString(state.reference, { capitalize: true, icon: false })}`,
+				`${context.title}，位置为 ${GitReference.toString(state.reference, { capitalize: true, icon: false })}`,
 				state,
 				context,
 			),
-			placeholder: 'Please provide an optional message to annotate the tag',
+			placeholder: '请输入可选的注释消息',
 			value: state.message,
-			prompt: 'Enter optional message',
+			prompt: '输入可选消息',
 		});
 
 		const value: StepSelection<typeof step> = yield step;
@@ -308,22 +306,20 @@ export class TagGitCommand extends QuickCommand<State> {
 		context: Context,
 	): StepResultGenerator<CreateFlags[]> {
 		const step: QuickPickStep<FlagsQuickPickItem<CreateFlags>> = QuickCommand.createConfirmStep(
-			appendReposToTitle(`Confirm ${context.title}`, state, context),
+			appendReposToTitle(`确认${context.title}`, state, context),
 			[
 				FlagsQuickPickItem.create<CreateFlags>(state.flags, state.message.length !== 0 ? ['-m'] : [], {
 					label: context.title,
 					description: state.message.length !== 0 ? '-m' : '',
-					detail: `Will create a new tag named ${state.name} at ${GitReference.toString(state.reference)}`,
+					detail: `将在 ${GitReference.toString(state.reference)} 创建名为 ${state.name} 的新标签`,
 				}),
 				FlagsQuickPickItem.create<CreateFlags>(
 					state.flags,
 					state.message.length !== 0 ? ['--force', '-m'] : ['--force'],
 					{
-						label: `Force ${context.title}`,
+						label: `强制${context.title}`,
 						description: `--force${state.message.length !== 0 ? ' -m' : ''}`,
-						detail: `Will forcibly create a new tag named ${state.name} at ${GitReference.toString(
-							state.reference,
-						)}`,
+						detail: `将强制在 ${GitReference.toString(state.reference)} 创建名为 ${state.name} 的新标签`,
 					},
 				),
 			],
@@ -340,11 +336,11 @@ export class TagGitCommand extends QuickCommand<State> {
 			}
 
 			if (state.counter < 3 || state.references == null || state.references.length === 0) {
-				context.title = getTitle('Tags', state.subcommand);
+				context.title = getTitle('标签', state.subcommand);
 
 				const result = yield* pickTagsStep(state, context, {
 					picked: state.references?.map(r => r.ref),
-					placeholder: 'Choose tags to delete',
+					placeholder: '选择要删除的标签',
 				});
 				// Always break on the first step (so we will go back)
 				if (result === StepResult.Break) break;
@@ -352,7 +348,10 @@ export class TagGitCommand extends QuickCommand<State> {
 				state.references = result;
 			}
 
-			context.title = getTitle(pluralize('Tag', state.references.length, { only: true }), state.subcommand);
+			context.title = getTitle(
+				state.references.length === 1 ? '标签' : `${state.references.length} 个标签`,
+				state.subcommand,
+			);
 
 			const result = yield* this.deleteCommandConfirmStep(state, context);
 			if (result === StepResult.Break) continue;
@@ -367,11 +366,11 @@ export class TagGitCommand extends QuickCommand<State> {
 		context: Context,
 	): StepResultGenerator<void> {
 		const step: QuickPickStep<QuickPickItem> = QuickCommand.createConfirmStep(
-			appendReposToTitle(`Confirm ${context.title}`, state, context),
+			appendReposToTitle(`确认${context.title}`, state, context),
 			[
 				{
 					label: context.title,
-					detail: `Will delete ${GitReference.toString(state.references)}`,
+					detail: `将删除 ${GitReference.toString(state.references)}`,
 				},
 			],
 			context,

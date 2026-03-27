@@ -35,8 +35,8 @@ type StatusStepState<T extends State = State> = ExcludeSome<StepState<T>, 'repo'
 
 export class StatusGitCommand extends QuickCommand<State> {
 	constructor(container: Container, args?: StatusGitCommandArgs) {
-		super(container, 'status', 'status', 'Status', {
-			description: 'shows status information about a repository',
+		super(container, 'status', 'status', '状态', {
+			description: '显示仓库的状态信息',
 		});
 
 		let counter = 0;

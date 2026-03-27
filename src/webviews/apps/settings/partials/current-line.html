@@ -8,26 +8,26 @@
 				data-setting
 				data-add-settings-off="hovers.currentLine.over=line"
 			/>
-			<label for="currentLine.enabled">Current Line Blame</label>
+			<label for="currentLine.enabled">当前行归属</label>
 			<a
 				class="link__learn-more"
-				title="Learn more"
+				title="了解更多"
 				href="https://github.com/gitkraken/vscode-gitlens/#current-line-blame-"
 			>
 				<i class="icon icon__info"></i>
 			</a>
 		</div>
 
-		<p class="section__header-hint">Adds an unobtrusive blame annotation at the end of the current line</p>
+		<p class="section__header-hint">在当前行末尾添加低干扰的归属注释</p>
 		<div class="section__header-info">
 			<i class="icon icon--md icon__bulb"></i>
 			<div>
 				<p>
-					Use the
-					<a class="command" title="Run command" href="command:gitlens.toggleLineBlame"
-						>GitLens: Toggle Line Blame Annotations</a
+					使用
+					<a class="command" title="运行命令" href="command:gitlens.toggleLineBlame"
+						>GitLens: 切换行归属注释</a
 					>
-					command to override this setting for the current window
+					命令可在当前窗口中临时覆盖此设置
 				</p>
 			</div>
 		</div>
@@ -47,19 +47,18 @@
 								disabled
 							/>
 							<label for="currentLine.pullRequests.enabled"
-								>Show the Pull Request (if any) that introduced the commit</label
+								>显示引入该提交的拉取请求（如果有）</label
 							>
 						</div>
 
 						<p class="setting__hint hidden" data-visibility="currentLine.pullRequests.enabled">
-							<i class="icon icon__info"></i>Requires a connection to a supported remote service (e.g.
-							GitHub)
+							<i class="icon icon__info"></i>需要连接到受支持的远程服务（例如 GitHub）
 						</p>
 					</div>
 
 					<div class="setting" data-enablement="currentLine.enabled">
 						<div class="setting__input setting__input--format">
-							<label for="currentLine.format">Annotation&nbsp;format</label>
+							<label for="currentLine.format">注解格式</label>
 							<input
 								id="currentLine.format"
 								name="currentLine.format"
@@ -71,13 +70,13 @@
 								data-popup-trigger
 								disabled
 							/>
-							<label for="currentLine.format" title="See available tokens">
+							<label for="currentLine.format" title="查看可用标记">
 								<i class="icon icon__chevron-down"></i>
 							</label>
 						</div>
 						<div id="currentLine.format.popup" class="popup hidden"></div>
 						<span class="setting__hint"
-							>Example:
+							>示例：
 							<span
 								data-setting-preview="currentLine.format"
 								data-setting-preview-type="commit"
@@ -96,20 +95,20 @@
 								disabled
 							/>
 							<label for="currentLine.scrollable">
-								Include the annotation when scrolling the editor horizontally
+								在编辑器水平滚动时保留注解
 							</label>
 						</div>
 						<p class="setting__hint">
-							When enabled the annotation can be scrolled into view when it is outside the viewport.
+							启用后，当注解位于视口之外时，可通过滚动将其带入视图。
 						</p>
 						<p class="setting__hint">
 							<i class="icon icon__info"></i>
-							Setting this to <code>false</code> will inhibit the hovers from showing over the annotation;
-							Set
-							<a title="Jump to Hovers settings" data-action="jump" href="#hovers.currentLine.over"
+							将此项设为 <code>false</code> 会阻止悬停提示在注解上显示；
+							可将
+							<a title="跳转到 悬停提示设置" data-action="jump" href="#hovers.currentLine.over"
 								><code>gitlens.hovers.currentLine.over</code></a
 							>
-							to <code>line</code> to enable the hovers to show anywhere over the line.
+							将其设为 <code>line</code> 后，可在整行范围内显示悬停提示。
 						</p>
 					</div>
 				</div>
@@ -140,14 +139,14 @@
 
 		<div class="section__group">
 			<p class="section__hint">
-				<i class="icon icon__info"></i> For more options, open
+				<i class="icon icon__info"></i> 如需更多选项，打开
 				<a
 					class="command"
-					title="Open Settings"
+					title="打开设置"
 					href="command:workbench.action.openSettings?%22gitlens.currentLine%22"
-					>Settings</a
+					>设置</a
 				>
-				and search for <b><i>gitlens.currentLine</i></b>
+				并搜索 <b><i>gitlens.currentLine</i></b>
 			</p>
 		</div>
 	</div>

@@ -118,7 +118,7 @@ export class MergeConflictFileNode extends ViewNode<ViewsWithCommits> implements
 
 	override getCommand(): Command | undefined {
 		return {
-			title: 'Open File',
+			title: '打开文件',
 			command: CoreCommands.Open,
 			arguments: [
 				this.view.container.git.getAbsoluteUri(this.file.path, this.repoPath),

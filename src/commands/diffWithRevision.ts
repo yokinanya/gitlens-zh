@@ -46,14 +46,14 @@ export class DiffWithRevisionCommand extends ActiveEditorCommand {
 							: undefined),
 				);
 
-			const title = `Open Changes with Revision${pad(GlyphChars.Dot, 2, 2)}`;
+			const title = `打开与修订版本的对比${pad(GlyphChars.Dot, 2, 2)}`;
 			const pick = await CommitPicker.show(
 				log,
 				`${title}${gitUri.getFormattedFileName({
 					suffix: gitUri.sha ? `:${GitRevision.shorten(gitUri.sha)}` : undefined,
 					truncateTo: quickPickTitleMaxChars - title.length,
 				})}`,
-				'Choose a commit to compare with',
+				'选择要比较的提交',
 				{
 					picked: gitUri.sha,
 					keys: ['right', 'alt+right', 'ctrl+right'],
@@ -73,9 +73,9 @@ export class DiffWithRevisionCommand extends ActiveEditorCommand {
 						}));
 					},
 					showOtherReferences: [
-						CommandQuickPickItem.fromCommand('Choose a Branch or Tag...', Commands.DiffWithRevisionFrom),
+						CommandQuickPickItem.fromCommand('选择分支或标签...', Commands.DiffWithRevisionFrom),
 						CommandQuickPickItem.fromCommand<DiffWithRevisionFromCommandArgs>(
-							'Choose a Stash...',
+							'选择储藏...',
 							Commands.DiffWithRevisionFrom,
 							{ stash: true },
 						),
@@ -99,7 +99,7 @@ export class DiffWithRevisionCommand extends ActiveEditorCommand {
 			}));
 		} catch (ex) {
 			Logger.error(ex, 'DiffWithRevisionCommand');
-			void Messages.showGenericErrorMessage('Unable to open compare');
+			void Messages.showGenericErrorMessage('无法打开比较');
 		}
 	}
 }

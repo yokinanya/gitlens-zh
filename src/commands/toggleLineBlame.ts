@@ -17,7 +17,7 @@ export class ToggleLineBlameCommand extends ActiveEditorCommand {
 		} catch (ex) {
 			Logger.error(ex, 'ToggleLineBlameCommand');
 			void window.showErrorMessage(
-				'Unable to toggle line blame annotations. See output channel for more details',
+				'无法切换行归属注释。更多细节请查看输出频道',
 			);
 		}
 	}

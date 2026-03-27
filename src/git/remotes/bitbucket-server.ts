@@ -20,12 +20,12 @@ export class BitbucketServerRemote extends RemoteProvider {
 				{
 					prefix: 'issue #',
 					url: `${this.baseUrl}/issues/<num>`,
-					title: `Open Issue #<num> on ${this.name}`,
+					title: `在 ${this.name} 上打开议题 #<num>`,
 				},
 				{
 					prefix: 'pull request #',
 					url: `${this.baseUrl}/pull-requests/<num>`,
-					title: `Open PR #<num> on ${this.name}`,
+					title: `在 ${this.name} 上打开拉取请求 #<num>`,
 				},
 			];
 		}
