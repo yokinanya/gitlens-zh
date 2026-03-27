@@ -11,6 +11,8 @@
 
 > GitLens **supercharges** Git inside VS Code. It helps you to **visualize code authorship** at a glance via Git blame annotations and CodeLens, **seamlessly navigate and explore** Git repositories, **gain valuable insights** via rich visualizations and powerful comparison commands, and so much more.
 
+> Libre GitLess is a community-maintained, Chinese-localized fork of GitLens, published separately for localized distribution.
+
 <p align="center">
   <br />
   <a title="What's New in GitLens 12" href="https://gitkraken.com/blog/gitlens-12"><img width="600px" src="./src/webviews/apps/media/gitlens-12-card.png" alt="Open What's New in GitLens 12" /></a>

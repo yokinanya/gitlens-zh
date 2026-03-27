@@ -1,8 +1,8 @@
 {
 	"name": "libre-gitless",
 	"displayName": "Libre GitLess",
-	"description": "在 VS Code 中增强 Git 体验：通过 Git 归属注释和 CodeLens 一目了然地查看代码作者信息，顺畅地浏览和探索 Git 仓库，并借助丰富的可视化与强大的比较命令获得更多洞察。",
-	"version": "12.0.1",
+	"description": "A Chinese-localized fork of GitLens for VS Code with blame annotations, CodeLens, and powerful Git insights.",
+	"version": "12.0.1.1",
 	"engines": {
 		"vscode": "^1.64.0"
 	},
